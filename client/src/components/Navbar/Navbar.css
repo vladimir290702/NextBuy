@@ -1,0 +1,20 @@
+#navbar{
+    display: flex;
+}
+
+#logo-wrapper{
+    width: 200px;
+    height: 200px;
+    background-color: blue;
+}
+
+#logo{
+    width: 1rem;
+    height: 1rem;
+}
+
+#options{
+    display: flex;
+    text-align: right;
+    background-color: aqua;
+}

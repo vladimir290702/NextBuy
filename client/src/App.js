@@ -1,8 +1,11 @@
-import {useEffect, useState} from 'react'
 import './App.css';
+import { useEffect, useState} from 'react'
+import { Routes, Route, BrowserRouter} from 'react-router-dom'
+import Navbar from './components/Navbar/Navbar'
 
 function App() {
   const [items, setItems] = useState([])
+  const value = {}
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,13 +21,12 @@ function App() {
   })
 
   return (
-    <div className="App">
-      {
-        items.map((item) => (
-          <h1 key={item._id}>{item._id} --- {item.name}</h1>
-        ))
-      }
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path='/' element={<Navbar />} />
+      </Routes>
+    </BrowserRouter>
+      
   );
 }
 
