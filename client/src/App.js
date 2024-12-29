@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Register from "./components/Register/Register";
-
+import Login from "./components/Login/Login";
 function App() {
   const [items, setItems] = useState([]);
   const value = {};
@@ -25,6 +25,7 @@ function App() {
       <Routes>
         <Route path="/" element={null} />
         <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </BrowserRouter>
   );
