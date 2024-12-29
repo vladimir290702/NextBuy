@@ -1,20 +1,18 @@
 #navbar{
     display: flex;
+    justify-content: space-between;
+    background-color: #F5E6CA;
+    padding: 1rem 2rem;
 }
 
-#logo-wrapper{
-    width: 200px;
-    height: 200px;
-    background-color: blue;
-}
-
-#logo{
-    width: 1rem;
-    height: 1rem;
+#logo #logo-wrapper img{
+    width: 70px;
+    height: 70px;
 }
 
 #options{
     display: flex;
-    text-align: right;
-    background-color: aqua;
+    font-size: 1.5rem;
+    list-style: none;
 }
+
