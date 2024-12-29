@@ -39,12 +39,14 @@
   border-bottom: 3px solid #d1c5c5;
   color: #d1c5c5;
   font-weight: 400;
+  cursor: pointer;
 }
 
 .selected-option h2 {
   color: #000;
   border-bottom: 3px solid #001f54;
   transition: 1s;
+  cursor: pointer;
 }
 
 .selected-option:focus {
@@ -86,4 +88,8 @@
 
 #button-wrapper {
   margin-bottom: 3rem;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }

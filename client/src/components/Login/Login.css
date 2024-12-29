@@ -1,0 +1,92 @@
+#login-wrapper {
+  text-align: center;
+  margin-top: 3rem;
+}
+
+#title {
+  font-weight: 600;
+}
+
+#options-container {
+  margin: 0 auto;
+  width: 35%;
+  padding-top: 1rem;
+}
+
+#options-container h2 {
+  font-weight: 400;
+  margin-bottom: 0px;
+  cursor: pointer;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.option {
+  width: 400px;
+  margin: 0 1rem;
+}
+
+.selected-option {
+  width: 400px;
+  margin: 0 1rem;
+}
+
+.option h2 {
+  border-bottom: 3px solid #d1c5c5;
+  color: #d1c5c5;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.selected-option h2 {
+  color: #000;
+  border-bottom: 3px solid #001f54;
+  transition: 1s;
+  cursor: pointer;
+}
+
+.selected-option:focus {
+  color: #000;
+  border-bottom: 3px solid #001f54;
+}
+
+.input input {
+  margin-bottom: 1rem;
+  height: 3rem;
+  width: 420px;
+  padding: 0px 15px;
+}
+
+.input select {
+  margin-bottom: 1rem;
+  height: 3rem;
+  width: 453px;
+  padding: 0px 15px;
+}
+
+#button-wrapper button {
+  height: 3rem;
+  width: 453px;
+  background-color: #001f54;
+  color: #fff;
+  font-weight: 500;
+  font-size: 20px;
+  border-width: 3px;
+  border-style: ridge;
+}
+
+#button-wrapper button:hover {
+  background-color: #fff;
+  color: #001f54;
+  border-color: #001f54;
+  transition: 1s;
+}
+
+#button-wrapper {
+  margin-bottom: 3rem;
+}
