@@ -1,18 +1,17 @@
-#navbar{
-    display: flex;
-    justify-content: space-between;
-    background-color: #F5E6CA;
-    padding: 1rem 2rem;
+#navbar {
+  display: flex;
+  justify-content: space-between;
+  background-color: #f5e6ca;
+  padding: 1rem 2rem;
 }
 
-#logo #logo-wrapper img{
-    width: 70px;
-    height: 70px;
+#logo #logo-wrapper img {
+  width: 70px;
+  height: 70px;
 }
 
-#options{
-    display: flex;
-    font-size: 1.5rem;
-    list-style: none;
+#options {
+  display: flex;
+  font-size: 1.5rem;
+  list-style: none;
 }
-
