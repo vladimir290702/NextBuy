@@ -7,20 +7,6 @@ import Login from "./components/Login/Login";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-  const [items, setItems] = useState([]);
-  const value = {};
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const res = await fetch("http://localhost:3000");
-
-      const data = await res.json();
-
-      setItems(data.items);
-    };
-    fetchData();
-  });
-
   return (
     <BrowserRouter>
       <Navbar />

@@ -1,10 +1,18 @@
 import "./Login.css";
 import { useState } from "react";
+import { loginUser } from "../../services/auth";
 
 export default function Register() {
   const [custommer, setCustommer] = useState("option");
   const [creator, setCreator] = useState("option");
   const [isSelected, setIsSelected] = useState(true);
+  const [email, setEmail] = useState(null);
+  const [password, setPassword] = useState(null);
+
+  const userData = {
+    email,
+    password,
+  };
 
   const setOption = (option) => {
     if (option === "custommer") {
@@ -18,8 +26,17 @@ export default function Register() {
     setIsSelected(false);
   };
 
-  const login = () => {
-    console.log(1321231321);
+  const handleLogin = (e) => {
+    e.preventDefault();
+    try {
+      fetch("http://localhost:3000")
+        .then((res) => res.json())
+        .then((data) => console.log(data));
+
+      console.log("Bravoooo");
+    } catch (error) {
+      console.log("mmmmmmmmmmmmmmmmmmmmmmmm");
+    }
   };
 
   return (
@@ -52,19 +69,25 @@ export default function Register() {
       </div>
       <div id="user-data">
         <div className="input">
-          <input type="text" placeholder="Email*" />
+          <input
+            type="text"
+            placeholder="Email*"
+            onChange={(e) => setEmail(e.target.value)}
+          />
         </div>
         <div className="input">
-          <input type="text" placeholder="Password*" />
+          <input
+            type="text"
+            placeholder="Password*"
+            onChange={(e) => setPassword(e.target.value)}
+          />
         </div>
       </div>
       <div id="button-wrapper">
         <button
           disabled={isSelected}
           onClick={(e) => {
-            e.preventDefault();
-            login();
-            console.log(11111111111);
+            handleLogin(e);
           }}
         >
           Login
