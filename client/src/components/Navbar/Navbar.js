@@ -1,10 +1,11 @@
 import "./Navbar.css";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import logo from "../../public/images/logo.png";
 import GuestUserLayout from "../NavbarOptions/GuestUser/GuestUserLayout";
 import LoggedUserLayout from "../NavbarOptions/LoggedInUser/LoggedUserLayout";
+import { useUser } from "../../contexts/UserContext";
 export default function Navbar() {
-  const navigate = useNavigate();
+  const { user } = useUser();
 
   return (
     <div id="navbar">
@@ -15,7 +16,7 @@ export default function Navbar() {
       </div>
 
       <nav id="options">
-        {true ? <GuestUserLayout /> : <LoggedUserLayout />}
+        {user ? <LoggedUserLayout user={user} /> : <GuestUserLayout />}
       </nav>
     </div>
   );
