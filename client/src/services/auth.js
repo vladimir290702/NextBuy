@@ -16,12 +16,17 @@ export const registerUser = async (userData) => {
   }
 };
 
-export const loginUser = async () => {
+export const loginUser = async (userData) => {
   try {
-    const response = await fetch("http://localhost:3000/login");
-    const data = await response.json();
+    const response = await fetch("http://localhost:3000/login", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userData),
+    });
 
-    console.log(data);
+    const data = await response.json();
 
     return data;
   } catch (error) {
