@@ -1,15 +1,19 @@
 import "./Login.css";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { loginUser } from "../../services/auth";
+import { useUser } from "../../contexts/UserContext";
 
 export default function Register() {
+  const navigate = useNavigate();
+  const { login } = useUser();
   const [custommer, setCustommer] = useState("option");
   const [creator, setCreator] = useState("option");
   const [isSelected, setIsSelected] = useState(true);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
-  const userData = {
+  let userData = {
     email,
     password,
   };
@@ -26,16 +30,15 @@ export default function Register() {
     setIsSelected(false);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    try {
-      fetch("http://localhost:3000")
-        .then((res) => res.json())
-        .then((data) => console.log(data));
+    let result = await loginUser(userData);
 
-      console.log("Bravoooo");
-    } catch (error) {
-      console.log("mmmmmmmmmmmmmmmmmmmmmmmm");
+    if (!result.status) {
+      navigate("/login");
+    } else {
+      navigate("/");
+      login(result.user);
     }
   };
 
