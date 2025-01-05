@@ -19,25 +19,23 @@ app.get("/", async (req, res) => {
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
 
-  const user = await User.find();
+  if (!email || !password) {
+    return res
+      .status(400)
+      .json({ message: "Email and password are required", status: false });
+  }
 
-  console.log(user);
+  const user = await User.findOne({ email });
 
-  return res.json({ user });
+  if (!user) {
+    return res.status(404).json({ message: "User not found", status: false });
+  }
 
-  /*User.findOne().then((data) => {
-    console.log(data);
+  if (user.password !== password) {
+    return res.status(401).json({ message: "Invalid password", status: false });
+  }
 
-    if (user) {
-      if (user.password === password) {
-        res.json("Success");
-      } else {
-        res.json("Mistake");
-      }
-    } else {
-      res.json("N/A");
-    } 
-  });*/
+  return res.status(200).json({ user });
 });
 
 // POST /register
