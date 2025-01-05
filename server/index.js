@@ -35,7 +35,7 @@ app.post("/login", async (req, res) => {
     return res.status(401).json({ message: "Invalid password", status: false });
   }
 
-  return res.status(200).json({ user });
+  return res.status(200).json({ user, status: true });
 });
 
 // POST /register
