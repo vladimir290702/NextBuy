@@ -2,9 +2,11 @@ import "./Register.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { registerUser } from "../../services/auth";
+import { useUser } from "../../contexts/UserContext";
 
 export default function Register() {
   const navigate = useNavigate();
+  const { register } = useUser();
   const [custommer, setCustommer] = useState("option");
   const [creator, setCreator] = useState("option");
   const [isSelected, setIsSelected] = useState(true);
@@ -29,23 +31,25 @@ export default function Register() {
     gender,
   };
 
-  const handleRegister = (e) => {
+  const handleRegister = async (e) => {
     e.preventDefault();
 
     if (
-      email !== null &&
-      name !== null &&
-      surname !== null &&
-      password !== null &&
-      repeatPassword !== null &&
-      age !== null &&
-      gender !== null
+      email === null &&
+      name === null &&
+      surname === null &&
+      password === null &&
+      repeatPassword === null &&
+      age === null &&
+      gender === null
     ) {
       return;
     } else if (password !== repeatPassword) {
       return;
     } else {
-      registerUser(userData);
+      const response = await registerUser(userData);
+
+      register(response);
 
       navigate("/");
     }
@@ -137,18 +141,16 @@ export default function Register() {
           />
         </div>
         <div className="input">
-          <select id="gender-options">
-            <option
-              disabled
-              selected
-              value
-              onChange={(e) => setGender(e.target.value)}
-            >
+          <select
+            id="gender-options"
+            onChange={(e) => setGender(e.currentTarget.value)}
+          >
+            <option disabled selected value>
               Gender*
             </option>
-            <option value="1">Male</option>
-            <option value="2">Female</option>
-            <option value="3">Prefer not ot answer</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Prefer not ot answer">Prefer not ot answer</option>
           </select>
         </div>
       </div>
