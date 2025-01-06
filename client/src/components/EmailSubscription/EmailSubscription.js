@@ -1,9 +1,27 @@
 import "./EmailSubscription.css";
 import { FaCheck } from "react-icons/fa";
 import { useState } from "react";
+import { sendPromoCode } from "../../services/sendPromoCode";
 
 export default function EmailSubscription() {
   const [email, setEmail] = useState(null);
+  const [buttonText, setButtonText] = useState("Subscribe");
+
+  const handleEmailSender = async (e) => {
+    e.preventDefault();
+
+    if (email) {
+      setButtonText("Sending...");
+
+      const response = await sendPromoCode(email);
+
+      setButtonText("Sent");
+      setEmail(null);
+    }
+
+    return;
+  };
+
   return (
     <div id="subscribtion-wrapper">
       <div>
@@ -29,8 +47,11 @@ export default function EmailSubscription() {
           />
         </div>
         <div>
-          <button id="subscribtion-button">
-            <span class="button-text">Subscribe</span>
+          <button
+            id="subscribtion-button"
+            onClick={(e) => handleEmailSender(e)}
+          >
+            <span class="button-text">{buttonText}</span>
           </button>
         </div>
       </div>
