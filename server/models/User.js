@@ -10,6 +10,7 @@ const userSchema = new mongoose.Schema({
   password: { type: String, required: true },
   age: { type: Number, required: true },
   gender: { type: String },
+  promocode: { type: String },
 });
 
 // Hash the password before saving the user
