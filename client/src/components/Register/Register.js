@@ -29,6 +29,7 @@ export default function Register() {
     age,
     role: role,
     gender,
+    promocode: null,
   };
 
   const handleRegister = async (e) => {
