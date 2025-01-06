@@ -54,7 +54,7 @@ app.post("/register", async (req, res) => {
     gender: gender, // In a real app, you should hash the password before storing it
   });
 
-  return user;
+  return res.status(200).json({ user });
 });
 
 app.listen(3000, () => {
