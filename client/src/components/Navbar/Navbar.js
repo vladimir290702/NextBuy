@@ -3,9 +3,23 @@ import { Link } from "react-router-dom";
 import logo from "../../public/images/logo.png";
 import GuestUserLayout from "../NavbarOptions/GuestUser/GuestUserLayout";
 import LoggedUserLayout from "../NavbarOptions/LoggedInUser/LoggedUserLayout";
+import ShopOwner from "../NavbarOptions/ShopOwner/ShopOwnerLayout";
+
 import { useUser } from "../../contexts/UserContext";
 export default function Navbar() {
   const { user } = useUser();
+
+  const NavbarLayout = () => {
+    if (user) {
+      if (user.role === "creator") {
+        return <ShopOwner />;
+      } else {
+        return <LoggedUserLayout />;
+      }
+    } else {
+      return <GuestUserLayout />;
+    }
+  };
 
   return (
     <div id="navbar">
@@ -15,9 +29,7 @@ export default function Navbar() {
         </Link>
       </div>
 
-      <nav id="options">
-        {user ? <LoggedUserLayout user={user} /> : <GuestUserLayout />}
-      </nav>
+      <nav id="options">{<NavbarLayout />}</nav>
     </div>
   );
 }
