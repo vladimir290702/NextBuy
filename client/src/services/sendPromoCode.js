@@ -1,11 +1,11 @@
-export const sendPromoCode = async (email) => {
+export const sendPromoCode = async (userData) => {
   try {
     const response = await fetch("http://localhost:3000/promo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email }),
+      body: JSON.stringify({ userData }),
     });
     const data = await response.json();
 
