@@ -29,7 +29,6 @@ contactEmail.verify((error) => {
 });
 
 app.post("/promo", (req, res) => {
-  console.log("Body received:", req.body);
   const email = req.body.email;
   const mail = {
     from: "name",
@@ -48,6 +47,26 @@ app.post("/promo", (req, res) => {
       res.json({ code: 200, status: "Message Sent" });
     }
   });
+});
+
+app.patch("/promo", async (req, res) => {
+  const { email, promocode } = req.body.userData;
+
+  const user = await User.findOne({ email });
+  if (user.promocode) {
+    console.log("nice");
+  } else {
+    const filter = {
+      email: email,
+    };
+    const updateDocument = {
+      $set: {
+        promocode: promocode,
+      },
+    };
+
+    const updatedData = await User.updateOne(filter, updateDocument);
+  }
 });
 
 app.get("/", async (req, res) => {
@@ -82,8 +101,17 @@ app.post("/login", async (req, res) => {
 
 // POST /register
 app.post("/register", async (req, res) => {
-  const { role, username, email, password, name, surname, age, gender } =
-    req.body;
+  const {
+    role,
+    username,
+    email,
+    password,
+    name,
+    surname,
+    age,
+    gender,
+    promocode,
+  } = req.body;
 
   const user = await User.create({
     role: role,
@@ -93,7 +121,8 @@ app.post("/register", async (req, res) => {
     name,
     surname,
     age,
-    gender: gender, // In a real app, you should hash the password before storing it
+    gender: gender,
+    promocode, // In a real app, you should hash the password before storing it
   });
 
   return res.status(200).json({ user });
