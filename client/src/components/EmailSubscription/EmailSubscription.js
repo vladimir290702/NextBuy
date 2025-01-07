@@ -2,6 +2,7 @@ import "./EmailSubscription.css";
 import { FaCheck } from "react-icons/fa";
 import { useState } from "react";
 import { sendPromoCode } from "../../services/sendPromoCode";
+import { addPromoCode } from "../../services/addPromocode";
 
 export default function EmailSubscription() {
   const [email, setEmail] = useState(null);
@@ -13,7 +14,13 @@ export default function EmailSubscription() {
     if (email) {
       setButtonText("Sending...");
 
+      const data = {
+        email,
+        promocode: "vladko",
+      };
+
       const response = await sendPromoCode(email);
+      const promoResponse = await addPromoCode(data);
 
       setButtonText("Sent");
       setEmail(null);
