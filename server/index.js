@@ -28,33 +28,15 @@ contactEmail.verify((error) => {
   }
 });
 
-app.post("/promo", (req, res) => {
-  const email = req.body.email;
-  const mail = {
-    from: "name",
-    to: email,
-    subject: "Welcome Promo Code",
-    html: `
-        <h1>Thank you so much for joining our comunity</h1>
-        <p>We want to give a 10% off promo code</p>
-        <h3>WELCOME10</h3>
-      `,
-  };
-  contactEmail.sendMail(mail, (error) => {
-    if (error) {
-      res.json(error);
-    } else {
-      res.json({ code: 200, status: "Message Sent" });
-    }
-  });
-});
-
-app.patch("/promo", async (req, res) => {
+app.post("/promo", async (req, res) => {
   const { email, promocode } = req.body.userData;
 
   const user = await User.findOne({ email });
   if (user.promocode) {
-    console.log("nice");
+    return res.json({
+      code: 200,
+      status: "You have already received a promocode",
+    });
   } else {
     const filter = {
       email: email,
@@ -66,6 +48,24 @@ app.patch("/promo", async (req, res) => {
     };
 
     const updatedData = await User.updateOne(filter, updateDocument);
+
+    const mail = {
+      from: "name",
+      to: email,
+      subject: "Welcome Promo Code",
+      html: `
+        <h1>Thank you so much for joining our comunity</h1>
+        <p>We want to give a 10% off promo code</p>
+        <h3>WELCOME10</h3>
+      `,
+    };
+    contactEmail.sendMail(mail, (error) => {
+      if (error) {
+        res.json(error);
+      } else {
+        res.json({ code: 200, status: "Email Sent" });
+      }
+    });
   }
 });
 
