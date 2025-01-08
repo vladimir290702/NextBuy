@@ -1,0 +1,27 @@
+#shop-profile-wrapper {
+  display: flex;
+  align-items: left;
+}
+
+#shop-profile-categories {
+  display: inline-block;
+  align-items: left;
+  background-color: #001f54;
+  color: #fff;
+  width: 20vw;
+}
+
+.shop-profile-category {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 1rem;
+}
+
+.shop-profile-category h3 {
+  margin: 1rem 0;
+}
+
+#selected-shop-category {
+  width: 80vw;
+}
