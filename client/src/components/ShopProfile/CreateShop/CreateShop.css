@@ -1,0 +1,67 @@
+#create-shop-wrapper {
+  justify-content: center;
+  align-items: center;
+}
+
+.create-shop-option {
+  padding: 2rem 3rem;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.create-shop-option > .create-shop-option-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#optionSlider {
+  padding: 3rem 9rem;
+}
+
+#create-shop-option-first-step {
+  display: flex;
+  justify-content: end;
+}
+
+.create-shop-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.create-shop-carousel-button {
+  font-size: 1rem;
+  padding: 0.5rem 1.5rem;
+  background-color: #001f54;
+  color: #fff;
+  transition: 0.5s;
+}
+
+.create-shop-carousel-button:hover {
+  background-color: #fff;
+  color: #001f54;
+}
+
+#create-shop-carousel-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.create-shop-carousel-bubble {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background-color: #001f54;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-shop-carousel-line {
+  width: 3rem;
+  height: 2px;
+  background-color: #001f54;
+}
