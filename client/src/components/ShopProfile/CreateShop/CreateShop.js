@@ -1,11 +1,12 @@
 import "./CreateShop.css";
 import { useState } from "react";
+import createShopLogo from "../../../public/images/createShopLogo.png";
+import createShopName from "../../../public/images/createShopName.png";
+import createShopFinish from "../../../public/images/createShopFinish.png";
+import createShopListing from "../../../public/images/createShopListing.png";
 
 export default function CreateShop() {
-  const [optionCounter, setOptionCounter] = useState(0);
   const [activeOption, setActiveOption] = useState(0);
-
-  console.log(activeOption);
 
   const handleCarousel = (e, option) => {
     e.preventDefault();
@@ -15,25 +16,70 @@ export default function CreateShop() {
   return (
     <div id="create-shop-wrapper">
       <div id="create-shop-carousel-counter">
-        <div className="create-shop-carousel-bubble">1</div>
+        <div
+          className={
+            activeOption === 0
+              ? "create-shop-carousel-bubble-selected"
+              : "create-shop-carousel-bubble"
+          }
+          onClick={(e) => handleCarousel(e, 0)}
+        >
+          1
+        </div>
         <div className="create-shop-carousel-line"></div>
-        <div className="create-shop-carousel-bubble">2</div>
+        <div
+          className={
+            activeOption === 1
+              ? "create-shop-carousel-bubble-selected"
+              : "create-shop-carousel-bubble"
+          }
+          onClick={(e) => handleCarousel(e, 1)}
+        >
+          2
+        </div>
         <div className="create-shop-carousel-line"></div>
-        <div className="create-shop-carousel-bubble">3</div>
+        <div
+          className={
+            activeOption === 2
+              ? "create-shop-carousel-bubble-selected"
+              : "create-shop-carousel-bubble"
+          }
+          onClick={(e) => handleCarousel(e, 2)}
+        >
+          3
+        </div>
         <div className="create-shop-carousel-line"></div>
-        <div className="create-shop-carousel-bubble">4</div>
+        <div
+          className={
+            activeOption === 3
+              ? "create-shop-carousel-bubble-selected"
+              : "create-shop-carousel-bubble"
+          }
+          onClick={(e) => handleCarousel(e, 3)}
+        >
+          4
+        </div>
       </div>
 
       <div id="optionSlider">
-        <div className="create-shop-option">
+        <div
+          className={
+            activeOption === 0
+              ? "create-shop-option-selected"
+              : "create-shop-option"
+          }
+        >
           <div className="create-shop-option-text-container">
             <div>
               <h2>First Step</h2>
             </div>
-            <div>
+            <div className="create-shop-option-image">
+              <img src={createShopLogo} alt="create" />
+            </div>
+            <div className="create-shop-option-text-wrapper">
               <h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident, ab!
+                What will attract more visitors to your shop? Of corse - a well
+                designed and good looking logo!
               </h3>
             </div>
           </div>
@@ -48,15 +94,24 @@ export default function CreateShop() {
             </div>
           </div>
         </div>
-        <div className="create-shop-option">
+        <div
+          className={
+            activeOption === 1
+              ? "create-shop-option-selected"
+              : "create-shop-option"
+          }
+        >
           <div className="create-shop-option-text-container">
             <div>
               <h2>Create Name</h2>
             </div>
-            <div>
+            <div className="create-shop-option-image">
+              <img src={createShopName} alt="create" />
+            </div>
+            <div className="create-shop-option-text-wrapper">
               <h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident, ab!
+                Another thing that will attract more customers to your shop is a
+                remembering unique name!
               </h3>
             </div>
           </div>
@@ -79,15 +134,24 @@ export default function CreateShop() {
             </div>
           </div>
         </div>
-        <div className="create-shop-option">
+        <div
+          className={
+            activeOption === 2
+              ? "create-shop-option-selected"
+              : "create-shop-option"
+          }
+        >
           <div className="create-shop-option-text-container">
             <div>
               <h2>Start Listing</h2>
             </div>
-            <div>
+            <div className="create-shop-option-image">
+              <img src={createShopListing} alt="create" />
+            </div>
+            <div className="create-shop-option-text-wrapper">
               <h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident, ab!
+                After your logo and name are ready start lising your products
+                and start making profits even from today!
               </h3>
             </div>
           </div>
@@ -110,15 +174,24 @@ export default function CreateShop() {
             </div>
           </div>
         </div>
-        <div className="create-shop-option">
+        <div
+          className={
+            activeOption === 3
+              ? "create-shop-option-selected"
+              : "create-shop-option"
+          }
+        >
           <div className="create-shop-option-text-container">
             <div>
               <h2>One more step!</h2>
             </div>
-            <div>
+            <div className="create-shop-option-image">
+              <img src={createShopFinish} alt="create" />
+            </div>
+            <div className="create-shop-option-text-wrapper">
               <h3>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Provident, ab!
+                Are you ready to start this adventure and meantime develop sale
+                skills meantime? If the answer is YES - move forward!
               </h3>
             </div>
           </div>
