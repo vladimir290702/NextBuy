@@ -5,13 +5,19 @@ import createShopName from "../../../public/images/createShopName.png";
 import createShopFinish from "../../../public/images/createShopFinish.png";
 import createShopListing from "../../../public/images/createShopListing.png";
 
-export default function CreateShop() {
+export default function CreateShop({ sendDataToParent }) {
   const [activeOption, setActiveOption] = useState(0);
 
   const handleCarousel = (e, option) => {
     e.preventDefault();
 
     setActiveOption(option);
+  };
+
+  const handleCreateShop = (e, activeOption) => {
+    e.preventDefault();
+
+    sendDataToParent(e, activeOption);
   };
   return (
     <div id="create-shop-wrapper">
@@ -207,7 +213,7 @@ export default function CreateShop() {
             <div>
               <button
                 className="create-shop-carousel-button"
-                onClick={(e) => handleCarousel(e, 2)}
+                onClick={(e) => handleCreateShop(e, "finish-create-shop")}
               >
                 Create Shop
               </button>

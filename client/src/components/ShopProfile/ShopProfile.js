@@ -6,16 +6,23 @@ import { LuLayoutDashboard } from "react-icons/lu";
 import { AiFillShop } from "react-icons/ai";
 import { useState } from "react";
 import CreateShop from "./CreateShop/CreateShop";
+import FinishCreateShop from "./FinishCreateShop/FinishCreateShop";
+import AddListing from "./AddListing/AddListing";
 
 export default function ShopProfile() {
   const [selectedCategory, setSelectedCategory] = useState(null);
-  let comp;
+
+  const handleSelectedCategory = (e, category) => {
+    e.preventDefault();
+
+    setSelectedCategory(category);
+  };
 
   const displayOption = () => {
     if (selectedCategory === "create-shop") {
-      return <CreateShop />;
+      return <CreateShop sendDataToParent={handleSelectedCategory} />;
     } else if (selectedCategory === "add-listing") {
-      return <h3>Add Listing</h3>;
+      return <AddListing />;
     } else if (selectedCategory === "orders") {
       return <h3>Orders</h3>;
     } else if (selectedCategory === "dashboard") {
@@ -24,15 +31,11 @@ export default function ShopProfile() {
       return <h3>Settings</h3>;
     } else if (selectedCategory === "other-shops") {
       return <h3>Other Shops</h3>;
+    } else if (selectedCategory === "finish-create-shop") {
+      return <FinishCreateShop />;
     } else {
-      return <h3>not seleted Option</h3>;
+      return <h3>{selectedCategory}</h3>;
     }
-  };
-
-  const handleSelectedCategory = (e, category) => {
-    e.preventDefault();
-
-    setSelectedCategory(category);
   };
 
   return (
