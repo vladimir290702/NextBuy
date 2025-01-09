@@ -7,6 +7,7 @@ import { AiFillShop } from "react-icons/ai";
 import { useState } from "react";
 import CreateShop from "./CreateShop/CreateShop";
 import FinishCreateShop from "./FinishCreateShop/FinishCreateShop";
+import AddListing from "./AddListing/AddListing";
 
 export default function ShopProfile() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -21,7 +22,7 @@ export default function ShopProfile() {
     if (selectedCategory === "create-shop") {
       return <CreateShop sendDataToParent={handleSelectedCategory} />;
     } else if (selectedCategory === "add-listing") {
-      return <h3>Add Listing</h3>;
+      return <AddListing />;
     } else if (selectedCategory === "orders") {
       return <h3>Orders</h3>;
     } else if (selectedCategory === "dashboard") {
