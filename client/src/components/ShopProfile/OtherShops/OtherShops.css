@@ -1,0 +1,125 @@
+#other-shops-wrapper {
+  padding: 2rem 3rem;
+}
+
+.shop-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem;
+  margin: 1.5rem 0;
+  border: 1px grey solid;
+  border-radius: 5px;
+}
+
+.shop-initial-info {
+  display: flex;
+}
+
+.shop-initial-image-container {
+  width: 4rem;
+  border: 1px grey solid;
+  border-radius: 5px;
+}
+
+.shop-initial-info div img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.shop-initial-name-conatiner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shop-initial-name-conatiner p {
+  font-size: 2.5rem;
+  font-weight: 500;
+  margin: 0 1rem;
+}
+
+.shop-creation-info {
+  display: flex;
+  margin-top: 0.5rem;
+}
+
+.shop-creation-date {
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+
+.shop-creation-info div p {
+  margin-bottom: 0;
+}
+
+.shop-listings-info {
+  display: flex;
+  font-size: 1.2rem;
+}
+
+.shop-categories-info {
+  display: flex;
+  font-size: 1.2rem;
+}
+
+.shop-categories-info > div > p {
+  margin: 0.5rem 0;
+}
+
+.shop-listing-info-count {
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+
+.shop-categories-info-names {
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+
+.shop-button button {
+  width: 100%;
+  background-color: #001f54;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.search-input {
+  flex: 1; /* Allows the input to take up available space */
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-button {
+  background-color: #001f54;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #001f54;
+}
+
+.search-icon {
+  font-size: 18px; /* Icon size */
+}

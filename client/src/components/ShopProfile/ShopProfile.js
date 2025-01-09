@@ -8,6 +8,7 @@ import { useState } from "react";
 import CreateShop from "./CreateShop/CreateShop";
 import FinishCreateShop from "./FinishCreateShop/FinishCreateShop";
 import AddListing from "./AddListing/AddListing";
+import OtherShops from "./OtherShops/OtherShops";
 
 export default function ShopProfile() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -30,7 +31,7 @@ export default function ShopProfile() {
     } else if (selectedCategory === "settings") {
       return <h3>Settings</h3>;
     } else if (selectedCategory === "other-shops") {
-      return <h3>Other Shops</h3>;
+      return <OtherShops />;
     } else if (selectedCategory === "finish-create-shop") {
       return <FinishCreateShop />;
     } else {
