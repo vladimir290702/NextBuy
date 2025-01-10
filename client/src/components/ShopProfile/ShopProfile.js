@@ -9,6 +9,7 @@ import CreateShop from "./CreateShop/CreateShop";
 import FinishCreateShop from "./FinishCreateShop/FinishCreateShop";
 import AddListing from "./AddListing/AddListing";
 import OtherShops from "./OtherShops/OtherShops";
+import Dashboard from "./Dashboard/Dashboard";
 
 export default function ShopProfile() {
   const [selectedCategory, setSelectedCategory] = useState(null);
@@ -27,7 +28,7 @@ export default function ShopProfile() {
     } else if (selectedCategory === "orders") {
       return <h3>Orders</h3>;
     } else if (selectedCategory === "dashboard") {
-      return <h3>Dashboard</h3>;
+      return <Dashboard />;
     } else if (selectedCategory === "settings") {
       return <h3>Settings</h3>;
     } else if (selectedCategory === "other-shops") {
