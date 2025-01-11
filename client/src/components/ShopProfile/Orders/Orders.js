@@ -69,11 +69,18 @@ export default function Orders() {
       </div>
       <div id="orders-sorting-container">
         <div
-          id="orders-options-toggle-container"
+          id={
+            isClicked
+              ? "orders-options-toggle-container-active"
+              : "orders-options-toggle-container"
+          }
           onClick={(e) => handleSortButton(e)}
         >
-          <div>Sort by: Oldest</div>
-
+          <div
+            id={isClicked ? "orders-initial-div-active" : "orders-initial-div"}
+          >
+            Sort by: Oldest
+          </div>
           <div
             id={
               isClicked
@@ -88,23 +95,65 @@ export default function Orders() {
         <div>
           <div>
             <div>
-              <p>destination</p>
+              <p>Destination:</p>
             </div>
-            <div>
-              <div>Empty</div>
+            <div className="order-sorting-options">
+              <div
+                className={
+                  true ? "orders-empty-div-active" : "orders-empty-div"
+                }
+              ></div>
               <div>
                 <p>All</p>
+              </div>
+            </div>
+            <div className="order-sorting-options">
+              <div
+                className={
+                  true ? "orders-empty-div-active" : "orders-empty-div"
+                }
+              ></div>
+              <div>
+                <p>Bulgaria</p>
+              </div>
+            </div>
+            <div className="order-sorting-options">
+              <div
+                className={
+                  true ? "orders-empty-div-active" : "orders-empty-div"
+                }
+              ></div>
+              <div>
+                <p>United States</p>
               </div>
             </div>
           </div>
           <div>
             <div>
-              <p>status</p>
+              <p>Status:</p>
             </div>
-            <div>
-              <div>Empty</div>
+            <div className="order-sorting-options">
+              <div className="orders-empty-div"></div>
+              <div>
+                <p>Pre-transit</p>
+              </div>
+            </div>
+            <div className="order-sorting-options">
+              <div className="orders-empty-div"></div>
               <div>
                 <p>In transit</p>
+              </div>
+            </div>
+            <div className="order-sorting-options">
+              <div className="orders-empty-div"></div>
+              <div>
+                <p>Delivered</p>
+              </div>
+            </div>
+            <div className="order-sorting-options">
+              <div className="orders-empty-div"></div>
+              <div>
+                <p>Canceled</p>
               </div>
             </div>
           </div>
