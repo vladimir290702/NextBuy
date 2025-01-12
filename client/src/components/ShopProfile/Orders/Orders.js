@@ -3,11 +3,25 @@ import { useState } from "react";
 
 export default function Orders() {
   const [isClicked, setIsClicked] = useState(false);
+  const [selectedDestination, setSelectedDestination] = useState(null);
+  const [selectedOrderStatus, setSelectedOrderStatus] = useState(null);
 
   const handleSortButton = (e) => {
     e.preventDefault();
 
     setIsClicked(!isClicked);
+  };
+
+  const handleSelectedDestination = (e, destination) => {
+    e.preventDefault();
+
+    setSelectedDestination(destination);
+  };
+
+  const handleSelectedOrderStatus = (e, orderStatus) => {
+    e.preventDefault();
+
+    setSelectedOrderStatus(orderStatus);
   };
 
   return (
@@ -97,30 +111,45 @@ export default function Orders() {
             <div>
               <p>Destination:</p>
             </div>
-            <div className="order-sorting-options">
+            <div
+              className="order-sorting-options"
+              onClick={(e) => handleSelectedDestination(e, "All")}
+            >
               <div
                 className={
-                  true ? "orders-empty-div-active" : "orders-empty-div"
+                  selectedDestination === "All"
+                    ? "orders-empty-div-active"
+                    : "orders-empty-div"
                 }
               ></div>
               <div>
                 <p>All</p>
               </div>
             </div>
-            <div className="order-sorting-options">
+            <div
+              className="order-sorting-options"
+              onClick={(e) => handleSelectedDestination(e, "Bulgaria")}
+            >
               <div
                 className={
-                  true ? "orders-empty-div-active" : "orders-empty-div"
+                  selectedDestination === "Bulgaria"
+                    ? "orders-empty-div-active"
+                    : "orders-empty-div"
                 }
               ></div>
               <div>
                 <p>Bulgaria</p>
               </div>
             </div>
-            <div className="order-sorting-options">
+            <div
+              className="order-sorting-options"
+              onClick={(e) => handleSelectedDestination(e, "United States")}
+            >
               <div
                 className={
-                  true ? "orders-empty-div-active" : "orders-empty-div"
+                  selectedDestination === "United States"
+                    ? "orders-empty-div-active"
+                    : "orders-empty-div"
                 }
               ></div>
               <div>
@@ -132,26 +161,62 @@ export default function Orders() {
             <div>
               <p>Status:</p>
             </div>
-            <div className="order-sorting-options">
-              <div className="orders-empty-div"></div>
+            <div
+              className="order-sorting-options"
+              onClick={(e) => handleSelectedOrderStatus(e, "Pre-transit")}
+            >
+              <div
+                className={
+                  selectedOrderStatus === "Pre-transit"
+                    ? "orders-empty-div-active"
+                    : "orders-empty-div"
+                }
+              ></div>
               <div>
                 <p>Pre-transit</p>
               </div>
             </div>
-            <div className="order-sorting-options">
-              <div className="orders-empty-div"></div>
+            <div
+              className="order-sorting-options"
+              onClick={(e) => handleSelectedOrderStatus(e, "In transit")}
+            >
+              <div
+                className={
+                  selectedOrderStatus === "In transit"
+                    ? "orders-empty-div-active"
+                    : "orders-empty-div"
+                }
+              ></div>
               <div>
                 <p>In transit</p>
               </div>
             </div>
-            <div className="order-sorting-options">
-              <div className="orders-empty-div"></div>
+            <div
+              className="order-sorting-options"
+              onClick={(e) => handleSelectedOrderStatus(e, "Delivered")}
+            >
+              <div
+                className={
+                  selectedOrderStatus === "Delivered"
+                    ? "orders-empty-div-active"
+                    : "orders-empty-div"
+                }
+              ></div>
               <div>
                 <p>Delivered</p>
               </div>
             </div>
-            <div className="order-sorting-options">
-              <div className="orders-empty-div"></div>
+            <div
+              className="order-sorting-options"
+              onClick={(e) => handleSelectedOrderStatus(e, "Canceled")}
+            >
+              <div
+                className={
+                  selectedOrderStatus === "Canceled"
+                    ? "orders-empty-div-active"
+                    : "orders-empty-div"
+                }
+              ></div>
               <div>
                 <p>Canceled</p>
               </div>
