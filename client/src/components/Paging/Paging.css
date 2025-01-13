@@ -1,0 +1,28 @@
+.page-selected {
+  background-color: #001f54;
+  color: #fff;
+  border: 1px #001f54 solid;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+}
+
+.page-selected h3 {
+  margin: 0;
+}
+
+.page {
+  border: 1px grey solid;
+  padding: 1rem 2rem;
+  font-size: 1rem;
+  transition: 0.5s ease-in-out;
+}
+
+.page:hover {
+  background-color: #001f54;
+  color: #fff;
+  border: 1px #001f54 solid;
+}
+
+.page h3 {
+  margin: 0;
+}

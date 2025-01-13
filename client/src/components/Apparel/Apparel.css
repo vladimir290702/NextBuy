@@ -35,6 +35,9 @@
 }
 
 #toggle-category {
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
   border-top: 1px #000 solid;
   padding-left: 2rem;
 }
@@ -48,4 +51,33 @@
   text-decoration: underline;
   text-decoration-color: #000; /* Customize the underline color */
   text-decoration-thickness: 2px;
+}
+
+#apparel-products {
+  padding: 1rem 2rem;
+  display: flex;
+}
+
+#apparel-results-container p {
+  color: gray;
+  font-size: 1rem;
+}
+
+#apparel-products-container {
+  width: 25%;
+}
+
+#products-container {
+  width: 75%;
+  padding-left: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#paging {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
 }
