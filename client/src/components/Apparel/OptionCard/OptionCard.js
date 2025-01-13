@@ -7,11 +7,14 @@ export default function OptionCard({ data, setDataToParent }) {
 
   const handleToggleOption = (e, category) => {
     e.preventDefault();
-    setSelectedOption(category);
 
     if (selectedOption === category) {
       setOption(!option);
+    } else {
+      setOption(true);
     }
+
+    setSelectedOption(category);
   };
   return (
     <div id="apparel-sorting-options">
@@ -24,7 +27,7 @@ export default function OptionCard({ data, setDataToParent }) {
             <p>{data.category}</p>
           </div>
           <div className="apparel-toggle-function">
-            <p>{data.category === selectedOption ? "-" : "+"}</p>
+            <p>{option ? "-" : "+"}</p>
           </div>
         </div>
         <div

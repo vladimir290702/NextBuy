@@ -3,10 +3,13 @@ import { useState } from "react";
 import { manApparel } from "../../data/apparelData";
 import { sortData } from "../../data/apparelSortData";
 import OptionCard from "./OptionCard/OptionCard";
+import ProductCard from "./ProductCard/ProductCard";
+import Paging from "../Paging/Paging";
 
 export default function Apparel() {
   const [selectedIndex, setSelectedIndex] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedPage, setSelectedPage] = useState(1);
 
   const [toggle, setToggle] = useState(false);
   const [sortToggle, setSortToggle] = useState(false);
@@ -34,6 +37,12 @@ export default function Apparel() {
     } else {
       setSortToggle(category);
     }
+  };
+
+  const handleSelectPage = (e, page) => {
+    e.preventDefault();
+
+    setSelectedPage(page);
   };
   return (
     <>
@@ -75,28 +84,33 @@ export default function Apparel() {
           </div>
         </div>
       )}
-      <div id="apparel-products">
-        <div id="apparel-products-container">
-          <div id="apparel-results-container">
-            <p>Total results: 1186</p>
+      <div id="apparel-content-container">
+        <div id="apparel-products">
+          <div id="apparel-products-container">
+            <div id="apparel-results-container">
+              <p>Total results: 1186</p>
+            </div>
+            <div id="apparel-sorting-options">
+              {sortData?.map((item, index) => {
+                return (
+                  <OptionCard
+                    key={index}
+                    data={item}
+                    setDataToParent={handleSelectOption}
+                    selectedOption={sortToggle}
+                  />
+                );
+              })}
+            </div>
           </div>
-          <div id="apparel-sorting-options">
-            {sortData?.map((item, index) => {
-              return (
-                <OptionCard
-                  key={index}
-                  data={item}
-                  setDataToParent={handleSelectOption}
-                  selectedOption={sortToggle}
-                />
-              );
+          <div id="products-container">
+            {[1, 2, 3, 4, 5, 6].map((item, index) => {
+              return <ProductCard key={index} />;
             })}
           </div>
         </div>
-        <div id="products-container">
-          <h2>Here</h2>
-        </div>
       </div>
+      <Paging page={selectedPage} selectPage={handleSelectPage} />
     </>
   );
 }

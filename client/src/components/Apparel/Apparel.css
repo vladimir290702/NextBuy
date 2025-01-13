@@ -35,6 +35,9 @@
 }
 
 #toggle-category {
+  position: absolute;
+  width: 100%;
+  background-color: #fff;
   border-top: 1px #000 solid;
   padding-left: 2rem;
 }
@@ -61,5 +64,20 @@
 }
 
 #apparel-products-container {
-  width: 20%;
+  width: 25%;
+}
+
+#products-container {
+  width: 75%;
+  padding-left: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+#paging {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
 }
