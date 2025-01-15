@@ -1,0 +1,151 @@
+#cart-wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+}
+
+#cart-products {
+  width: 70%;
+  margin-right: 3rem;
+}
+
+.cart-section {
+  border-bottom: 1px grey solid;
+}
+
+.cart-product {
+  display: flex;
+  margin-top: 1.5rem;
+}
+
+.cart-product-image-container {
+  width: 15rem;
+}
+
+.cart-product-image-container img {
+  width: 100%;
+}
+
+.cart-product-details {
+  margin-left: 2rem;
+}
+
+.cart-product-name {
+  font-size: 1.5rem;
+  margin-bottom: 0;
+}
+
+.cart-product-price {
+  font-size: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.cart-product-additional-info {
+  margin: 0;
+  color: gray;
+}
+
+.cart-product-buttons-container {
+  display: flex;
+  margin-top: 1rem;
+}
+
+.cart-product-button button {
+  padding: 0.5rem 2rem;
+  margin-right: 0.5rem;
+  background-color: #001f54;
+  border: 2px #001f54 solid;
+  color: #fff;
+  transition: 0.3s ease-in-out;
+}
+
+.cart-product-button button:hover {
+  background-color: #fff;
+  border: 2px #001f54 solid;
+  color: #001f54;
+}
+
+#cart-overview {
+  width: 30%;
+}
+
+#overview-subtotal {
+  display: flex;
+  justify-content: space-between;
+  color: grey;
+}
+
+#overview-delivery {
+  display: flex;
+  justify-content: space-between;
+  color: grey;
+}
+
+#overview-discount {
+  display: flex;
+  justify-content: space-between;
+  color: grey;
+}
+
+.overview-prices-container p {
+  color: #000;
+  font-weight: 500;
+}
+
+#overview-delivery-additional {
+  font-size: 0.75rem;
+  margin: 0;
+}
+
+#promocode-container {
+  display: flex;
+  width: 100%;
+}
+
+#promocode-input {
+  width: 70%;
+}
+
+#promocode-input input {
+  width: 100%;
+  padding: 0.75rem;
+}
+
+#promocode-apply-button {
+  width: 30%;
+}
+
+#promocode-apply-button button {
+  width: 100%;
+  padding: 0.75rem 2rem;
+  background-color: #001f54;
+  color: #fff;
+  font-weight: 500;
+}
+
+#overview-total-items {
+  display: flex;
+  justify-content: space-between;
+  color: grey;
+  border-bottom: 1px grey solid;
+}
+
+#procceed-button {
+  width: 100%;
+  margin-top: 1rem;
+}
+
+#procceed-button button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #001f54;
+  color: #fff;
+  border: 2px #001f54 solid;
+  font-weight: 600;
+}
+
+#procceed-button button:hover {
+  background-color: #fff;
+  color: #001f54;
+  border: 2px #001f54 solid;
+}
