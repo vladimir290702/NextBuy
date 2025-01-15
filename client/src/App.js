@@ -8,6 +8,7 @@ import Login from "./components/Login/Login";
 import Footer from "./components/Footer/Footer";
 import Apparel from "./components/Apparel/Apparel";
 import ShopProfile from "./components/ShopProfile/ShopProfile";
+import ProductDetails from "./components/ProductDetails/ProductDetails";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/shop-profile" element={<ShopProfile />} />
+          <Route path="/product-details" element={<ProductDetails />} />
         </Routes>
         <Footer />
       </BrowserRouter>
