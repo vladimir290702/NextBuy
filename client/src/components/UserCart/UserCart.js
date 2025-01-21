@@ -1,6 +1,14 @@
 import "./UserCart.css";
+import { useNavigate } from "react-router-dom";
 
 export default function UserCart() {
+  const navigate = useNavigate();
+
+  const handleProcceedToCheckout = (e) => {
+    e.preventDefault();
+
+    navigate("/checkout");
+  };
   return (
     <div id="cart-wrapper">
       <div id="cart-products">
@@ -83,7 +91,7 @@ export default function UserCart() {
             <p>$129.99</p>
           </div>
         </div>
-        <div id="procceed-button">
+        <div id="procceed-button" onClick={(e) => handleProcceedToCheckout(e)}>
           <button>Procceed To Checkout</button>
         </div>
       </div>
