@@ -18,7 +18,55 @@ export const manApparel = [
     subcategory: ["Buisness Bag", "City Bag", "Travel Gag", "Backpack"],
   },
   {
-    category: "Shoes and Accessories",
-    subcategory: ["Sneakers", "SportShoes", "Wallets", "Belts", "Sunglasses"],
+    category: "Shoes",
+    subcategory: ["Sneakers", "SportShoes"],
+  },
+  {
+    category: "Accessories",
+    subcategory: [
+      "Wallets",
+      "Belts",
+      "Sunglasses",
+      "Hats",
+      "Watches",
+      "Jewellery",
+    ],
+  },
+];
+
+export const womanApparel = [
+  {
+    category: "Sale",
+  },
+  {
+    category: "Clothing",
+    subcategory: [
+      "Jackets",
+      "T-shirt",
+      "Sweatshirt",
+      "Dresses",
+      "Pants",
+      "Underwear",
+      "Tops and Shirts",
+      "Trousers",
+    ],
+  },
+  {
+    category: "Bags",
+    subcategory: [
+      "Buisness Bag",
+      "City Bag",
+      "Travel Gag",
+      "Backpack",
+      "Shoulder Bag",
+    ],
+  },
+  {
+    category: "Shoes",
+    subcategory: ["Sneakers", "SportShoes", "Heels", "Sandals", "Boots"],
+  },
+  {
+    category: "Accessories",
+    subcategory: ["Wallets", "Belts", "Sunglasses"],
   },
 ];

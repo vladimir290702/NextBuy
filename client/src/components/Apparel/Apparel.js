@@ -27,7 +27,7 @@ export default function Apparel() {
   };
   return (
     <>
-      <ProductCategories />
+      <ProductCategories type={"man"} />
       <div id="apparel-content-container">
         <div id="apparel-products">
           <div id="apparel-products-container">
