@@ -10,6 +10,7 @@ import Apparel from "./components/Apparel/Apparel";
 import ShopProfile from "./components/ShopProfile/ShopProfile";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import UserCart from "./components/UserCart/UserCart";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/shop-profile" element={<ShopProfile />} />
           <Route path="/product-details" element={<ProductDetails />} />
           <Route path="/cart" element={<UserCart />} />
+          <Route path="/checkout" element={<Checkout />} />
         </Routes>
         <Footer />
       </BrowserRouter>
