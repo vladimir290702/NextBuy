@@ -9,7 +9,7 @@ export default function Register() {
   const { login } = useUser();
   const [custommer, setCustommer] = useState("option");
   const [creator, setCreator] = useState("option");
-  const [isSelected, setIsSelected] = useState(true);
+  const [selectedOption, setSelectedOption] = useState("");
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
@@ -27,18 +27,21 @@ export default function Register() {
       setCustommer("option");
     }
 
-    setIsSelected(false);
+    setSelectedOption(option);
   };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     let result = await loginUser(userData);
 
-    if (!result.status) {
+    if (!result.status && selectedOption !== "") {
       navigate("/login");
     } else {
-      navigate("/");
-      login(result.user);
+      if (result.user.role !== selectedOption) {
+      } else {
+        navigate("/");
+        login(result.user);
+      }
     }
   };
 
@@ -88,7 +91,6 @@ export default function Register() {
       </div>
       <div id="button-wrapper">
         <button
-          disabled={isSelected}
           onClick={(e) => {
             handleLogin(e);
           }}
