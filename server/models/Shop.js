@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const shopSchema = new mongoose.Schema({
+  ownerId: { type: String },
   owner: { type: String, required: true },
   logo: { type: String },
   name: { type: String, required: true },

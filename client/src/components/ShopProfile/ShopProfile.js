@@ -13,20 +13,18 @@ import Dashboard from "./Dashboard/Dashboard";
 import Orders from "./Orders/Orders";
 import Settings from "./Settings/Settings";
 import { getShopData } from "../../services/createShop";
+import { useUser } from "../../contexts/UserContext";
 
 export default function ShopProfile() {
+  const { user } = useUser();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [shopData, setShopData] = useState(null);
 
-  console.log(shopData);
-
   useEffect(() => {
     const fetchedShopData = async () => {
-      fetch("http://localhost:3000/shop-profile")
-        .then((res) => res.json())
-        .then((data) => {
-          setShopData(data);
-        });
+      const response = await getShopData(user?.username);
+
+      setShopData(response.shop);
     };
     fetchedShopData();
   }, []);
@@ -60,7 +58,7 @@ export default function ShopProfile() {
   return (
     <div id="shop-profile-wrapper">
       <div id="shop-profile-categories">
-        {shopData?.length > 0 ? null : (
+        {shopData ? null : (
           <div
             className="shop-profile-category"
             onClick={(e) => handleSelectedCategory(e, "create-shop")}

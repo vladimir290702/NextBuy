@@ -25,7 +25,8 @@ export default function FinishCreateShop() {
     e.preventDefault();
 
     const data = {
-      owner: user.name,
+      ownerId: user._id,
+      owner: user.username,
       logo: shopLogo,
       name: shopName,
       categories: selectedOptions,

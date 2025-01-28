@@ -129,6 +129,7 @@ app.post("/register", async (req, res) => {
 
 app.post("/shop-profile", async (req, res) => {
   const {
+    ownerId,
     owner,
     logo,
     name,
@@ -141,6 +142,7 @@ app.post("/shop-profile", async (req, res) => {
   } = req.body;
 
   const shop = await Shop.create({
+    ownerId,
     owner,
     logo,
     name,
@@ -156,9 +158,11 @@ app.post("/shop-profile", async (req, res) => {
 });
 
 app.get("/shop-profile", async (req, res) => {
-  const items = await Shop.find();
+  const { name } = req.query;
 
-  return res.json({ items });
+  const shop = await Shop.findOne({ owner: name });
+
+  return res.json({ shop });
 });
 
 app.listen(3000, () => {
