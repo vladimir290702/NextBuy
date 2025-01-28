@@ -4,7 +4,7 @@ import { IoCreateOutline, IoSettingsOutline } from "react-icons/io5";
 import { GoListUnordered } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { AiFillShop } from "react-icons/ai";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreateShop from "./CreateShop/CreateShop";
 import FinishCreateShop from "./FinishCreateShop/FinishCreateShop";
 import AddListing from "./AddListing/AddListing";
@@ -12,9 +12,24 @@ import OtherShops from "./OtherShops/OtherShops";
 import Dashboard from "./Dashboard/Dashboard";
 import Orders from "./Orders/Orders";
 import Settings from "./Settings/Settings";
+import { getShopData } from "../../services/createShop";
 
 export default function ShopProfile() {
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [shopData, setShopData] = useState(null);
+
+  console.log(shopData);
+
+  useEffect(() => {
+    const fetchedShopData = async () => {
+      fetch("http://localhost:3000/shop-profile")
+        .then((res) => res.json())
+        .then((data) => {
+          setShopData(data);
+        });
+    };
+    fetchedShopData();
+  }, []);
 
   const handleSelectedCategory = (e, category) => {
     e.preventDefault();
@@ -45,13 +60,15 @@ export default function ShopProfile() {
   return (
     <div id="shop-profile-wrapper">
       <div id="shop-profile-categories">
-        <div
-          className="shop-profile-category"
-          onClick={(e) => handleSelectedCategory(e, "create-shop")}
-        >
-          <CiShop />
-          <h3>Create Shop</h3>
-        </div>
+        {shopData ? null : (
+          <div
+            className="shop-profile-category"
+            onClick={(e) => handleSelectedCategory(e, "create-shop")}
+          >
+            <CiShop />
+            <h3>Create Shop</h3>
+          </div>
+        )}
         <div
           className="shop-profile-category"
           onClick={(e) => handleSelectedCategory(e, "add-listing")}

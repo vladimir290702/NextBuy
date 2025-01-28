@@ -5,6 +5,7 @@ const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const itemModel = require("./models/Item.js");
 const User = require("./models/User.js");
+const Shop = require("./models/Shop");
 
 const app = express();
 app.use(express.json());
@@ -70,14 +71,12 @@ app.post("/promo", async (req, res) => {
 });
 
 app.get("/", async (req, res) => {
-  const items = await itemModel.find();
+  const items = await Shop.find();
 
   return res.json({ items });
 });
 
 app.post("/login", async (req, res) => {
-  console.log(req.body);
-
   const { email, password } = req.body;
 
   if (!email || !password) {
@@ -126,6 +125,26 @@ app.post("/register", async (req, res) => {
   });
 
   return res.status(200).json({ user });
+});
+
+app.post("/shop-profile", async (req, res) => {
+  const { owner, logo, name, categories, listings } = req.body;
+
+  const shop = await Shop.create({
+    owner,
+    logo,
+    name,
+    categories,
+    listings,
+  });
+
+  return res.status(200).json({ shop });
+});
+
+app.get("/shop-profile", async (req, res) => {
+  const items = await Shop.find();
+
+  return res.json({ items });
 });
 
 app.listen(3000, () => {
