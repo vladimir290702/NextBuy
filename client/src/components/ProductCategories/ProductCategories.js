@@ -1,13 +1,17 @@
 import "./ProductCategories";
 import { useState } from "react";
-import { manApparel } from "../../data/apparelData";
+import { useLocation } from "react-router-dom";
+import { manApparel, womanApparel } from "../../data/apparelData";
 
-export default function ProductCategories() {
+export default function ProductCategories({ type }) {
+  const location = useLocation();
   const [toggle, setToggle] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const apparelType = location.state;
 
-  const subCategoryItems = manApparel[selectedIndex]?.subcategory || null;
+  const data = apparelType === "man" ? manApparel : womanApparel;
+  const subCategoryItems = data[selectedIndex]?.subcategory || null;
 
   const handleSelectItem = (e, index, category) => {
     e.preventDefault();
@@ -24,7 +28,7 @@ export default function ProductCategories() {
   return (
     <>
       <div id="apparel-wrapper">
-        {manApparel.map((item, index) => {
+        {data.map((item, index) => {
           return (
             <div
               className={selectedIndex === index ? "item-selected" : "item"}

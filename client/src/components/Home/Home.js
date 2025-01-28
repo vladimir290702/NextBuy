@@ -6,16 +6,10 @@ import EmailSubscribtion from "../EmailSubscription/EmailSubscription";
 export default function Home() {
   const navigate = useNavigate();
 
-  const handleManApparel = (e) => {
+  const handleApparel = (e, option) => {
     e.preventDefault();
 
-    navigate("/apparel-man");
-  };
-
-  const handleWomanApparel = (e) => {
-    e.preventDefault();
-
-    navigate("/apparel-woman");
+    navigate("/apparel", { state: option });
   };
   return (
     <>
@@ -27,7 +21,7 @@ export default function Home() {
           <div>
             <Link
               className="collection-button"
-              onClick={(e) => handleManApparel(e)}
+              onClick={(e) => handleApparel(e, "man")}
             >
               FOR HIM
             </Link>
@@ -35,7 +29,7 @@ export default function Home() {
           <div>
             <Link
               className="collection-button"
-              onClick={(e) => handleWomanApparel(e)}
+              onClick={(e) => handleApparel(e, "woman")}
             >
               FOR HER
             </Link>
