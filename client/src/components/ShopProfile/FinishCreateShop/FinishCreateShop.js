@@ -30,6 +30,10 @@ export default function FinishCreateShop() {
       name: shopName,
       categories: selectedOptions,
       listings: [],
+      revenue: 0,
+      views: 0,
+      orders: [],
+      activity: [],
     };
     const response = await createShop(data);
 

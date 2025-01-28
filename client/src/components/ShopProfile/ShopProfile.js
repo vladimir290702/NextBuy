@@ -60,7 +60,7 @@ export default function ShopProfile() {
   return (
     <div id="shop-profile-wrapper">
       <div id="shop-profile-categories">
-        {shopData ? null : (
+        {shopData?.length > 0 ? null : (
           <div
             className="shop-profile-category"
             onClick={(e) => handleSelectedCategory(e, "create-shop")}

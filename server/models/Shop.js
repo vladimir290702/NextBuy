@@ -6,6 +6,10 @@ const shopSchema = new mongoose.Schema({
   name: { type: String, required: true },
   categories: { type: Array, required: true },
   listings: { type: Array },
+  revenue: { type: Number },
+  views: { type: Number },
+  orders: { type: Array },
+  activity: { type: Array },
 });
 
 const Shop = mongoose.model("Shop", shopSchema);

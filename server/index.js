@@ -128,7 +128,17 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/shop-profile", async (req, res) => {
-  const { owner, logo, name, categories, listings } = req.body;
+  const {
+    owner,
+    logo,
+    name,
+    categories,
+    listings,
+    revenue,
+    views,
+    orders,
+    activity,
+  } = req.body;
 
   const shop = await Shop.create({
     owner,
@@ -136,6 +146,10 @@ app.post("/shop-profile", async (req, res) => {
     name,
     categories,
     listings,
+    revenue,
+    views,
+    orders,
+    activity,
   });
 
   return res.status(200).json({ shop });
