@@ -4,7 +4,7 @@ import { IoCreateOutline, IoSettingsOutline } from "react-icons/io5";
 import { GoListUnordered } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { AiFillShop } from "react-icons/ai";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CreateShop from "./CreateShop/CreateShop";
 import FinishCreateShop from "./FinishCreateShop/FinishCreateShop";
 import AddListing from "./AddListing/AddListing";
@@ -12,9 +12,22 @@ import OtherShops from "./OtherShops/OtherShops";
 import Dashboard from "./Dashboard/Dashboard";
 import Orders from "./Orders/Orders";
 import Settings from "./Settings/Settings";
+import { getShopData } from "../../services/createShop";
+import { useUser } from "../../contexts/UserContext";
 
 export default function ShopProfile() {
+  const { user } = useUser();
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [shopData, setShopData] = useState(null);
+
+  useEffect(() => {
+    const fetchedShopData = async () => {
+      const response = await getShopData(user?.username);
+
+      setShopData(response.shop);
+    };
+    fetchedShopData();
+  }, []);
 
   const handleSelectedCategory = (e, category) => {
     e.preventDefault();
@@ -30,7 +43,7 @@ export default function ShopProfile() {
     } else if (selectedCategory === "orders") {
       return <Orders />;
     } else if (selectedCategory === "dashboard") {
-      return <Dashboard />;
+      return <Dashboard shopData={shopData} />;
     } else if (selectedCategory === "settings") {
       return <Settings />;
     } else if (selectedCategory === "other-shops") {
@@ -45,13 +58,15 @@ export default function ShopProfile() {
   return (
     <div id="shop-profile-wrapper">
       <div id="shop-profile-categories">
-        <div
-          className="shop-profile-category"
-          onClick={(e) => handleSelectedCategory(e, "create-shop")}
-        >
-          <CiShop />
-          <h3>Create Shop</h3>
-        </div>
+        {shopData ? null : (
+          <div
+            className="shop-profile-category"
+            onClick={(e) => handleSelectedCategory(e, "create-shop")}
+          >
+            <CiShop />
+            <h3>Create Shop</h3>
+          </div>
+        )}
         <div
           className="shop-profile-category"
           onClick={(e) => handleSelectedCategory(e, "add-listing")}

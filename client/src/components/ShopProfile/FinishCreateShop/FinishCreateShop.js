@@ -1,10 +1,15 @@
 import "./FinishCreateShop.css";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { createShop } from "../../../services/createShop";
+import { useUser } from "../../../contexts/UserContext";
 
 export default function FinishCreateShop() {
   const navigate = useNavigate();
+  const { user } = useUser();
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const [shopName, setShopName] = useState("");
+  const [shopLogo, setShopLogo] = useState("");
 
   const checkIfOptionIsSelected = (e, option) => {
     e.preventDefault();
@@ -16,8 +21,22 @@ export default function FinishCreateShop() {
     }
   };
 
-  const handleCreateShop = (e) => {
+  const handleCreateShop = async (e) => {
     e.preventDefault();
+
+    const data = {
+      ownerId: user._id,
+      owner: user.username,
+      logo: shopLogo,
+      name: shopName,
+      categories: selectedOptions,
+      listings: [],
+      revenue: 0,
+      views: 0,
+      orders: [],
+      activity: [],
+    };
+    const response = await createShop(data);
 
     navigate("/add-listing");
   };
@@ -28,13 +47,21 @@ export default function FinishCreateShop() {
         <div>
           <label>Import your logo's URL:</label>
           <div className="finish-create-shop-input">
-            <input type="text" placeholder="Logo URL..." />
+            <input
+              type="text"
+              placeholder="Logo URL..."
+              onChange={(e) => setShopLogo(e.target.value)}
+            />
           </div>
         </div>
         <div>
           <label>Your shop's name:</label>
           <div className="finish-create-shop-input">
-            <input type="text" placeholder="Shop's Name..." />
+            <input
+              type="text"
+              placeholder="Shop's Name..."
+              onChange={(e) => setShopName(e.target.value)}
+            />
           </div>
         </div>
         <div>

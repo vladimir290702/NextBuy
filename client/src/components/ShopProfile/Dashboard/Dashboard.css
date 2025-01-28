@@ -7,13 +7,15 @@
 }
 
 #dashboard-shop-data-image-container {
-  width: 3.5rem;
+  width: 4rem;
+  height: 3.5rem;
   border: 1px grey solid;
   border-radius: 5px;
 }
 
 #dashboard-shop-data-image-container img {
   width: 100%;
+  height: 100%;
   border-radius: 5px;
 }
 
