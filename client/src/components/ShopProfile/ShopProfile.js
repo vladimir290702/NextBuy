@@ -43,7 +43,7 @@ export default function ShopProfile() {
     } else if (selectedCategory === "orders") {
       return <Orders />;
     } else if (selectedCategory === "dashboard") {
-      return <Dashboard />;
+      return <Dashboard shopData={shopData} />;
     } else if (selectedCategory === "settings") {
       return <Settings />;
     } else if (selectedCategory === "other-shops") {
