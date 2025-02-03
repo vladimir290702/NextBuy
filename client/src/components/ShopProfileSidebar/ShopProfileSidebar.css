@@ -1,8 +1,3 @@
-#shop-profile-wrapper {
-  display: flex;
-  align-items: left;
-}
-
 #shop-profile-categories {
   display: inline-block;
   align-items: left;
@@ -20,8 +15,4 @@
 
 .shop-profile-category h3 {
   margin: 1rem 0;
-}
-
-#selected-shop-category {
-  width: 80vw;
 }

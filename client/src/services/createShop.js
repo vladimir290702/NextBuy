@@ -18,9 +18,7 @@ export const createShop = async (userData) => {
 
 export const getShopData = async (id) => {
   try {
-    const response = await fetch(
-      `http://localhost:3000/shop-profile?name=${id}`
-    );
+    const response = await fetch(`http://localhost:3000/dashboard?name=${id}`);
 
     const data = await response.json();
 

@@ -157,7 +157,7 @@ app.post("/shop-profile", async (req, res) => {
   return res.status(200).json({ shop });
 });
 
-app.get("/shop-profile", async (req, res) => {
+app.get("/dashboard", async (req, res) => {
   const { name } = req.query;
 
   const shop = await Shop.findOne({ owner: name });
