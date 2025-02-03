@@ -1,5 +1,5 @@
 import "./Dashboard.css";
-import { IoCalendarOutline, IoHeart } from "react-icons/io5";
+import { IoCalendarOutline } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
 export default function Dashboard({ shopData }) {
   return (

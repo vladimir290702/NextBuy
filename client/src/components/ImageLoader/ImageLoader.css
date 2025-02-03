@@ -5,15 +5,15 @@
   cursor: pointer;
 }
 
-#image-uploader-images-container {
+.image-uploader-images-container {
   display: flex;
   flex-wrap: wrap;
   margin-top: 20px;
 }
 
 .image-uploader-image {
-  width: 30px;
-  height: 20px;
+  width: 15rem;
+  height: 15rem;
   border-radius: 5px;
 }
 
@@ -21,6 +21,7 @@
   position: absolute;
   top: 5px;
   right: 5px;
+  padding: 0;
   background: #001f54;
   color: white;
   border: none;

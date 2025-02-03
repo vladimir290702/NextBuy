@@ -1,18 +1,29 @@
 import "./AddListing.css";
 import { useState } from "react";
 import ImageLoader from "../../ImageLoader/ImageLoader";
+import { clothingCategories } from "../../../data/clothingCategories";
+import { sizing } from "../../../data/sizing";
 
 export default function AddListing() {
   const [imageUrls, setImageUrls] = useState([]);
   const [model, setModel] = useState("");
   const [description, setDescription] = useState("");
-  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState("");
   const [sizes, setSizes] = useState([]);
   const [price, setPrice] = useState([]);
 
-  // Function to receive images from child
   const handleImageUpload = (urls) => {
     setImageUrls(urls);
+  };
+
+  const handleProductSizes = (e, size) => {
+    e.preventDefault();
+
+    if (!sizes.includes(size)) {
+      setSizes([...sizes, size]);
+    } else {
+      setSizes(sizes.filter((item) => item !== size));
+    }
   };
 
   const handleCreateListing = (e) => {
@@ -22,7 +33,7 @@ export default function AddListing() {
       images: imageUrls,
       model,
       description,
-      categories,
+      category,
       sizes,
       price,
       date: new Date().toLocaleString(),
@@ -43,31 +54,14 @@ export default function AddListing() {
               <label>Category</label>
             </div>
             <div id="add-listing-category-options">
-              <select>
-                <option name="Clothing" id="">
-                  Clothing
-                </option>
-                <option name="Shoes" id="">
-                  Shoes
-                </option>
-                <option name="Accessories" id="">
-                  Accessories
-                </option>
-                <option name="Belts" id="">
-                  Belts
-                </option>
-                <option name="Bags" id="">
-                  Bags
-                </option>
-                <option name="Watches" id="">
-                  Watches
-                </option>
-                <option name="Sunglasses" id="">
-                  Sunglasses
-                </option>
-                <option name="Wallets" id="">
-                  Wallets
-                </option>
+              <select onChange={(e) => setCategory(e.target.value)}>
+                {clothingCategories.map((item, index) => {
+                  return (
+                    <option key={index} value={item}>
+                      {item}
+                    </option>
+                  );
+                })}
               </select>
             </div>
           </div>
@@ -95,15 +89,6 @@ export default function AddListing() {
               />
             </div>
           </div>
-          <div className="main-data-option">
-            <div className="main-data-label-container">
-              <label>Select Currency:</label>
-            </div>
-            <div id="add-listing-currency">
-              <div id="add-listing-currency-dollar">$</div>
-              <div id="add-listing-currency-euro">€</div>
-            </div>
-          </div>
         </div>
       </div>
       <div id="secondary-product-data">
@@ -112,12 +97,21 @@ export default function AddListing() {
             <label>Which product sizes will you offer to your customers:</label>
           </div>
           <div id="create-product-sizes-wrapper">
-            <div className="create-product-size">S</div>
-            <div className="create-product-size">M</div>
-            <div className="create-product-size">L</div>
-            <div className="create-product-size">XL</div>
-            <div className="create-product-size">2XL</div>
-            <div className="create-product-size">3XL</div>
+            {sizing.clothing.map((item, index) => {
+              return (
+                <div
+                  key={index}
+                  onClick={(e) => handleProductSizes(e, item)}
+                  className={
+                    sizes.includes(item)
+                      ? "create-product-size-active"
+                      : "create-product-size"
+                  }
+                >
+                  {item}
+                </div>
+              );
+            })}
           </div>
         </div>
         <div id="add-listing-discription">

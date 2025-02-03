@@ -33,47 +33,23 @@ const ImageUploader = ({ onImageUpload }) => {
   return (
     <div>
       {/* Dropzone Area */}
-      <div
-        {...getRootProps()}
-        style={{
-          border: "2px dashed #ccc",
-          padding: "20px",
-          textAlign: "center",
-          cursor: "pointer",
-        }}
-      >
+      <div id="image-uploader-input-container" {...getRootProps()}>
         <input {...getInputProps()} />
         <p>Drag & drop images here, or click to select files</p>
       </div>
 
       {/* Preview Section */}
-      <div style={{ display: "flex", flexWrap: "wrap", marginTop: "20px" }}>
+      <div className="image-uploader-images-container ">
         {images.map((file) => (
           <div key={file.id} style={{ margin: "10px", position: "relative" }}>
             <img
+              className="image-uploader-image"
               src={file.preview}
               alt="uploaded"
-              style={{
-                width: "100px",
-                height: "100px",
-                objectFit: "cover",
-                borderRadius: "5px",
-              }}
             />
             <button
+              className="image-uploader-image-delete-button"
               onClick={() => deleteImage(file.id)}
-              style={{
-                position: "absolute",
-                top: "5px",
-                right: "5px",
-                background: "red",
-                color: "white",
-                border: "none",
-                borderRadius: "50%",
-                width: "20px",
-                height: "20px",
-                cursor: "pointer",
-              }}
             >
               ✕
             </button>
