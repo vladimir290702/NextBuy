@@ -13,6 +13,7 @@ import UserCart from "./components/UserCart/UserCart";
 import Checkout from "./components/Checkout/Checkout";
 import CreateListing from "./components/CreateListing/CreateListing";
 import Dashboard from "./components/Dashboard/Dashboard";
+import ShopOrders from "./components/ShopOrders/ShopOrders";
 function App() {
   //          <Route path="/shop-profile" element={<ShopProfile />} />
 
@@ -27,6 +28,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/shop-orders" element={<ShopOrders />} />
           <Route path="/product-details" element={<ProductDetails />} />
           <Route path="/cart" element={<UserCart />} />
           <Route path="/checkout" element={<Checkout />} />

@@ -4,12 +4,10 @@ import { IoCreateOutline, IoSettingsOutline } from "react-icons/io5";
 import { GoListUnordered } from "react-icons/go";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { AiFillShop } from "react-icons/ai";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function ShopProfileSidebar() {
   const navigate = useNavigate();
-  const [shopData, setShopData] = useState(null);
 
   const handleSelectedCategory = (e, category) => {
     e.preventDefault();
@@ -18,15 +16,13 @@ export default function ShopProfileSidebar() {
   };
   return (
     <div id="shop-profile-categories">
-      {shopData ? null : (
-        <div
-          className="shop-profile-category"
-          onClick={(e) => handleSelectedCategory(e, "create-shop")}
-        >
-          <CiShop />
-          <h3>Create Shop</h3>
-        </div>
-      )}
+      <div
+        className="shop-profile-category"
+        onClick={(e) => handleSelectedCategory(e, "create-shop")}
+      >
+        <CiShop />
+        <h3>Create Shop</h3>
+      </div>
       <div
         className="shop-profile-category"
         onClick={(e) => handleSelectedCategory(e, "create-listing")}
@@ -36,7 +32,7 @@ export default function ShopProfileSidebar() {
       </div>
       <div
         className="shop-profile-category"
-        onClick={(e) => handleSelectedCategory(e, "orders")}
+        onClick={(e) => handleSelectedCategory(e, "shop-orders")}
       >
         <GoListUnordered />
         <h3>Orders</h3>

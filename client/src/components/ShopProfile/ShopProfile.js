@@ -38,8 +38,6 @@ export default function ShopProfile() {
   const displayOption = () => {
     if (selectedCategory === "create-shop") {
       return <CreateShop sendDataToParent={handleSelectedCategory} />;
-    } else if (selectedCategory === "orders") {
-      return <Orders />;
     } else if (selectedCategory === "settings") {
       return <Settings />;
     } else if (selectedCategory === "other-shops") {
