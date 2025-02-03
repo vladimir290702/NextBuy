@@ -7,7 +7,6 @@ import Register from "./components/Register/Register";
 import Login from "./components/Login/Login";
 import Footer from "./components/Footer/Footer";
 import Apparel from "./components/Apparel/Apparel";
-import ShopProfile from "./components/ShopProfile/ShopProfile";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import UserCart from "./components/UserCart/UserCart";
 import Checkout from "./components/Checkout/Checkout";
@@ -16,9 +15,10 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import ShopOrders from "./components/ShopOrders/ShopOrders";
 import ShopSettings from "./components/ShopSettings/ShopSettings";
 import OtherShops from "./components/OtherShops/OtherShops";
-function App() {
-  //          <Route path="/shop-profile" element={<ShopProfile />} />
+import InitialPage from "./components/CreateShop/InitialPage/InitialPage";
+import CreateShop from "./components/CreateShop/CreateShop";
 
+function App() {
   return (
     <UserProvider>
       <BrowserRouter>
@@ -28,6 +28,8 @@ function App() {
           <Route path="/apparel" element={<Apparel />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/create-shop-initial" element={<InitialPage />} />
+          <Route path="/create-shop" element={<CreateShop />} />
           <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/shop-orders" element={<ShopOrders />} />

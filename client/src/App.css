@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 
 .App {
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 
 .App-logo {
@@ -29,6 +29,34 @@
 
 .App-link {
   color: #61dafb;
+}
+
+#shop-profile-wrapper {
+  display: flex;
+  align-items: left;
+}
+
+#shop-profile-categories {
+  display: inline-block;
+  align-items: left;
+  background-color: #001f54;
+  color: #fff;
+  width: 20vw;
+}
+
+.shop-profile-category {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 1rem;
+}
+
+.shop-profile-category h3 {
+  margin: 1rem 0;
+}
+
+#selected-shop-category {
+  width: 80vw;
 }
 
 @keyframes App-logo-spin {

@@ -18,7 +18,7 @@ export default function ShopProfileSidebar() {
     <div id="shop-profile-categories">
       <div
         className="shop-profile-category"
-        onClick={(e) => handleSelectedCategory(e, "create-shop")}
+        onClick={(e) => handleSelectedCategory(e, "create-shop-initial")}
       >
         <CiShop />
         <h3>Create Shop</h3>
