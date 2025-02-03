@@ -12,7 +12,7 @@ import ProductDetails from "./components/ProductDetails/ProductDetails";
 import UserCart from "./components/UserCart/UserCart";
 import Checkout from "./components/Checkout/Checkout";
 import CreateListing from "./components/CreateListing/CreateListing";
-
+import Dashboard from "./components/Dashboard/Dashboard";
 function App() {
   //          <Route path="/shop-profile" element={<ShopProfile />} />
 
@@ -26,6 +26,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/create-listing" element={<CreateListing />} />
+          <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/product-details" element={<ProductDetails />} />
           <Route path="/cart" element={<UserCart />} />
           <Route path="/checkout" element={<Checkout />} />
