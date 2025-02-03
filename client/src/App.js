@@ -11,8 +11,11 @@ import ShopProfile from "./components/ShopProfile/ShopProfile";
 import ProductDetails from "./components/ProductDetails/ProductDetails";
 import UserCart from "./components/UserCart/UserCart";
 import Checkout from "./components/Checkout/Checkout";
+import CreateListing from "./components/CreateListing/CreateListing";
 
 function App() {
+  //          <Route path="/shop-profile" element={<ShopProfile />} />
+
   return (
     <UserProvider>
       <BrowserRouter>
@@ -22,7 +25,7 @@ function App() {
           <Route path="/apparel" element={<Apparel />} />
           <Route path="/register" element={<Register />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/shop-profile" element={<ShopProfile />} />
+          <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/product-details" element={<ProductDetails />} />
           <Route path="/cart" element={<UserCart />} />
           <Route path="/checkout" element={<Checkout />} />

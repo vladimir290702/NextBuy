@@ -14,8 +14,10 @@ import Orders from "./Orders/Orders";
 import Settings from "./Settings/Settings";
 import { getShopData } from "../../services/createShop";
 import { useUser } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function ShopProfile() {
+  const navigate = useNavigate();
   const { user } = useUser();
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [shopData, setShopData] = useState(null);
