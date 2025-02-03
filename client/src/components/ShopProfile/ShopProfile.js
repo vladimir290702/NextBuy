@@ -7,7 +7,6 @@ import { AiFillShop } from "react-icons/ai";
 import { useState, useEffect } from "react";
 import CreateShop from "./CreateShop/CreateShop";
 import FinishCreateShop from "./FinishCreateShop/FinishCreateShop";
-import OtherShops from "./OtherShops/OtherShops";
 import { getShopData } from "../../services/createShop";
 import { useUser } from "../../contexts/UserContext";
 
@@ -34,8 +33,6 @@ export default function ShopProfile() {
   const displayOption = () => {
     if (selectedCategory === "create-shop") {
       return <CreateShop sendDataToParent={handleSelectedCategory} />;
-    } else if (selectedCategory === "other-shops") {
-      return <OtherShops />;
     } else if (selectedCategory === "finish-create-shop") {
       return <FinishCreateShop />;
     } else {
