@@ -14,6 +14,8 @@ import Checkout from "./components/Checkout/Checkout";
 import CreateListing from "./components/CreateListing/CreateListing";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ShopOrders from "./components/ShopOrders/ShopOrders";
+import ShopSettings from "./components/ShopSettings/ShopSettings";
+
 function App() {
   //          <Route path="/shop-profile" element={<ShopProfile />} />
 
@@ -29,6 +31,7 @@ function App() {
           <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/shop-orders" element={<ShopOrders />} />
+          <Route path="/shop-settings" element={<ShopSettings />} />
           <Route path="/product-details" element={<ProductDetails />} />
           <Route path="/cart" element={<UserCart />} />
           <Route path="/checkout" element={<Checkout />} />

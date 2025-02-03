@@ -1,0 +1,26 @@
+#settings-wrapper {
+  padding: 3rem 3rem 0 3rem;
+}
+
+.settings-option {
+  width: 100%;
+  border: 2px #001f54 solid;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.settings-name {
+  margin-left: 1rem;
+}
+
+.settings-icon-container {
+  margin-right: 1rem;
+}
+
+.settings-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #001f54;
+}

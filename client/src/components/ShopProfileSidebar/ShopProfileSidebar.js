@@ -53,7 +53,7 @@ export default function ShopProfileSidebar() {
       </div>
       <div
         className="shop-profile-category"
-        onClick={(e) => handleSelectedCategory(e, "settings")}
+        onClick={(e) => handleSelectedCategory(e, "shop-settings")}
       >
         <IoSettingsOutline />
         <h3>Settings</h3>
