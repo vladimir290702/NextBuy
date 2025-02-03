@@ -1,26 +1,41 @@
 import "./AddListing.css";
+import { useState } from "react";
+import ImageLoader from "../../ImageLoader/ImageLoader";
 
 export default function AddListing() {
+  const [imageUrls, setImageUrls] = useState([]);
+  const [model, setModel] = useState("");
+  const [description, setDescription] = useState("");
+  const [categories, setCategories] = useState([]);
+  const [sizes, setSizes] = useState([]);
+  const [price, setPrice] = useState([]);
+
+  // Function to receive images from child
+  const handleImageUpload = (urls) => {
+    setImageUrls(urls);
+  };
+
+  const handleCreateListing = (e) => {
+    e.preventDefault();
+
+    const data = {
+      images: imageUrls,
+      model,
+      description,
+      categories,
+      sizes,
+      price,
+      date: new Date().toLocaleString(),
+    };
+
+    console.log(data);
+  };
+
   return (
     <div id="add-listing-wrapper">
       <div id="first-product-section">
         <div id="imageContainer">
-          <img
-            src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/9e970183-c03c-4250-ae91-b238aefd47df/NIKE+AIR+MAX+90.png"
-            alt=""
-          />
-          <img
-            src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/6ca23f73-976a-47c0-86f9-a6a7ab527130/AIR+MAX+PLUS+DRIFT.png"
-            alt=""
-          />
-          <img
-            src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/7ccbde3c-6b29-4027-ad8a-bdbd84426c1d/W+AIR+FORCE+1+%2707+NEXT+NATURE.png"
-            alt=""
-          />
-          <img
-            src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/7ccbde3c-6b29-4027-ad8a-bdbd84426c1d/W+AIR+FORCE+1+%2707+NEXT+NATURE.png"
-            alt=""
-          />
+          <ImageLoader onImageUpload={handleImageUpload} />
         </div>
         <div id="productMainData">
           <div className="main-data-option">
@@ -61,7 +76,11 @@ export default function AddListing() {
               <label>Product Model:</label>
             </div>
             <div className="add-listing-category-input">
-              <input type="text" placeholder="Model..." />
+              <input
+                type="text"
+                placeholder="Model..."
+                onChange={(e) => setModel(e.target.value)}
+              />
             </div>
           </div>
           <div className="main-data-option">
@@ -69,7 +88,11 @@ export default function AddListing() {
               <label>Price:</label>
             </div>
             <div className="add-listing-category-input">
-              <input type="text" placeholder="Price..." />
+              <input
+                type="text"
+                placeholder="Price..."
+                onChange={(e) => setPrice(e.target.value)}
+              />
             </div>
           </div>
           <div className="main-data-option">
@@ -102,12 +125,15 @@ export default function AddListing() {
             <label htmlFor="productModel">Description:</label>
           </div>
           <div className="add-listing-category-input">
-            <textarea placeholder="Please describe your product..."></textarea>
+            <textarea
+              placeholder="Please describe your product..."
+              onChange={(e) => setDescription(e.target.value)}
+            ></textarea>
           </div>
         </div>
       </div>
       <div id="createProductButton">
-        <button>Add Listing</button>
+        <button onClick={(e) => handleCreateListing(e)}>Add Listing</button>
       </div>
     </div>
   );
