@@ -165,6 +165,19 @@ app.get("/dashboard", async (req, res) => {
   return res.json({ shop });
 });
 
+app.patch("/create-listing", async (req, res) => {
+  const { name } = req.query;
+
+  // Update only the "listings" field
+  const updatedListings = await Shop.findOneAndUpdate(
+    { owner: name }, // Find the shop by owner email
+    { $push: { listings: req.body } }, // Add new object to listings array
+    { new: true } // Return the updated document
+  );
+
+  return res.json(updatedListings);
+});
+
 app.listen(3000, () => {
   console.log("app is running");
 });

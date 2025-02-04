@@ -4,8 +4,13 @@ import ImageLoader from "../ImageLoader/ImageLoader";
 import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 import { clothingCategories } from "../../data/clothingCategories";
 import { sizing } from "../../data/sizing";
+import { createListing } from "../../services/createShop";
+import { useUser } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function CreateListing() {
+  const navigate = useNavigate();
+  const { user } = useUser();
   const [imageUrls, setImageUrls] = useState([]);
   const [model, setModel] = useState("");
   const [description, setDescription] = useState("");
@@ -27,7 +32,7 @@ export default function CreateListing() {
     }
   };
 
-  const handleCreateListing = (e) => {
+  const handleCreateListing = async (e) => {
     e.preventDefault();
 
     const data = {
@@ -38,9 +43,12 @@ export default function CreateListing() {
       sizes,
       price,
       date: new Date().toLocaleString(),
+      color: "White",
     };
 
-    console.log(data);
+    const response = await createListing(data, user.username);
+
+    navigate("/dashboard");
   };
 
   return (
