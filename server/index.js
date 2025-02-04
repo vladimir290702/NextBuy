@@ -127,7 +127,7 @@ app.post("/register", async (req, res) => {
   return res.status(200).json({ user });
 });
 
-app.post("/shop-profile", async (req, res) => {
+app.post("/create-shop", async (req, res) => {
   const {
     ownerId,
     owner,
@@ -139,6 +139,7 @@ app.post("/shop-profile", async (req, res) => {
     views,
     orders,
     activity,
+    createdOn,
   } = req.body;
 
   const shop = await Shop.create({
@@ -152,7 +153,10 @@ app.post("/shop-profile", async (req, res) => {
     views,
     orders,
     activity,
+    createdOn,
   });
+
+  console.log(shop);
 
   return res.status(200).json({ shop });
 });
@@ -176,6 +180,14 @@ app.patch("/create-listing", async (req, res) => {
   );
 
   return res.json(updatedListings);
+});
+
+app.get("/other-shops", async (req, res) => {
+  const shops = await Shop.find();
+
+  console.log(shops);
+
+  return res.json(shops);
 });
 
 app.listen(3000, () => {
