@@ -10,6 +10,11 @@ export default function OtherShops() {
     const fetchedShopData = async () => {
       const response = await getAllShopData();
 
+      if (!response) {
+        setData(null);
+        return;
+      }
+
       setData(response);
     };
     fetchedShopData();
@@ -37,9 +42,9 @@ export default function OtherShops() {
             </div>
           </div>
           <div id="shops-container">
-            {data.map((shop) => {
+            {data?.map((shop) => {
               return (
-                <div className="shop-container">
+                <div className="shop-container" key={shop._id}>
                   <div className="asd">
                     <div className="shop-initial-info">
                       <div className="shop-initial-image-container">
@@ -54,7 +59,7 @@ export default function OtherShops() {
                         <p>Created On:</p>
                       </div>
                       <div className="shop-creation-date">
-                        <p>12/01/2025.</p>
+                        <p>{shop.createdOn}</p>
                       </div>
                     </div>
                   </div>

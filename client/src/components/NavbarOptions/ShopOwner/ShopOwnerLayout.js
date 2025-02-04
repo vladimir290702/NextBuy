@@ -15,7 +15,7 @@ export default function ShopOwnerLayout() {
   const handleProfileRedirect = async () => {
     const response = await getShopData(user.username);
 
-    if (response.shop.owner) {
+    if (response?.shop?.owner) {
       navigate("/dashboard");
     } else {
       navigate("/create-shop-initial");

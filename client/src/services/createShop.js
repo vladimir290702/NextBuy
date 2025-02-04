@@ -1,6 +1,6 @@
 export const createShop = async (userData) => {
   try {
-    const response = await fetch("http://localhost:3000/shop-profile", {
+    const response = await fetch("http://localhost:3000/create-shop", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
