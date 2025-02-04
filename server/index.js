@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const itemModel = require("./models/Item.js");
 const User = require("./models/User.js");
 const Shop = require("./models/Shop");
-
+const Listings = require("./models/Listings");
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -156,8 +156,6 @@ app.post("/create-shop", async (req, res) => {
     createdOn,
   });
 
-  console.log(shop);
-
   return res.status(200).json({ shop });
 });
 
@@ -179,7 +177,9 @@ app.patch("/create-listing", async (req, res) => {
     { new: true } // Return the updated document
   );
 
-  return res.json(updatedListings);
+  const newListingToCollection = await Listings.create(req.body);
+
+  return res.json({ updatedListings, newListingToCollection });
 });
 
 app.get("/other-shops", async (req, res) => {
