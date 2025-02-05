@@ -1,14 +1,27 @@
 import "./Apparel.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { sortData } from "../../data/apparelSortData";
 import OptionCard from "./OptionCard/OptionCard";
 import ProductCard from "./ProductCard/ProductCard";
 import Paging from "../Paging/Paging";
 import ProductCategories from "../ProductCategories/ProductCategories";
+import { getListingsData } from "../../services/createShop";
 
 export default function Apparel() {
   const [selectedPage, setSelectedPage] = useState(1);
   const [sortToggle, setSortToggle] = useState(false);
+  const [listings, setListings] = useState(null);
+
+  useState(() => {
+    const fetchedShopData = async () => {
+      const response = await getListingsData();
+
+      setListings(response);
+    };
+    fetchedShopData();
+  }, []);
+
+  console.log(listings);
 
   const handleSelectOption = (e, category) => {
     e.preventDefault();
@@ -48,8 +61,8 @@ export default function Apparel() {
             </div>
           </div>
           <div id="products-container">
-            {[1, 2, 3, 4, 5, 6].map((item, index) => {
-              return <ProductCard key={index} />;
+            {listings?.listings.map((item, index) => {
+              return <ProductCard key={index} listing={item} />;
             })}
           </div>
         </div>
