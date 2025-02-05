@@ -18,7 +18,7 @@ export default function ProductCard({ listing }) {
         <img src={listing.images[0]} alt="" />
       </div>
       <div>
-        <h3>Nike</h3>
+        <h3>{listing.productName}</h3>
         <p>{listing.model}</p>
         <p>${listing.price}</p>
       </div>

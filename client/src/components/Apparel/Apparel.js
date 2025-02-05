@@ -21,8 +21,6 @@ export default function Apparel() {
     fetchedShopData();
   }, []);
 
-  console.log(listings);
-
   const handleSelectOption = (e, category) => {
     e.preventDefault();
 

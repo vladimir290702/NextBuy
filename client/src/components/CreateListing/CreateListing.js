@@ -1,5 +1,5 @@
 import "./CreateListing.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 import { IoIosMale, IoIosFemale } from "react-icons/io";
@@ -8,10 +8,12 @@ import { sizing } from "../../data/sizing";
 import { createListing } from "../../services/createShop";
 import { useUser } from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
+import { getShopData } from "../../services/createShop";
 
 export default function CreateListing() {
   const navigate = useNavigate();
   const { user } = useUser();
+  const [shopData, setShopData] = useState(null);
   const [imageUrls, setImageUrls] = useState([]);
   const [model, setModel] = useState("");
   const [description, setDescription] = useState("");
@@ -20,7 +22,14 @@ export default function CreateListing() {
   const [price, setPrice] = useState([]);
   const [gender, setGender] = useState("");
 
-  console.log(imageUrls);
+  useEffect(() => {
+    const fetchedShopData = async () => {
+      const response = await getShopData(user?.username);
+
+      setShopData(response?.shop);
+    };
+    fetchedShopData();
+  }, []);
 
   const handleImageUpload = (urls) => {
     setImageUrls(urls);
@@ -50,6 +59,7 @@ export default function CreateListing() {
     e.preventDefault();
 
     const data = {
+      productName: shopData.name,
       images: imageUrls,
       model,
       description,
