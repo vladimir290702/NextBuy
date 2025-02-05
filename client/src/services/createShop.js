@@ -62,3 +62,16 @@ export const getAllShopData = async (id) => {
     console.log(error);
   }
 };
+
+export const getListingsData = async () => {
+  try {
+    const response = await fetch(`http://localhost:3000/apparel`);
+
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log("This is the error: ");
+    console.log(error);
+  }
+};

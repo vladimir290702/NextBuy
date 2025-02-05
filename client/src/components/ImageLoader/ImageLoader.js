@@ -1,55 +1,52 @@
 import "./ImageLoader.css";
-import React, { useState, useEffect } from "react";
-import { useDropzone } from "react-dropzone";
+import React, { useState, useRef, useEffect } from "react";
 
-const ImageUploader = ({ onImageUpload }) => {
-  const [images, setImages] = useState([]);
+const ImageDropZone = ({ onImageUpload }) => {
+  const [images, setImages] = useState([]); // Stores all image URLs
+  const fileInputRef = useRef(null); // Reference for hidden file input
 
-  const onDrop = (acceptedFiles) => {
-    const newImages = acceptedFiles.map((file) =>
-      Object.assign(file, {
-        preview: URL.createObjectURL(file),
-        id: Math.random(),
-      })
-    );
-    setImages((prevImages) => [...prevImages, ...newImages]);
-  };
-
-  const deleteImage = (id) => {
-    setImages(images.filter((image) => image.id !== id));
-  };
-
-  // Pass image URLs to parent whenever the images change
   useEffect(() => {
     onImageUpload(images);
   }, [images]);
 
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    accept: "image/*",
-    multiple: true,
-  });
+  // Handle Drag & Drop from Web
+  const handleDrop = (event) => {
+    event.preventDefault();
+
+    for (const item of event.dataTransfer.items) {
+      if (item.kind === "string" && item.type === "text/uri-list") {
+        item.getAsString((url) => {
+          console.log("Dragged Image URL:", url);
+          setImages((prev) => [...prev, url]);
+        });
+      }
+    }
+  };
+
+  const deleteImage = (id) => {
+    setImages(images.filter((image) => image !== id));
+  };
 
   return (
     <div>
-      {/* Dropzone Area */}
-      <div id="image-uploader-input-container" {...getRootProps()}>
-        <input {...getInputProps()} />
-        <p>Drag & drop images here, or click to select files</p>
+      {/* Drop & Upload Area */}
+      <div
+        id="image-uploader-input-container"
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={handleDrop}
+        onClick={() => fileInputRef.current.click()} // Trigger file input on click
+      >
+        <p>Drag & Drop images here or Click to Upload</p>
       </div>
 
-      {/* Preview Section */}
+      {/* Display Uploaded Images */}
       <div className="image-uploader-images-container ">
         {images.map((file) => (
-          <div key={file.id} style={{ margin: "10px", position: "relative" }}>
-            <img
-              className="image-uploader-image"
-              src={file.preview}
-              alt="uploaded"
-            />
+          <div key={file} style={{ margin: "10px", position: "relative" }}>
+            <img className="image-uploader-image" src={file} alt="uploaded" />
             <button
               className="image-uploader-image-delete-button"
-              onClick={() => deleteImage(file.id)}
+              onClick={() => deleteImage(file)}
             >
               ✕
             </button>
@@ -60,4 +57,4 @@ const ImageUploader = ({ onImageUpload }) => {
   );
 };
 
-export default ImageUploader;
+export default ImageDropZone;

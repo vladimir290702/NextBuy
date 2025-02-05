@@ -2,6 +2,7 @@ import "./CreateListing.css";
 import { useState } from "react";
 import ImageLoader from "../ImageLoader/ImageLoader";
 import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
+import { IoIosMale, IoIosFemale } from "react-icons/io";
 import { clothingCategories } from "../../data/clothingCategories";
 import { sizing } from "../../data/sizing";
 import { createListing } from "../../services/createShop";
@@ -17,6 +18,9 @@ export default function CreateListing() {
   const [category, setCategory] = useState("");
   const [sizes, setSizes] = useState([]);
   const [price, setPrice] = useState([]);
+  const [gender, setGender] = useState("");
+
+  console.log(imageUrls);
 
   const handleImageUpload = (urls) => {
     setImageUrls(urls);
@@ -32,6 +36,16 @@ export default function CreateListing() {
     }
   };
 
+  const setGenderOption = (e, type) => {
+    e.preventDefault();
+
+    if (type === "male") {
+      setGender("male");
+    } else {
+      setGender("female");
+    }
+  };
+
   const handleCreateListing = async (e) => {
     e.preventDefault();
 
@@ -44,6 +58,7 @@ export default function CreateListing() {
       price,
       date: new Date().toLocaleString(),
       color: "White",
+      gender,
     };
 
     const response = await createListing(data, user.username);
@@ -99,6 +114,33 @@ export default function CreateListing() {
                     placeholder="Price..."
                     onChange={(e) => setPrice(e.target.value)}
                   />
+                </div>
+              </div>
+              <div className="main-data-option">
+                <div className="main-data-label-container">
+                  <label>Select Gender:</label>
+                </div>
+                <div id="add-listing-gender">
+                  <div
+                    id={
+                      gender === "male"
+                        ? "add-listing-gender-man-active"
+                        : "add-listing-gender-man"
+                    }
+                    onClick={(e) => setGenderOption(e, "male")}
+                  >
+                    <IoIosMale />
+                  </div>
+                  <div
+                    id={
+                      gender === "female"
+                        ? "add-listing-gender-woman-active"
+                        : "add-listing-gender-woman"
+                    }
+                    onClick={(e) => setGenderOption(e, "female")}
+                  >
+                    <IoIosFemale />
+                  </div>
                 </div>
               </div>
             </div>
