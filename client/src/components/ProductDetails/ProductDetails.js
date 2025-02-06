@@ -5,12 +5,16 @@ import { useState, useEffect } from "react";
 import ProductCategories from "../ProductCategories/ProductCategories";
 import { useLocation } from "react-router-dom";
 import { getListing } from "../../services/createShop";
+import { addListingToBag } from "../../services/custommerOperations";
+import { useUser } from "../../contexts/UserContext";
 
 export default function ProductDetails() {
   const location = useLocation();
+  const { user } = useUser();
   const [selectedFavourite, setSelectedFavourite] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [selectedSize, setSelectedSize] = useState(null);
   const id = location.state.id;
 
   useEffect(() => {
@@ -32,6 +36,27 @@ export default function ProductDetails() {
     e.preventDefault();
 
     setSelectedFavourite(!selectedFavourite);
+  };
+
+  const handleAddProductToBag = async (e) => {
+    e.preventDefault();
+
+    const productData = {
+      id: listingData.product._id,
+      productName: listingData.product.productName,
+      model: listingData.product.model,
+      category: listingData.product.category,
+      price: listingData.product.price,
+      description: listingData.product.description,
+      color: listingData.product.color,
+      size: selectedSize,
+      images: listingData.product.images,
+    };
+
+    const response = await addListingToBag(productData, user.username);
+
+    //TO DO navigation and register context
+    console.log(response);
   };
 
   return (
@@ -71,12 +96,21 @@ export default function ProductDetails() {
 
               <div id="product-details-sizes-container">
                 {listingData?.product.sizes.map((size) => {
-                  return <div className="product-size">{size}</div>;
+                  return (
+                    <div
+                      className="product-size"
+                      onClick={() => setSelectedSize(size)}
+                    >
+                      {size}
+                    </div>
+                  );
                 })}
               </div>
               <div id="product-details-buttons-container">
                 <div id="add-to-bag-button">
-                  <button>Add to Bag</button>
+                  <button onClick={(e) => handleAddProductToBag(e)}>
+                    Add to Bag
+                  </button>
                 </div>
                 <div
                   id="favourite-button"
