@@ -170,6 +170,8 @@ app.get("/dashboard", async (req, res) => {
 app.patch("/create-listing", async (req, res) => {
   const { name } = req.query;
 
+  const shop = await Shop.find({ owner: name });
+
   // Update only the "listings" field
   const updatedListings = await Shop.findOneAndUpdate(
     { owner: name }, // Find the shop by owner email
@@ -179,7 +181,7 @@ app.patch("/create-listing", async (req, res) => {
 
   const newListingToCollection = await Listings.create(req.body);
 
-  return res.json({ updatedListings, newListingToCollection });
+  return res.json({ updatedListings, newListingToCollection, shop });
 });
 
 app.get("/other-shops", async (req, res) => {
@@ -188,6 +190,20 @@ app.get("/other-shops", async (req, res) => {
   console.log(shops);
 
   return res.json(shops);
+});
+
+app.get("/apparel", async (req, res) => {
+  const listings = await Listings.find();
+
+  return res.json({ listings });
+});
+
+app.get("/product-details", async (req, res) => {
+  const { id } = req.query;
+
+  const product = await Listings.findOne({ _id: id });
+
+  return res.json({ product });
 });
 
 app.listen(3000, () => {
