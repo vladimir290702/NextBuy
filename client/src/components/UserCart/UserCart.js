@@ -1,8 +1,46 @@
 import "./UserCart.css";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useUser } from "../../contexts/UserContext";
+import { getUserCart } from "../../services/custommerOperations";
 
 export default function UserCart() {
   const navigate = useNavigate();
+  const { user, login } = useUser();
+  const [cart, setCart] = useState([]);
+  const [promocode, setPromocode] = useState("");
+  const [discount, setDiscount] = useState(1);
+  const [subtotal, setSubtotal] = useState(0);
+  const deliveryPrice = 7.99;
+  const total = ((subtotal + deliveryPrice) * discount).toFixed(2);
+  const discountedPrice = (subtotal + deliveryPrice - total).toFixed(2);
+  const storageEmail = localStorage.getItem("user");
+
+  useEffect(() => {
+    const fetchedShopData = async () => {
+      const response = await getUserCart(storageEmail);
+      login(response);
+      setCart(response);
+
+      let allPrices = 0;
+      if (response?.user?.bag) {
+        for (const product of response?.user?.bag) {
+          allPrices += Number(product.price);
+
+          setSubtotal(allPrices);
+        }
+      }
+    };
+    fetchedShopData();
+  }, []);
+
+  const handleApplyPromocode = (e) => {
+    e.preventDefault();
+
+    if (promocode === user.user.promocode) {
+      setDiscount(0.9);
+    }
+  };
 
   const handleProcceedToCheckout = (e) => {
     e.preventDefault();
@@ -15,29 +53,36 @@ export default function UserCart() {
         <div className="cart-section">
           <h3>Your Shopping Cart</h3>
         </div>
-        <div className="cart-product">
-          <div className="cart-product-image-container">
-            <img
-              src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/6ca23f73-976a-47c0-86f9-a6a7ab527130/AIR+MAX+PLUS+DRIFT.png"
-              alt=""
-            />
-          </div>
-          <div className="cart-product-details">
-            <p className="cart-product-name">Nike-Air Force</p>
-            <p className="cart-product-price">$129.99</p>
-            <p className="cart-product-additional-info">Color: White</p>
-            <p className="cart-product-additional-info">Size: 44</p>
-            <p className="cart-product-additional-info">Quantity: 1</p>
-            <div className="cart-product-buttons-container">
-              <div className="cart-product-button">
-                <button>Edit</button>
+        {cart?.user?.bag.map((product) => {
+          return (
+            <div className="cart-product" key={product.id}>
+              <div className="cart-product-image-container">
+                <img src={product.images[0]} alt={product.productName} />
               </div>
-              <div className="cart-product-button">
-                <button>Remove</button>
+              <div className="cart-product-details">
+                <p className="cart-product-name">
+                  {product.productName}-{product.model}
+                </p>
+                <p className="cart-product-price">${product.price}</p>
+                <p className="cart-product-additional-info">
+                  Color: {product.color}
+                </p>
+                <p className="cart-product-additional-info">
+                  Size: {product.size}
+                </p>
+                <p className="cart-product-additional-info">Quantity: 1</p>
+                <div className="cart-product-buttons-container">
+                  <div className="cart-product-button">
+                    <button>Edit</button>
+                  </div>
+                  <div className="cart-product-button">
+                    <button>Remove</button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
       <div id="cart-overview">
         <div className="cart-section">
@@ -48,7 +93,7 @@ export default function UserCart() {
             <p>Subtotal</p>
           </div>
           <div className="overview-prices-container">
-            <p>$129.99</p>
+            <p>${subtotal}</p>
           </div>
         </div>
         <div id="overview-delivery">
@@ -67,7 +112,7 @@ export default function UserCart() {
             <p>Product Discount</p>
           </div>
           <div className="overview-prices-container">
-            <p>- $24.99</p>
+            <p>{discountedPrice}</p>
           </div>
         </div>
         <div id="overview-promocode-section">
@@ -76,19 +121,29 @@ export default function UserCart() {
           </div>
           <div id="promocode-container">
             <div id="promocode-input">
-              <input type="text" placeholder="Enter promocode" />
+              <input
+                type="text"
+                placeholder="Enter promocode"
+                onChange={(e) => setPromocode(e.target.value)}
+              />
             </div>
-            <div id="promocode-apply-button">
+            <div
+              id="promocode-apply-button"
+              onClick={(e) => handleApplyPromocode(e, promocode)}
+            >
               <button>Apply</button>
             </div>
           </div>
         </div>
         <div id="overview-total-items">
           <div>
-            <p>Total (1 item)</p>
+            <p>
+              Total ({cart?.user?.bag.length}{" "}
+              {cart?.user?.bag.length > 1 ? "items" : "item"})
+            </p>
           </div>
           <div className="overview-prices-container">
-            <p>$129.99</p>
+            <p>${total}</p>
           </div>
         </div>
         <div id="procceed-button" onClick={(e) => handleProcceedToCheckout(e)}>

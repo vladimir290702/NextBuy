@@ -219,6 +219,13 @@ app.post("/product-details", async (req, res) => {
   return res.json({ updatedListings });
 });
 
+app.get("/cart", async (req, res) => {
+  const { id } = req.query;
+  const user = await User.findOne({ email: id });
+
+  return res.json({ user });
+});
+
 app.listen(3000, () => {
   console.log("app is running");
 });
