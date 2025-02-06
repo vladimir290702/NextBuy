@@ -5,6 +5,7 @@ const listingsSchema = new mongoose.Schema({
   images: { type: Array },
   model: { type: String },
   description: { type: String },
+  parentCategory: { type: String },
   category: { type: String },
   sizes: { type: Array },
   price: { type: String },

@@ -58,20 +58,23 @@ export default function CreateListing() {
   const handleCreateListing = async (e) => {
     e.preventDefault();
 
+    const clothing = clothingCategories.find(
+      (item) => item.category === category
+    );
+
     const data = {
       productName: shopData.name,
       images: imageUrls,
       model,
       description,
       category,
+      parentCategory: clothing.parentCategory,
       sizes,
       price,
       date: new Date().toLocaleString(),
       color: "White",
       gender,
     };
-
-    console.log(data);
 
     const response = await createListing(data, user.username);
 
@@ -96,8 +99,8 @@ export default function CreateListing() {
                   <select onChange={(e) => setCategory(e.target.value)}>
                     {clothingCategories.map((item, index) => {
                       return (
-                        <option key={index} value={item}>
-                          {item}
+                        <option key={index} value={item.category}>
+                          {item.category}
                         </option>
                       );
                     })}
