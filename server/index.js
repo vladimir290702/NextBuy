@@ -198,6 +198,14 @@ app.get("/apparel", async (req, res) => {
   return res.json({ listings });
 });
 
+app.get("/product-details", async (req, res) => {
+  const { id } = req.query;
+
+  const product = await Listings.findOne({ _id: id });
+
+  return res.json({ product });
+});
+
 app.listen(3000, () => {
   console.log("app is running");
 });
