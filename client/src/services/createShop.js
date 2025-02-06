@@ -50,7 +50,7 @@ export const createListing = async (listingData, user) => {
   }
 };
 
-export const getAllShopData = async (id) => {
+export const getAllShopData = async () => {
   try {
     const response = await fetch(`http://localhost:3000/other-shops`);
 
@@ -68,6 +68,23 @@ export const getListingsData = async () => {
     const response = await fetch(`http://localhost:3000/apparel`);
 
     const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log("This is the error: ");
+    console.log(error);
+  }
+};
+
+export const getListing = async (id) => {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/product-details?id=${id}`
+    );
+
+    const data = await response.json();
+
+    console.log(data);
 
     return data;
   } catch (error) {

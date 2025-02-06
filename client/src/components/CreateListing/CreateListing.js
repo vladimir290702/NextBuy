@@ -17,7 +17,7 @@ export default function CreateListing() {
   const [imageUrls, setImageUrls] = useState([]);
   const [model, setModel] = useState("");
   const [description, setDescription] = useState("");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState("Jackets");
   const [sizes, setSizes] = useState([]);
   const [price, setPrice] = useState([]);
   const [gender, setGender] = useState("");
@@ -70,6 +70,8 @@ export default function CreateListing() {
       color: "White",
       gender,
     };
+
+    console.log(data);
 
     const response = await createListing(data, user.username);
 

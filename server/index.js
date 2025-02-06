@@ -206,6 +206,19 @@ app.get("/product-details", async (req, res) => {
   return res.json({ product });
 });
 
+app.post("/product-details", async (req, res) => {
+  const { name } = req.query;
+  const data = req.body;
+
+  const updatedListings = await User.findOneAndUpdate(
+    { username: name }, // Find the shop by owner email
+    { $push: { bag: data } }, // Add new object to listings array
+    { new: true } // Return the updated document
+  );
+
+  return res.json({ updatedListings });
+});
+
 app.listen(3000, () => {
   console.log("app is running");
 });

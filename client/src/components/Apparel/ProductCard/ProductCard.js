@@ -7,10 +7,11 @@ export default function ProductCard({ listing }) {
   const handleNavigateProductDetails = (e) => {
     e.preventDefault();
 
-    navigate("/product-details");
+    navigate("/product-details", { state: { id: listing._id } });
   };
   return (
     <div
+      key={listing._id}
       className="product-card"
       onClick={(e) => handleNavigateProductDetails(e)}
     >

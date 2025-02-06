@@ -1,11 +1,36 @@
 import "./ProductDetails.css";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TbTruckDelivery, TbPackageImport } from "react-icons/tb";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductCategories from "../ProductCategories/ProductCategories";
+import { useLocation } from "react-router-dom";
+import { getListing } from "../../services/createShop";
+import { addListingToBag } from "../../services/custommerOperations";
+import { useUser } from "../../contexts/UserContext";
 
 export default function ProductDetails() {
+  const location = useLocation();
+  const { user } = useUser();
   const [selectedFavourite, setSelectedFavourite] = useState(false);
+  const [listingData, setListingData] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [selectedSize, setSelectedSize] = useState(null);
+  const id = location.state.id;
+
+  useEffect(() => {
+    try {
+      const fetchedShopData = async () => {
+        const response = await getListing(id);
+
+        setListingData(response);
+      };
+      fetchedShopData();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
   const handleFavouriteProduct = (e) => {
     e.preventDefault();
@@ -13,105 +38,115 @@ export default function ProductDetails() {
     setSelectedFavourite(!selectedFavourite);
   };
 
+  const handleAddProductToBag = async (e) => {
+    e.preventDefault();
+
+    const productData = {
+      id: listingData.product._id,
+      productName: listingData.product.productName,
+      model: listingData.product.model,
+      category: listingData.product.category,
+      price: listingData.product.price,
+      description: listingData.product.description,
+      color: listingData.product.color,
+      size: selectedSize,
+      images: listingData.product.images,
+    };
+
+    const response = await addListingToBag(productData, user.username);
+  };
+
   return (
     <>
-      <ProductCategories />
-      <div id="product-details-wrapper">
-        <div id="product-details-images-container">
-          <div className="product-details-image">
-            <img
-              src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/6ca23f73-976a-47c0-86f9-a6a7ab527130/AIR+MAX+PLUS+DRIFT.png"
-              alt=""
-            />
-          </div>
-          <div className="product-details-image">
-            <img
-              src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/6ca23f73-976a-47c0-86f9-a6a7ab527130/AIR+MAX+PLUS+DRIFT.png"
-              alt=""
-            />
-          </div>
-          <div className="product-details-image">
-            <img
-              src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/6ca23f73-976a-47c0-86f9-a6a7ab527130/AIR+MAX+PLUS+DRIFT.png"
-              alt=""
-            />
-          </div>
-          <div className="product-details-image">
-            <img
-              src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/6ca23f73-976a-47c0-86f9-a6a7ab527130/AIR+MAX+PLUS+DRIFT.png"
-              alt=""
-            />
-          </div>
-        </div>
-        <div id="product-details-information-container">
-          <div id="routes">
-            <p>Man - Shoes - Sport shoes</p>
-          </div>
-          <div id="product-name">
-            <p>Nike Air Force</p>
-          </div>
-          <div id="product-price">
-            <p>$129.99</p>
-          </div>
-          <div>
-            <p>Color: White</p>
-          </div>
-          <div>
-            <p>Sizes:</p>
-          </div>
-          <div id="product-details-sizes-container">
-            <div className="product-size">39</div>
-            <div className="product-size">40</div>
-            <div className="product-size">41</div>
-            <div className="product-size">42</div>
-            <div className="product-size">43</div>
-            <div className="product-size">44</div>
-          </div>
-          <div id="product-details-buttons-container">
-            <div id="add-to-bag-button">
-              <button>Add to Bag</button>
+      {loading ? null : (
+        <>
+          <ProductCategories />
+          <div id="product-details-wrapper">
+            <div id="product-details-images-container">
+              {listingData?.product.images.map((product) => {
+                return (
+                  <div className="product-details-image">
+                    <img src={product} alt={product} />
+                  </div>
+                );
+              })}
             </div>
-            <div
-              id="favourite-button"
-              onClick={(e) => handleFavouriteProduct(e)}
-            >
-              {selectedFavourite ? (
-                <FaHeart id="favourite-pressed" />
-              ) : (
-                <FaRegHeart />
-              )}
-            </div>
-          </div>
-          <div id="delivery-container">
-            <div className="delivery-info">
-              <div>
-                <TbTruckDelivery className="delivery-icon" />
+            <div id="product-details-information-container">
+              <div id="routes">
+                <p>Man - Shoes - {listingData?.product.category}</p>
+              </div>
+              <div id="product-name">
+                <p>
+                  {listingData?.product.productName}{" "}
+                  {listingData?.product.model}
+                </p>
+              </div>
+              <div id="product-price">
+                <p>${listingData?.product?.price}</p>
               </div>
               <div>
-                <p>Free delivery on all orders over $75</p>
-              </div>
-            </div>
-            <div className="delivery-info">
-              <div>
-                <TbPackageImport className="delivery-icon" />
+                <p>Color: {listingData?.product?.color}</p>
               </div>
               <div>
-                <p>60-day returns. For returns, a fee of 4,95 EUR applies.</p>
+                <p>Sizes:</p>
+              </div>
+
+              <div id="product-details-sizes-container">
+                {listingData?.product.sizes.map((size) => {
+                  return (
+                    <div
+                      className="product-size"
+                      onClick={() => setSelectedSize(size)}
+                    >
+                      {size}
+                    </div>
+                  );
+                })}
+              </div>
+              <div id="product-details-buttons-container">
+                <div id="add-to-bag-button">
+                  <button onClick={(e) => handleAddProductToBag(e)}>
+                    Add to Bag
+                  </button>
+                </div>
+                <div
+                  id="favourite-button"
+                  onClick={(e) => handleFavouriteProduct(e)}
+                >
+                  {selectedFavourite ? (
+                    <FaHeart id="favourite-pressed" />
+                  ) : (
+                    <FaRegHeart />
+                  )}
+                </div>
+              </div>
+              <div id="delivery-container">
+                <div className="delivery-info">
+                  <div>
+                    <TbTruckDelivery className="delivery-icon" />
+                  </div>
+                  <div>
+                    <p>Free delivery on all orders over $75</p>
+                  </div>
+                </div>
+                <div className="delivery-info">
+                  <div>
+                    <TbPackageImport className="delivery-icon" />
+                  </div>
+                  <div>
+                    <p>
+                      60-day returns. For returns, a fee of 4,95 EUR applies.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div id="details-container">
+                <p>{listingData?.product.description} </p>
               </div>
             </div>
           </div>
-          <div id="details-container">
-            <p>
-              This T-shirt is crafted from 100% regenerative cotton, excluding
-              trims. The cotton is grown using farming methods that seek to
-              improve soil health, watersheds and biodiversity. • cotton jersey
-              • regular fit • crew neckline • short sleeves • Calvin Klein
-              monogram embroidery on the chest composition and care: 100% cotton
-              machine wash tumble dry low
-            </p>
-          </div>
-        </div>
-      </div>
+        </>
+      )}
     </>
   );
 }

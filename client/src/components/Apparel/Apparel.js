@@ -12,7 +12,7 @@ export default function Apparel() {
   const [sortToggle, setSortToggle] = useState(false);
   const [listings, setListings] = useState(null);
 
-  useState(() => {
+  useEffect(() => {
     const fetchedShopData = async () => {
       const response = await getListingsData();
 
