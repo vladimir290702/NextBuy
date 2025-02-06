@@ -73,7 +73,10 @@ export default function ProductDetails() {
             </div>
             <div id="product-details-information-container">
               <div id="routes">
-                <p>Man - Shoes - {listingData?.product.category}</p>
+                <p>
+                  Man - {listingData?.product.parentCategory} -{" "}
+                  {listingData?.product.category}
+                </p>
               </div>
               <div id="product-name">
                 <p>
@@ -116,7 +119,7 @@ export default function ProductDetails() {
                   {selectedFavourite ? (
                     <FaHeart id="favourite-pressed" />
                   ) : (
-                    <FaRegHeart />
+                    <FaRegHeart id="favourite-not-pressed" />
                   )}
                 </div>
               </div>

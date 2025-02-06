@@ -41,6 +41,7 @@ export default function Register() {
       } else {
         navigate("/");
         login(result.user);
+        localStorage.setItem("user", result.user.username);
       }
     }
   };

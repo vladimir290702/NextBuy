@@ -74,7 +74,7 @@
   border: 2px #001f54 solid;
 }
 
-#favourite-button {
+#favourite-pressed {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -82,9 +82,10 @@
   padding: 0.5rem 2rem;
   margin-left: 0.5rem;
   border: 2px #001f54 solid;
+  color: #001f54;
 }
 
-#favourite-pressed {
+#favourite-not-pressed {
   display: flex;
   justify-content: center;
   align-items: center;
