@@ -6,6 +6,7 @@
 #product-details-images-container {
   display: flex;
   flex-wrap: wrap;
+  width: 60%;
   justify-content: space-between;
 }
 
@@ -20,7 +21,8 @@
 
 #product-details-information-container {
   padding-top: 4rem;
-  padding-left: 1.5rem;
+  padding-left: 3rem;
+  width: 40%;
 }
 
 #routes {
