@@ -85,6 +85,13 @@
 }
 
 #favourite-pressed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  margin-left: 0.5rem;
+  border: 2px #001f54 solid;
   color: #001f54;
 }
 

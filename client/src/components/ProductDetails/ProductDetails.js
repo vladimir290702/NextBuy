@@ -54,9 +54,6 @@ export default function ProductDetails() {
     };
 
     const response = await addListingToBag(productData, user.username);
-
-    //TO DO navigation and register context
-    console.log(response);
   };
 
   return (
