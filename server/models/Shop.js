@@ -12,6 +12,7 @@ const shopSchema = new mongoose.Schema({
   orders: { type: Array },
   activity: { type: Array },
   createdOn: { type: String },
+  orders: { type: Array },
 });
 
 const Shop = mongoose.model("Shop", shopSchema);
