@@ -31,3 +31,21 @@ export const getUserCart = async (user) => {
     console.log(error);
   }
 };
+
+export const orderCheckout = async (checkoutData) => {
+  try {
+    const response = await fetch(`http://localhost:3000/checkout`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(checkoutData),
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log("This is the error: ");
+    console.log(error);
+  }
+};

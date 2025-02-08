@@ -16,6 +16,7 @@ export default function ProductDetails() {
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
   const id = location.state.id;
+  const storageEmail = localStorage.getItem("user");
 
   useEffect(() => {
     try {
@@ -53,7 +54,7 @@ export default function ProductDetails() {
       images: listingData.product.images,
     };
 
-    const response = await addListingToBag(productData, user.username);
+    const response = await addListingToBag(productData, storageEmail);
   };
 
   return (

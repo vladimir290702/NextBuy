@@ -11,9 +11,9 @@ export default function UserCart() {
   const [promocode, setPromocode] = useState("");
   const [discount, setDiscount] = useState(1);
   const [subtotal, setSubtotal] = useState(0);
-  const deliveryPrice = 7.99;
-  const total = ((subtotal + deliveryPrice) * discount).toFixed(2);
-  const discountedPrice = (subtotal + deliveryPrice - total).toFixed(2);
+  const deliveryPrice = 5.99;
+  const discountedPrice = (subtotal * (1 - discount)).toFixed(2);
+  const total = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
   const storageEmail = localStorage.getItem("user");
 
   useEffect(() => {
@@ -45,7 +45,14 @@ export default function UserCart() {
   const handleProcceedToCheckout = (e) => {
     e.preventDefault();
 
-    navigate("/checkout");
+    const checkoutData = {
+      subtotal,
+      total,
+      discountedPrice,
+      cart,
+    };
+
+    navigate("/checkout", { state: checkoutData });
   };
   return (
     <div id="cart-wrapper">
@@ -104,7 +111,7 @@ export default function UserCart() {
             </p>
           </div>
           <div className="overview-prices-container">
-            <p>$ 7.99</p>
+            <p>$ {deliveryPrice}</p>
           </div>
         </div>
         <div id="overview-discount">

@@ -226,6 +226,47 @@ app.get("/cart", async (req, res) => {
   return res.json({ user });
 });
 
+app.patch("/checkout", async (req, res) => {
+  const {
+    shopOwner,
+    user,
+    subtotal,
+    discountedPrice,
+    orderedProducts,
+    firstName,
+    lastName,
+    street,
+    city,
+    zipcode,
+    dateOfOrder,
+  } = req.body;
+
+  const order = {
+    subtotal,
+    discountedPrice,
+    firstName,
+    lastName,
+    street,
+    city,
+    zipcode,
+    orderedProducts,
+    dateOfOrder,
+  };
+  const addProductToOrders = await User.findOneAndUpdate(
+    { username: user }, // Find the shop by owner email
+    { $push: { orders: order } }, // Add new object to listings array
+    { new: true } // Return the updated document
+  );
+
+  const emptiedBag = await User.updateMany({}, { $set: { bag: [] } });
+
+  const addOrderToShop = await Shop.findOneAndUpdate(
+    { name: shopOwner }, // Find the shop by owner email
+    { $push: { orders: order } }, // Add new object to listings array
+    { new: true } // Return the updated document
+  );
+});
+
 app.listen(3000, () => {
   console.log("app is running");
 });
