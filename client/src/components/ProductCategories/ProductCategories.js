@@ -1,4 +1,4 @@
-import "./ProductCategories";
+import "./ProductCategories.css";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { manApparel, womanApparel } from "../../data/apparelData";
