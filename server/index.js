@@ -239,6 +239,8 @@ app.patch("/checkout", async (req, res) => {
     city,
     zipcode,
     dateOfOrder,
+    totalPrice,
+    trackingNumber,
   } = req.body;
 
   const order = {
@@ -251,7 +253,10 @@ app.patch("/checkout", async (req, res) => {
     zipcode,
     orderedProducts,
     dateOfOrder,
+    totalPrice,
+    trackingNumber,
   };
+
   const addProductToOrders = await User.findOneAndUpdate(
     { username: user }, // Find the shop by owner email
     { $push: { orders: order } }, // Add new object to listings array
@@ -265,6 +270,34 @@ app.patch("/checkout", async (req, res) => {
     { $push: { orders: order } }, // Add new object to listings array
     { new: true } // Return the updated document
   );
+
+  const htmlContent = `
+    <div style="font-family: Arial, sans-serif; text-align: center;">
+        <h2 style="color: #001F54;">Thank you so much for your order!</h2>
+        <p style="font-size: 16px; color: #555;">Here are your products:</p>
+        ${orderedProducts
+          .map(
+            (url) =>
+              `<img src="${url.images[0]}" style="width: 300px; border-radius: 10px; margin: 10px;" />`
+          )
+          .join("")}
+        <h2>Amount Paid: ${totalPrice}</h2>
+        <p style="margin-top: 20px;"><a href="https://yourwebsite.com" style="background: #001F54; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Visit Us</a></p>
+    </div>
+`;
+  const mail = {
+    from: "name",
+    to: user,
+    subject: `Order #${trackingNumber}`,
+    html: htmlContent,
+  };
+  contactEmail.sendMail(mail, (error) => {
+    if (error) {
+      res.json(error);
+    } else {
+      res.json({ code: 200, status: "Email Sent" });
+    }
+  });
 });
 
 app.listen(3000, () => {

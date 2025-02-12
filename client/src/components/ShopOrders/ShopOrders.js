@@ -50,7 +50,7 @@ export default function ShopOrders() {
               <div>New</div>
               <div>Completed</div>
             </div>
-            {shopData.orders.map((order) => {
+            {shopData?.orders.map((order) => {
               return (
                 <div class="order-card">
                   <div className="order-creation-info-container">
