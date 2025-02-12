@@ -52,9 +52,9 @@ export default function Paging({ page, selectPage }) {
     <div id="paging">
       {pages.map((item) => {
         if (pagesCount > 10) {
-          return <RenderManyPages item={item} />;
+          return <RenderManyPages item={item} key={item} />;
         } else {
-          return <RenderFewPages item={item} />;
+          return <RenderFewPages item={item} key={item} />;
         }
       })}
     </div>

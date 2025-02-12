@@ -53,7 +53,7 @@ export default function Register() {
       register(response);
 
       navigate("/");
-      localStorage.setItem("user", response.user.username);
+      localStorage.setItem("user", JSON.stringify(response.user));
     }
   };
 

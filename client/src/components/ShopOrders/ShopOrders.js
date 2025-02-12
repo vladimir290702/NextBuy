@@ -2,17 +2,18 @@ import "./ShopOrders.css";
 import { useState, useEffect } from "react";
 import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 import { getShopData } from "../../services/createShop";
+import { useUser } from "../../contexts/UserContext";
 
 export default function ShopOrders() {
+  const { user } = useUser();
   const [isClicked, setIsClicked] = useState(false);
   const [selectedDestination, setSelectedDestination] = useState(null);
   const [selectedOrderStatus, setSelectedOrderStatus] = useState(null);
   const [shopData, setShopData] = useState(null);
-  const storageEmail = localStorage.getItem("user");
 
   useEffect(() => {
     const fetchedShopData = async () => {
-      const response = await getShopData(storageEmail);
+      const response = await getShopData(user.email);
 
       setShopData(response?.shop);
     };
@@ -52,7 +53,7 @@ export default function ShopOrders() {
             </div>
             {shopData?.orders.map((order) => {
               return (
-                <div class="order-card">
+                <div class="order-card" key={order.dateOfOrder}>
                   <div className="order-creation-info-container">
                     <p>Completed on: 16.01.2025</p>
                   </div>

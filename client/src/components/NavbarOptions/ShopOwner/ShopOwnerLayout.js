@@ -10,6 +10,7 @@ export default function ShopOwnerLayout() {
   const handeLogout = () => {
     logout(null);
     navigate("/");
+    localStorage.removeItem("user");
   };
 
   const handleProfileRedirect = async () => {
