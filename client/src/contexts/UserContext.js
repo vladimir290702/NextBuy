@@ -1,11 +1,23 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
 
 // Create the Context
 const UserContext = createContext();
 
 // Provider Component
 export function UserProvider({ children }) {
-  const [user, setUser] = useState(null); // Store user data here
+  const [user, setUser] = useState(() => {
+    // Get user data from localStorage & parse it
+    const savedUser = localStorage.getItem("user");
+    return savedUser ? JSON.parse(savedUser) : null;
+  });
+  useEffect(() => {
+    // Update localStorage whenever user state changes
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    } else {
+      localStorage.removeItem("user"); // Remove when logged out
+    }
+  }, [user]);
 
   const login = (userData) => {
     setUser(userData);

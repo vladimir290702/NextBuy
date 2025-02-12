@@ -2,36 +2,26 @@ import "./UserCart.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
-import { getUserCart } from "../../services/custommerOperations";
 
 export default function UserCart() {
   const navigate = useNavigate();
-  const { user, login } = useUser();
-  const [cart, setCart] = useState([]);
+  const { user } = useUser();
   const [promocode, setPromocode] = useState("");
   const [discount, setDiscount] = useState(1);
   const [subtotal, setSubtotal] = useState(0);
   const deliveryPrice = 5.99;
   const discountedPrice = (subtotal * (1 - discount)).toFixed(2);
   const total = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
-  const storageEmail = localStorage.getItem("user");
 
   useEffect(() => {
-    const fetchedShopData = async () => {
-      const response = await getUserCart(storageEmail);
-      login(response);
-      setCart(response);
+    let allPrices = 0;
+    if (user?.bag) {
+      for (const product of user?.bag) {
+        allPrices += Number(product.price);
 
-      let allPrices = 0;
-      if (response?.user?.bag) {
-        for (const product of response?.user?.bag) {
-          allPrices += Number(product.price);
-
-          setSubtotal(allPrices);
-        }
+        setSubtotal(allPrices);
       }
-    };
-    fetchedShopData();
+    }
   }, []);
 
   const handleApplyPromocode = (e) => {
@@ -49,7 +39,7 @@ export default function UserCart() {
       subtotal,
       total,
       discountedPrice,
-      cart,
+      cart: user.bag,
     };
 
     navigate("/checkout", { state: checkoutData });
@@ -60,7 +50,7 @@ export default function UserCart() {
         <div className="cart-section">
           <h3>Your Shopping Cart</h3>
         </div>
-        {cart?.user?.bag.map((product) => {
+        {user.bag.map((product) => {
           return (
             <div className="cart-product" key={product.id}>
               <div className="cart-product-image-container">
@@ -145,8 +135,8 @@ export default function UserCart() {
         <div id="overview-total-items">
           <div>
             <p>
-              Total ({cart?.user?.bag.length}{" "}
-              {cart?.user?.bag.length > 1 ? "items" : "item"})
+              Total ({user?.bag.length}{" "}
+              {user?.bag.length > 1 ? "items" : "item"})
             </p>
           </div>
           <div className="overview-prices-container">

@@ -5,7 +5,7 @@ import { sendPromoCode } from "../../services/sendPromoCode";
 import generatePromoCode from "../../services/generatePromocode";
 
 export default function EmailSubscription() {
-  const [email, setEmail] = useState(null);
+  const [email, setEmail] = useState("");
   const [buttonText, setButtonText] = useState("Subscribe");
   const [message, setMessage] = useState("");
   const [labelVisible, setLabelVisible] = useState(true);
@@ -77,7 +77,7 @@ export default function EmailSubscription() {
               id="subscribtion-button"
               onClick={(e) => handleEmailSender(e)}
             >
-              <span class="button-text">{buttonText}</span>
+              <span className="button-text">{buttonText}</span>
             </button>
           </div>
         </div>

@@ -15,11 +15,7 @@ export default function ProductDetails() {
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
-
-  console.log(location.state);
-
   const id = location.state.id;
-  const storageEmail = localStorage.getItem("user");
 
   useEffect(() => {
     try {
@@ -57,7 +53,7 @@ export default function ProductDetails() {
       images: listingData.product.images,
     };
 
-    const response = await addListingToBag(productData, storageEmail);
+    const response = await addListingToBag(productData, user.email);
   };
 
   return (
@@ -69,7 +65,7 @@ export default function ProductDetails() {
             <div id="product-details-images-container">
               {listingData?.product.images.map((product) => {
                 return (
-                  <div className="product-details-image">
+                  <div className="product-details-image" key={product}>
                     <img src={product} alt={product} />
                   </div>
                 );
@@ -102,6 +98,7 @@ export default function ProductDetails() {
                 {listingData?.product.sizes.map((size) => {
                   return (
                     <div
+                      key={size}
                       className="product-size"
                       onClick={() => setSelectedSize(size)}
                     >

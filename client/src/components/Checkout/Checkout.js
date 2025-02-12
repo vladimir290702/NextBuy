@@ -3,9 +3,11 @@ import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { orderCheckout } from "../../services/custommerOperations";
 import { generateTrackingNumber } from "../../services/generateTrackingNumber";
+import { useUser } from "../../contexts/UserContext";
 
 export default function Checkout() {
   const { state } = useLocation();
+  const { user } = useUser();
   const navigation = useNavigate();
   const [deliveryPrice, setDeliveryPrice] = useState(5.99);
   const [selectedStandard, setSelectedStandard] = useState(false);
@@ -15,7 +17,6 @@ export default function Checkout() {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [zipcode, setZipcode] = useState(0);
-  const storageEmail = localStorage.getItem("user");
 
   const { subtotal, discountedPrice, cart } = state;
   const totalPrice = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
@@ -39,7 +40,7 @@ export default function Checkout() {
 
     const checkoutData = {
       shopOwner: cart.user.bag[0].productName,
-      user: storageEmail,
+      user: user.email,
       subtotal,
       totalPrice,
       discountedPrice,

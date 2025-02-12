@@ -81,10 +81,7 @@ export const getListing = async (id) => {
     const response = await fetch(
       `http://localhost:3000/product-details?id=${id}`
     );
-
     const data = await response.json();
-
-    console.log(data);
 
     return data;
   } catch (error) {

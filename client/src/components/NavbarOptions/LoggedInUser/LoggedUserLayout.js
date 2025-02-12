@@ -2,13 +2,14 @@ import "./LoggedUserLayout.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../../contexts/UserContext";
 
-export default function LoggedUserLayout({ user }) {
+export default function LoggedUserLayout() {
   const { logout } = useUser();
   const navigate = useNavigate();
 
   const handeLogout = () => {
     logout(null);
     navigate("/");
+    localStorage.removeItem("user");
   };
   return (
     <>
