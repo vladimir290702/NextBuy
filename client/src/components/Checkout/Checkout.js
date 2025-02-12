@@ -2,6 +2,7 @@ import "./Checkout.css";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { orderCheckout } from "../../services/custommerOperations";
+import { generateTrackingNumber } from "../../services/generateTrackingNumber";
 
 export default function Checkout() {
   const { state } = useLocation();
@@ -49,6 +50,7 @@ export default function Checkout() {
       city,
       zipcode,
       dateOfOrder: new Date().toLocaleString(),
+      trackingNumber: generateTrackingNumber(),
     };
 
     const response = await orderCheckout(checkoutData);

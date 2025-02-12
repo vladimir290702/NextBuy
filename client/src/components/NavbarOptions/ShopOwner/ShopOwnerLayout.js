@@ -25,7 +25,9 @@ export default function ShopOwnerLayout() {
   return (
     <>
       <li className="nav-item" onClick={() => handleProfileRedirect()}>
-        <Link className="nav-link">Profile</Link>
+        <Link className="nav-link" to="/dashboard">
+          Profile
+        </Link>
       </li>
       <li className="nav-item" onClick={() => handeLogout()}>
         <Link className="nav-link" to="/logout">

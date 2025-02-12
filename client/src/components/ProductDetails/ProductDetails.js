@@ -15,6 +15,9 @@ export default function ProductDetails() {
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
+
+  console.log(location.state);
+
   const id = location.state.id;
   const storageEmail = localStorage.getItem("user");
 

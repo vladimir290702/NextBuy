@@ -240,9 +240,8 @@ app.patch("/checkout", async (req, res) => {
     zipcode,
     dateOfOrder,
     totalPrice,
+    trackingNumber,
   } = req.body;
-
-  console.log(req.body);
 
   const order = {
     subtotal,
@@ -255,6 +254,7 @@ app.patch("/checkout", async (req, res) => {
     orderedProducts,
     dateOfOrder,
     totalPrice,
+    trackingNumber,
   };
 
   const addProductToOrders = await User.findOneAndUpdate(
@@ -287,8 +287,8 @@ app.patch("/checkout", async (req, res) => {
 `;
   const mail = {
     from: "name",
-    to: "vladimir.metodiev2907@gmail.com",
-    subject: "Order #1398769",
+    to: user,
+    subject: `Order #${trackingNumber}`,
     html: htmlContent,
   };
   contactEmail.sendMail(mail, (error) => {
