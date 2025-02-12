@@ -40,6 +40,7 @@ export default function Checkout() {
       shopOwner: cart.user.bag[0].productName,
       user: storageEmail,
       subtotal,
+      totalPrice,
       discountedPrice,
       orderedProducts: cart.user.bag,
       firstName,
