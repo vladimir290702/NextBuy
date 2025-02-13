@@ -25,7 +25,7 @@ export default function UserCart() {
       let allPrices = 0;
       if (cart) {
         for (const product of response.user.bag) {
-          allPrices += Number(product.price);
+          allPrices += Number(product.price) * Number(product.quantity);
 
           setSubtotal(allPrices);
         }
@@ -38,6 +38,17 @@ export default function UserCart() {
     setSubtotal(subtotal - price);
     const filteredCart = cart.filter((productId) => productId.id !== id);
     setCart(filteredCart);
+  };
+
+  const handleQuantityChange = (newCart) => {
+    setCart(newCart);
+    let allPrices = 0;
+
+    for (const product of newCart) {
+      allPrices += Number(product.price) * Number(product.quantity);
+
+      setSubtotal(allPrices);
+    }
   };
 
   const handleApplyPromocode = (e) => {
@@ -72,6 +83,7 @@ export default function UserCart() {
             product={product}
             username={user.username}
             sendDataToParent={handleBagSize}
+            changeQuantity={handleQuantityChange}
           />
         ))}
       </div>
@@ -84,7 +96,7 @@ export default function UserCart() {
             <p>Subtotal</p>
           </div>
           <div className="overview-prices-container">
-            <p>${subtotal}</p>
+            <p>${subtotal.toFixed(2)}</p>
           </div>
         </div>
         <div id="overview-delivery">

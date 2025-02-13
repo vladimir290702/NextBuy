@@ -52,12 +52,30 @@ export const orderCheckout = async (checkoutData) => {
 
 export const removeProductFromCart = async (id, user) => {
   try {
-    const response = await fetch(`http://localhost:3000/cart?productId=${id}`, {
+    const response = await fetch(`http://localhost:3000/cart`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ productId: id, user }),
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log("This is the error: ");
+    console.log(error);
+  }
+};
+
+export const editProductQuantity = async (productId, quantity, user) => {
+  try {
+    const response = await fetch(`http://localhost:3000/cart`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ productId, quantity, user }),
     });
     const data = await response.json();
 

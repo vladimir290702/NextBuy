@@ -235,6 +235,18 @@ app.delete("/cart", async (req, res) => {
   );
 });
 
+app.patch("/cart", async (req, res) => {
+  const { productId, quantity, user } = req.body;
+
+  const editQuantity = await User.findOneAndUpdate(
+    { username: user, "bag.id": productId }, // Find the shop by owner email
+    { $set: { "bag.$.quantity": quantity } }, // Add new object to listings array
+    { new: true } // Return the updated document
+  );
+
+  return res.json({ editQuantity });
+});
+
 app.patch("/checkout", async (req, res) => {
   const {
     shopOwner,
