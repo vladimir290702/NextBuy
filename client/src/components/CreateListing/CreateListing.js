@@ -18,6 +18,8 @@ export default function CreateListing() {
   const [model, setModel] = useState("");
   const [description, setDescription] = useState("");
   const [category, setCategory] = useState("Jackets");
+  const [parentCategory, setParentCategory] = useState("Clothing");
+  const [hasParentCategory, setHasParentCategory] = useState(true);
   const [sizes, setSizes] = useState([]);
   const [price, setPrice] = useState([]);
   const [gender, setGender] = useState("");
@@ -30,6 +32,27 @@ export default function CreateListing() {
     };
     fetchedShopData();
   }, []);
+
+  const handleProductCategories = (e) => {
+    e.preventDefault();
+
+    setCategory(e.target.value);
+
+    const selectedParentCategory = clothingCategories.find(
+      (id) => id.category === e.target.value
+    ).parentCategory;
+
+    if (selectedParentCategory !== "Accessories") {
+      setHasParentCategory(true);
+      if (e.target.value === "Watches") {
+        setParentCategory("Watches");
+      } else {
+        setParentCategory(selectedParentCategory);
+      }
+    } else {
+      setHasParentCategory(false);
+    }
+  };
 
   const handleImageUpload = (urls) => {
     setImageUrls(urls);
@@ -96,7 +119,7 @@ export default function CreateListing() {
                   <label>Category</label>
                 </div>
                 <div id="add-listing-category-options">
-                  <select onChange={(e) => setCategory(e.target.value)}>
+                  <select onChange={(e) => handleProductCategories(e)}>
                     {clothingCategories.map((item, index) => {
                       return (
                         <option key={index} value={item.category}>
@@ -161,30 +184,32 @@ export default function CreateListing() {
             </div>
           </div>
           <div id="secondary-product-data">
-            <div id="productSizes">
-              <div className="main-data-label-container">
-                <label>
-                  Which product sizes will you offer to your customers:
-                </label>
+            {hasParentCategory ? (
+              <div id="productSizes">
+                <div className="main-data-label-container">
+                  <label>
+                    Which product sizes will you offer to your customers:
+                  </label>
+                </div>
+                <div id="create-product-sizes-wrapper">
+                  {sizing[parentCategory].map((item, index) => {
+                    return (
+                      <div
+                        key={index}
+                        onClick={(e) => handleProductSizes(e, item)}
+                        className={
+                          sizes.includes(item)
+                            ? "create-product-size-active"
+                            : "create-product-size"
+                        }
+                      >
+                        {item}
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-              <div id="create-product-sizes-wrapper">
-                {sizing.clothing.map((item, index) => {
-                  return (
-                    <div
-                      key={index}
-                      onClick={(e) => handleProductSizes(e, item)}
-                      className={
-                        sizes.includes(item)
-                          ? "create-product-size-active"
-                          : "create-product-size"
-                      }
-                    >
-                      {item}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
+            ) : null}
             <div id="add-listing-discription">
               <div className="main-data-label-container">
                 <label htmlFor="productModel">Description:</label>
