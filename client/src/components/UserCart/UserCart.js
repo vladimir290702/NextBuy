@@ -16,8 +16,6 @@ export default function UserCart() {
   const discountedPrice = (subtotal * (1 - discount)).toFixed(2);
   const total = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
 
-  console.log(cart);
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await getUserCart(user.username);
