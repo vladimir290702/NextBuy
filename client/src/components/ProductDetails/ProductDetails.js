@@ -1,5 +1,5 @@
 import "./ProductDetails.css";
-import { FaHeart, FaRegHeart } from "react-icons/fa";
+import { FaHeart, FaRegHeart, FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { TbTruckDelivery, TbPackageImport } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import ProductCategories from "../ProductCategories/ProductCategories";
@@ -14,6 +14,7 @@ export default function ProductDetails() {
   const [selectedFavourite, setSelectedFavourite] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [quantity, setQuantity] = useState(1);
   const [selectedSize, setSelectedSize] = useState(null);
   const id = location.state.id;
 
@@ -31,6 +32,22 @@ export default function ProductDetails() {
       setLoading(false);
     }
   }, []);
+
+  const handleDownCounter = (e) => {
+    e.preventDefault();
+
+    if (quantity === 1) {
+      setQuantity(1);
+    } else {
+      setQuantity(quantity - 1);
+    }
+  };
+
+  const handleUpCounter = (e) => {
+    e.preventDefault();
+
+    setQuantity(quantity + 1);
+  };
 
   const handleFavouriteProduct = (e) => {
     e.preventDefault();
@@ -51,6 +68,7 @@ export default function ProductDetails() {
       color: listingData.product.color,
       size: selectedSize,
       images: listingData.product.images,
+      quantity,
     };
 
     const response = await addListingToBag(productData, user.email);
@@ -106,6 +124,26 @@ export default function ProductDetails() {
                     </div>
                   );
                 })}
+              </div>
+              <div id="product-details-quantity-container">
+                <div>
+                  <p>Quantity:</p>
+                </div>
+                <div id="quantity-counter">
+                  <div
+                    className="arrow-container"
+                    onClick={(e) => handleDownCounter(e)}
+                  >
+                    <FaArrowLeft className="quantity-arrow" />
+                  </div>
+                  <div id="product-details-quantity">{quantity}</div>
+                  <div
+                    className="arrow-container"
+                    onClick={(e) => handleUpCounter(e)}
+                  >
+                    <FaArrowRight className="quantity-arrow" />
+                  </div>
+                </div>
               </div>
               <div id="product-details-buttons-container">
                 <div id="add-to-bag-button">

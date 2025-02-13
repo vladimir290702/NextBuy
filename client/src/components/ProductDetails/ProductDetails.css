@@ -55,6 +55,35 @@
   color: #fff;
 }
 
+#product-details-quantity-container {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+#quantity-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+#product-details-quantity {
+  font-size: 1.2rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+}
+
+.arrow-container {
+  border: 1px #001f54 solid;
+  padding: 0 0.5rem;
+}
+
+.quantity-arrow {
+  font-size: 1.2rem;
+  height: 2rem;
+}
+
 #product-details-buttons-container {
   display: flex;
   margin-top: 2rem;
