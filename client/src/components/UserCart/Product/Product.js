@@ -4,7 +4,7 @@ import { removeProductFromCart } from "../../../services/custommerOperations";
 
 export default function Product({ product, username, sendDataToParent }) {
   const [triggeredEdit, setTriggeredEdit] = useState(false);
-  const [newQuantity, setNewQuantity] = useState(1);
+  const [newQuantity, setNewQuantity] = useState(product.quantity);
   const [editButtonText, setEditButtonText] = useState("Edit");
 
   const QuantityContent = () => {
