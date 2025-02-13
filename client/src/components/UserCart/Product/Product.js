@@ -1,7 +1,8 @@
 import "./Product.css";
 import { useState } from "react";
+import { removeProductFromCart } from "../../../services/custommerOperations";
 
-export default function Product({ product }) {
+export default function Product({ product, username, sendDataToParent }) {
   const [triggeredEdit, setTriggeredEdit] = useState(false);
   const [newQuantity, setNewQuantity] = useState(1);
   const [editButtonText, setEditButtonText] = useState("Edit");
@@ -31,7 +32,12 @@ export default function Product({ product }) {
     setTriggeredEdit(!triggeredEdit);
     setEditButtonText(triggeredEdit ? "Edit" : "Save");
   };
-  console.log(product);
+
+  const handleRemoveProduct = async (e) => {
+    e.preventDefault();
+    sendDataToParent(product.id, product.price);
+    const response = await removeProductFromCart(product.id, username);
+  };
 
   return (
     <div className="cart-product" key={product.id}>
@@ -51,7 +57,7 @@ export default function Product({ product }) {
             <button>{editButtonText}</button>
           </div>
           <div className="cart-product-button">
-            <button>Remove</button>
+            <button onClick={(e) => handleRemoveProduct(e)}>Remove</button>
           </div>
         </div>
       </div>
