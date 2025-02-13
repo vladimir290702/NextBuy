@@ -2,10 +2,13 @@ import "./UserCart.css";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
+import { getUserCart } from "../../services/custommerOperations";
+import Product from "./Product/Product";
 
 export default function UserCart() {
   const navigate = useNavigate();
   const { user } = useUser();
+  const [cart, setCart] = useState([]);
   const [promocode, setPromocode] = useState("");
   const [discount, setDiscount] = useState(1);
   const [subtotal, setSubtotal] = useState(0);
@@ -13,21 +16,30 @@ export default function UserCart() {
   const discountedPrice = (subtotal * (1 - discount)).toFixed(2);
   const total = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
 
+  console.log(cart);
+
   useEffect(() => {
+    const fetchData = async () => {
+      const response = await getUserCart(user.username);
+
+      setCart(response.user.bag);
+    };
+
     let allPrices = 0;
-    if (user?.bag) {
-      for (const product of user?.bag) {
+    if (cart) {
+      for (const product of cart) {
         allPrices += Number(product.price);
 
         setSubtotal(allPrices);
       }
     }
+    fetchData();
   }, []);
 
   const handleApplyPromocode = (e) => {
     e.preventDefault();
 
-    if (promocode === user.user.promocode) {
+    if (promocode === user.promocode) {
       setDiscount(0.9);
     }
   };
@@ -50,36 +62,9 @@ export default function UserCart() {
         <div className="cart-section">
           <h3>Your Shopping Cart</h3>
         </div>
-        {user.bag.map((product) => {
-          return (
-            <div className="cart-product" key={product.id}>
-              <div className="cart-product-image-container">
-                <img src={product.images[0]} alt={product.productName} />
-              </div>
-              <div className="cart-product-details">
-                <p className="cart-product-name">
-                  {product.productName}-{product.model}
-                </p>
-                <p className="cart-product-price">${product.price}</p>
-                <p className="cart-product-additional-info">
-                  Color: {product.color}
-                </p>
-                <p className="cart-product-additional-info">
-                  Size: {product.size}
-                </p>
-                <p className="cart-product-additional-info">Quantity: 1</p>
-                <div className="cart-product-buttons-container">
-                  <div className="cart-product-button">
-                    <button>Edit</button>
-                  </div>
-                  <div className="cart-product-button">
-                    <button>Remove</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {cart.map((product) => (
+          <Product product={product} />
+        ))}
       </div>
       <div id="cart-overview">
         <div className="cart-section">
@@ -135,8 +120,7 @@ export default function UserCart() {
         <div id="overview-total-items">
           <div>
             <p>
-              Total ({user?.bag.length}{" "}
-              {user?.bag.length > 1 ? "items" : "item"})
+              Total ({cart.length} {cart.length > 1 ? "items" : "item"})
             </p>
           </div>
           <div className="overview-prices-container">
