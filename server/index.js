@@ -226,6 +226,15 @@ app.get("/cart", async (req, res) => {
   return res.json({ user });
 });
 
+app.delete("/cart", async (req, res) => {
+  const { productId, user } = req.body;
+
+  const result = await User.updateOne(
+    { username: user }, // Find the document by user ID
+    { $pull: { bag: { id: productId } } } // Remove the object with the matching ID from `bag`
+  );
+});
+
 app.patch("/checkout", async (req, res) => {
   const {
     shopOwner,

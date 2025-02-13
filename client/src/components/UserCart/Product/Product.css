@@ -49,3 +49,13 @@
   border: 2px #001f54 solid;
   color: #001f54;
 }
+
+.edit-quantity-input {
+  width: 0.9rem; /* Set width */
+  height: 0.9rem; /* Equal to width for square */
+  text-align: center;
+  align-items: center; /* Center text vertically */
+  justify-content: center; /* Center text horizontally */
+  font-size: 15px;
+  margin: 0 0.5rem;
+}

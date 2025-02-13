@@ -16,25 +16,29 @@ export default function UserCart() {
   const discountedPrice = (subtotal * (1 - discount)).toFixed(2);
   const total = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
 
-  console.log(cart);
-
   useEffect(() => {
     const fetchData = async () => {
       const response = await getUserCart(user.username);
 
       setCart(response.user.bag);
-    };
 
-    let allPrices = 0;
-    if (cart) {
-      for (const product of cart) {
-        allPrices += Number(product.price);
+      let allPrices = 0;
+      if (cart) {
+        for (const product of response.user.bag) {
+          allPrices += Number(product.price);
 
-        setSubtotal(allPrices);
+          setSubtotal(allPrices);
+        }
       }
-    }
+    };
     fetchData();
   }, []);
+
+  const handleBagSize = (id, price) => {
+    setSubtotal(subtotal - price);
+    const filteredCart = cart.filter((productId) => productId.id !== id);
+    setCart(filteredCart);
+  };
 
   const handleApplyPromocode = (e) => {
     e.preventDefault();
@@ -63,7 +67,12 @@ export default function UserCart() {
           <h3>Your Shopping Cart</h3>
         </div>
         {cart.map((product) => (
-          <Product product={product} />
+          <Product
+            key={product.id}
+            product={product}
+            username={user.username}
+            sendDataToParent={handleBagSize}
+          />
         ))}
       </div>
       <div id="cart-overview">

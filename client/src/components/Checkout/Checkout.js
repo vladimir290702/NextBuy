@@ -21,8 +21,6 @@ export default function Checkout() {
   const { subtotal, discountedPrice, cart } = state;
   const totalPrice = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
 
-  console.log(cart);
-
   const handleDeliveryOption = (e, option) => {
     e.preventDefault();
 
