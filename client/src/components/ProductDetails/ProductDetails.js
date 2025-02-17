@@ -1,21 +1,27 @@
 import "./ProductDetails.css";
-import { FaHeart, FaRegHeart, FaArrowLeft, FaArrowRight } from "react-icons/fa";
+import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TbTruckDelivery, TbPackageImport } from "react-icons/tb";
 import { useState, useEffect } from "react";
 import ProductCategories from "../ProductCategories/ProductCategories";
 import { useLocation } from "react-router-dom";
 import { getListing } from "../../services/createShop";
-import { addListingToBag } from "../../services/custommerOperations";
+import {
+  addListingToBag,
+  addListingToFavourites,
+  removeListingFromFavourites,
+} from "../../services/custommerOperations";
 import { useUser } from "../../contexts/UserContext";
 
 export default function ProductDetails() {
   const location = useLocation();
-  const { user } = useUser();
-  const [selectedFavourite, setSelectedFavourite] = useState(false);
+  const { user, login } = useUser();
+  const id = location.state.id;
+  const [selectedFavourite, setSelectedFavourite] = useState(
+    user?.favouriteProducts.includes((product) => product._id === id)
+  );
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
-  const id = location.state.id;
 
   useEffect(() => {
     try {
@@ -32,10 +38,26 @@ export default function ProductDetails() {
     }
   }, []);
 
-  const handleFavouriteProduct = (e) => {
+  const handleFavouriteProduct = async (e) => {
     e.preventDefault();
 
-    setSelectedFavourite(!selectedFavourite);
+    if (selectedFavourite) {
+      const response = await removeListingFromFavourites(
+        listingData.product,
+        user.username
+      );
+
+      login(response.result);
+      setSelectedFavourite(false);
+    } else {
+      const response = await addListingToFavourites(
+        listingData.product,
+        user?.username
+      );
+
+      login(response.result);
+      setSelectedFavourite(true);
+    }
   };
 
   const handleAddProductToBag = async (e) => {
@@ -94,7 +116,6 @@ export default function ProductDetails() {
               <div>
                 <p>Sizes:</p>
               </div>
-
               <div id="product-details-sizes-container">
                 {listingData?.product.sizes.map((size) => {
                   return (

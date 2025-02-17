@@ -26,7 +26,7 @@ export default function LoggedUserLayout() {
         <Link className="nav-link" to="/search">
           <IoIosHeartEmpty />
           <div className={`dropdown ${isHovered ? "visible" : ""}`}>
-            {user.bag.map((product) => {
+            {user.favouriteProducts.map((product) => {
               return <DropdownCart product={product} />;
             })}
           </div>

@@ -205,6 +205,30 @@ app.get("/product-details", async (req, res) => {
   return res.json({ product });
 });
 
+app.patch("/product-details", async (req, res) => {
+  const { product, name } = req.body;
+
+  const result = await User.findOneAndUpdate(
+    { username: name }, // Find the shop by owner email
+    { $push: { favouriteProducts: product } }, // Add new object to listings array
+    { new: true } // Return the updated document
+  );
+
+  return res.json({ result });
+});
+
+app.delete("/product-details", async (req, res) => {
+  const { product, name } = req.body;
+
+  const result = await User.findOneAndUpdate(
+    { username: name }, // Find the document by user ID
+    { $pull: { favouriteProducts: { _id: product._id } } },
+    { new: true } // Remove the object with the matching ID from `bag`
+  );
+
+  return res.json({ result });
+});
+
 app.post("/product-details", async (req, res) => {
   const { name } = req.query;
   const data = req.body;
