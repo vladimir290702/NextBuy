@@ -85,3 +85,39 @@ export const editProductQuantity = async (productId, quantity, user) => {
     console.log(error);
   }
 };
+
+export const addListingToFavourites = async (product, name) => {
+  try {
+    const response = await fetch(`http://localhost:3000/product-details`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ product, name }),
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log("This is the error: ");
+    console.log(error);
+  }
+};
+
+export const removeListingFromFavourites = async (product, name) => {
+  try {
+    const response = await fetch(`http://localhost:3000/product-details`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ product, name }),
+    });
+    const data = await response.json();
+
+    return data;
+  } catch (error) {
+    console.log("This is the error: ");
+    console.log(error);
+  }
+};
