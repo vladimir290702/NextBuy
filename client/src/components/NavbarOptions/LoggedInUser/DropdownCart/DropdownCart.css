@@ -1,0 +1,41 @@
+.dropdown {
+  position: absolute;
+  top: 40px;
+  right: 0.25rem;
+  width: 25rem;
+  background: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  padding: 10px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  pointer-events: none; /* Prevent interaction when hidden */
+}
+
+.dropdown.visible {
+  opacity: 1;
+  transform: translateY(3.5rem);
+  pointer-events: auto;
+}
+
+.dropdown-products-container {
+  display: flex;
+}
+
+.dropdown-image-container img {
+  width: 9rem;
+  height: 11rem;
+  margin-right: 1rem;
+}
+
+.dropdown-product-details h4 {
+  font-size: 1.25rem;
+  margin: 0;
+  margin-bottom: 0.5rem;
+}
+
+.dropdown-product-details p {
+  font-size: 1rem;
+  margin: 0;
+}
