@@ -1,0 +1,13 @@
+#favourite-products-main-container {
+  padding: 2rem;
+}
+
+#favoruite-products-title-container {
+  border-bottom: 1px #001f54 solid;
+  margin-bottom: 2rem;
+}
+
+#favourite-products-title {
+  margin: 0;
+  font-size: 1.25rem;
+}
