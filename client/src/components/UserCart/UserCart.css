@@ -10,7 +10,7 @@
 }
 
 .cart-section {
-  border-bottom: 1px grey solid;
+  border-bottom: 1px #001f54 solid;
 }
 
 #cart-overview {
@@ -75,7 +75,7 @@
   display: flex;
   justify-content: space-between;
   color: grey;
-  border-bottom: 1px grey solid;
+  border-bottom: 1px #001f54 solid;
 }
 
 #procceed-button {
