@@ -23,12 +23,20 @@ export default function LoggedUserLayout() {
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <Link className="nav-link" to="/search">
+        <Link className="nav-link" to="/favourite-products">
           <IoIosHeartEmpty />
           <div className={`dropdown ${isHovered ? "visible" : ""}`}>
             {user.favouriteProducts.map((product) => {
               return <DropdownCart product={product} />;
             })}
+            {user.favouriteProducts.length > 3 ? (
+              <div
+                id="favourite-products-count-container"
+                onClick={() => navigate("/favourite-products")}
+              >
+                <h3>See {user.favouriteProducts.length - 3} products </h3>
+              </div>
+            ) : null}
           </div>
         </Link>
       </li>
