@@ -13,3 +13,11 @@
   font-weight: 500;
   font-size: 1.8rem;
 }
+
+#favourite-products-count-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  margin: 0;
+}
