@@ -12,7 +12,7 @@ export default function FavouriteProductCard({ product }) {
           <h2 className="favourite-product-name">
             {product.productName} {product.model}
           </h2>
-          <p>${product.price}</p>
+          <p className="favourite-product-price">${product.price}</p>
           <p>Color: {product.color}</p>
           <p>Avalible sizes: {product.sizes.join(" / ")}</p>
           <div className="favourite-product-description">
