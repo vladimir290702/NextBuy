@@ -5,6 +5,7 @@ import { FaPlus } from "react-icons/fa";
 import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 import { getShopData } from "../../services/createShop";
 import { useUser } from "../../contexts/UserContext";
+import Counter from "../Counter/Counter";
 
 export default function Dashboard() {
   const [shopData, setShopData] = useState(null);
@@ -41,7 +42,7 @@ export default function Dashboard() {
                 <p>Total Views:</p>
               </div>
               <div id="dashboard-shop-info-box-counter">
-                <p>{shopData?.views}</p>
+                <Counter end={shopData?.views / 2} duration={2000} />
               </div>
             </div>
             <div className="dashboard-shop-info-box-container">
@@ -49,7 +50,7 @@ export default function Dashboard() {
                 <p>Listings:</p>
               </div>
               <div id="dashboard-shop-info-box-counter">
-                <p>{shopData?.listings?.length}</p>
+                <Counter end={shopData?.listings?.length} duration={2000} />
               </div>
             </div>
             <div className="dashboard-shop-info-box-container">
@@ -57,7 +58,7 @@ export default function Dashboard() {
                 <p>Orders:</p>
               </div>
               <div id="dashboard-shop-info-box-counter">
-                <p>{shopData?.orders?.length}</p>
+                <Counter end={shopData?.orders?.length} duration={2000} />
               </div>
             </div>
             <div className="dashboard-shop-info-box-container">
@@ -65,7 +66,7 @@ export default function Dashboard() {
                 <p>Revenue in:</p>
               </div>
               <div id="dashboard-shop-info-box-counter">
-                <p>USD: {shopData?.revenue}</p>
+                <Counter end={shopData?.revenue.toFixed(2)} duration={2000} />
               </div>
             </div>
           </div>

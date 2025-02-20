@@ -37,6 +37,7 @@ export default function FinishCreateShop() {
       orders: [],
       activity: [],
       createdOn: new Date().toLocaleString(),
+      totalViews: 0,
     };
     const response = await createShop(data);
 
