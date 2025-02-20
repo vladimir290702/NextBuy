@@ -223,8 +223,22 @@ app.get("/product-details", async (req, res) => {
 app.patch("/product-details", async (req, res) => {
   const { product, name } = req.body;
 
+  const newActivity = {
+    type: "favourited",
+    firstName: name.name,
+    lastName: name.surname,
+    email: name.email,
+    date: new Date().toLocaleString(),
+    item: product,
+  };
+
+  const pushNewActivity = await Shop.findOneAndUpdate(
+    { name: product.productName },
+    { $push: { activity: newActivity } }
+  );
+
   const result = await User.findOneAndUpdate(
-    { username: name }, // Find the shop by owner email
+    { username: name.username }, // Find the shop by owner email
     { $push: { favouriteProducts: product } }, // Add new object to listings array
     { new: true } // Return the updated document
   );
@@ -305,6 +319,7 @@ app.patch("/checkout", async (req, res) => {
   const order = {
     subtotal,
     discountedPrice,
+    user,
     firstName,
     lastName,
     street,
