@@ -10,5 +10,6 @@
 #favourite-products-card-wrapper {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 1rem;
+  max-width: 100vw;
 }
