@@ -74,9 +74,17 @@
 
 #dashboard-button-wrapper {
   margin-top: 1rem;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 2s ease-out, visibility 0s 2s;
 }
 
-#dashboard-button-wrapper button {
+#dashboard-button-wrapper {
+  opacity: 0; /* Start fading out */
+  visibility: hidden;
+}
+
+#dashboard-button-wrapper-visible button {
   display: inline-flex; /* Aligns children in a row */
   align-items: center;
   background-color: #001f54;
@@ -86,7 +94,7 @@
   padding: 0.5rem 3rem;
 }
 
-#dashboard-button-wrapper button:hover {
+#dashboard-button-wrapper-visible button:hover {
   background-color: #fff;
   color: #001f54;
   border: 2px #001f54 solid;

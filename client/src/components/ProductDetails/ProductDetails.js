@@ -16,9 +16,7 @@ export default function ProductDetails() {
   const location = useLocation();
   const { user, login } = useUser();
   const id = location.state.id;
-  const [selectedFavourite, setSelectedFavourite] = useState(
-    user?.favouriteProducts.includes((product) => product._id === id)
-  );
+  const [selectedFavourite, setSelectedFavourite] = useState(false);
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [selectedSize, setSelectedSize] = useState(null);
@@ -29,6 +27,12 @@ export default function ProductDetails() {
         const response = await getListing(id);
 
         setListingData(response);
+
+        for (const item of user?.favouriteProducts) {
+          if (item._id === id) {
+            setSelectedFavourite(true);
+          }
+        }
       };
       fetchedShopData();
     } catch (error) {
@@ -44,7 +48,7 @@ export default function ProductDetails() {
     if (selectedFavourite) {
       const response = await removeListingFromFavourites(
         listingData.product,
-        user.username
+        user
       );
 
       login(response.result);

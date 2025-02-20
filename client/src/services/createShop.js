@@ -16,9 +16,11 @@ export const createShop = async (userData) => {
   }
 };
 
-export const getShopData = async (id) => {
+export const getShopData = async (id, page) => {
   try {
-    const response = await fetch(`http://localhost:3000/dashboard?name=${id}`);
+    const response = await fetch(
+      `http://localhost:3000/dashboard?name=${id}&page=${page}`
+    );
 
     const data = await response.json();
 

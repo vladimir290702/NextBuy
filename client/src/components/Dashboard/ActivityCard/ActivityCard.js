@@ -1,12 +1,23 @@
 import "./ActivityCard.css";
-import { IoCalendarOutline } from "react-icons/io5";
+import { IoCalendarOutline, IoHeart } from "react-icons/io5";
+import { MdDeleteForever } from "react-icons/md";
 
 export default function ActivityCard({ activity }) {
   let activityText = "";
 
   if (activity.type === "favourited") {
     activityText = `${activity.firstName} ${activity.lastName} favourited your item: ${activity.item.productName} ${activity.item.model}`;
+  } else if (activity.type === "removed") {
+    activityText = `${activity.firstName} ${activity.lastName} removed your item from favourites: ${activity.item.productName} ${activity.item.model}`;
   }
+
+  const Icon = () => {
+    if (activity.type === "favourited") {
+      return <IoHeart />;
+    } else if (activity.type === "removed") {
+      return <MdDeleteForever />;
+    }
+  };
   return (
     <div id="dashboard-shop-activities-wrapper">
       <div className="dashboard-shop-activity-card">
@@ -24,7 +35,9 @@ export default function ActivityCard({ activity }) {
               </p>
             </div>
             <div className="dashboard-shop-activity-date">
-              <p>{activity.date}</p>
+              <p>
+                {activity.date} <Icon />
+              </p>
             </div>
           </div>
         </div>

@@ -8,17 +8,27 @@ import Counter from "../Counter/Counter";
 import ActivityCard from "./ActivityCard/ActivityCard";
 
 export default function Dashboard() {
-  const [shopData, setShopData] = useState(null);
   const { user } = useUser();
+  const [shopData, setShopData] = useState(null);
+  const [activity, setActivity] = useState([]);
+  const [activitiesCount, setActivitiesCount] = useState(null);
+  const [page, setPage] = useState(1);
+  const visibleLoadButtonContainer =
+    activitiesCount !== 0 &&
+    activitiesCount > 3 &&
+    activity.length !== activitiesCount;
 
   useEffect(() => {
     const fetchedShopData = async () => {
-      const response = await getShopData(user?.username);
+      const response = await getShopData(user?.username, page);
 
+      setActivity(response.activities);
+
+      setActivitiesCount(response?.totalActivities);
       setShopData(response?.shop);
     };
     fetchedShopData();
-  }, []);
+  }, [page]);
 
   return (
     <div id="shop-profile-wrapper">
@@ -73,18 +83,25 @@ export default function Dashboard() {
           </div>
           <div id="dashboard-activity">
             <h2>Resent Activity:</h2>
-            {shopData?.activity?.length > 0 ? (
-              shopData?.activity?.map((activity) => {
-                return <ActivityCard activity={activity} />;
+            {activity?.length > 0 ? (
+              activity?.map((activity, index) => {
+                return <ActivityCard activity={activity} key={index} />;
               })
             ) : (
               <div>There is no activity yet!</div>
             )}
           </div>
 
-          {shopData?.activity?.length != 0 && shopData?.activity?.length > 4 ? (
+          {visibleLoadButtonContainer ? (
             <div id="dashboard-load-activity-container">
-              <div id="dashboard-button-wrapper">
+              <div
+                id={
+                  visibleLoadButtonContainer
+                    ? "dashboard-button-wrapper-visible"
+                    : "dashboard-button-wrapper"
+                }
+                onClick={() => setPage(page + 1)}
+              >
                 <button>
                   <FaPlus id="dashboard-button-plus" />
                   <span id="dashboard-button-text">Show more</span>
