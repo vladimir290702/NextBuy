@@ -2,7 +2,7 @@ import "./ShopOwnerLayout.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../../contexts/UserContext";
 import { getShopData } from "../../../services/createShop";
-
+import { FaUserCircle } from "react-icons/fa";
 export default function ShopOwnerLayout() {
   const { logout, user } = useUser();
   const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function ShopOwnerLayout() {
     <>
       <li className="nav-item" onClick={() => handleProfileRedirect()}>
         <Link className="nav-link" to="/dashboard">
-          Profile
+          <FaUserCircle />
         </Link>
       </li>
       <li className="nav-item" onClick={() => handeLogout()}>
