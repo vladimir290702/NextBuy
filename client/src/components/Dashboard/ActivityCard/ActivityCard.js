@@ -6,6 +6,8 @@ export default function ActivityCard({ activity }) {
 
   if (activity.type === "favourited") {
     activityText = `${activity.firstName} ${activity.lastName} favourited your item: ${activity.item.productName} ${activity.item.model}`;
+  } else if (activity.type === "removed") {
+    activityText = `${activity.firstName} ${activity.lastName} removed your item from favourites: ${activity.item.productName} ${activity.item.model}`;
   }
   return (
     <div id="dashboard-shop-activities-wrapper">

@@ -82,7 +82,8 @@ export default function Dashboard() {
             )}
           </div>
 
-          {shopData?.activity?.length != 0 && shopData?.activity?.length > 4 ? (
+          {shopData?.activity?.length !== 0 &&
+          shopData?.activity?.length > 4 ? (
             <div id="dashboard-load-activity-container">
               <div id="dashboard-button-wrapper">
                 <button>

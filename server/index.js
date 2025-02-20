@@ -249,8 +249,22 @@ app.patch("/product-details", async (req, res) => {
 app.delete("/product-details", async (req, res) => {
   const { product, name } = req.body;
 
+  const newActivity = {
+    type: "removed",
+    firstName: name.name,
+    lastName: name.surname,
+    email: name.email,
+    date: new Date().toLocaleString(),
+    item: product,
+  };
+
+  const pushNewActivity = await Shop.findOneAndUpdate(
+    { name: product.productName },
+    { $push: { activity: newActivity } }
+  );
+
   const result = await User.findOneAndUpdate(
-    { username: name }, // Find the document by user ID
+    { username: name.username }, // Find the document by user ID
     { $pull: { favouriteProducts: { _id: product._id } } },
     { new: true } // Remove the object with the matching ID from `bag`
   );
