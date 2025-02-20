@@ -1,11 +1,11 @@
 import "./Dashboard.css";
 import { useState, useEffect } from "react";
-import { IoCalendarOutline } from "react-icons/io5";
 import { FaPlus } from "react-icons/fa";
 import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 import { getShopData } from "../../services/createShop";
 import { useUser } from "../../contexts/UserContext";
 import Counter from "../Counter/Counter";
+import ActivityCard from "./ActivityCard/ActivityCard";
 
 export default function Dashboard() {
   const [shopData, setShopData] = useState(null);
@@ -32,7 +32,8 @@ export default function Dashboard() {
             <div id="dashboard-shop-data-name-container">
               <p>What's new, {shopData?.name}?</p>
               <p id="dashboard-shop-default-info">
-                0 sales | {shopData?.listings?.length} active listings
+                {shopData?.orders?.length} sales | {shopData?.listings?.length}{" "}
+                active listings
               </p>
             </div>
           </div>
@@ -73,44 +74,24 @@ export default function Dashboard() {
           <div id="dashboard-activity">
             <h2>Resent Activity:</h2>
             {shopData?.activity?.length > 0 ? (
-              <div id="dashboard-shop-activities-wrapper">
-                <div className="dashboard-shop-activity-card">
-                  <div className="dashboard-shop-image-container">
-                    <img
-                      src="https://static.nike.com/a/images/t_PDP_936_v1/f_auto,q_auto:eco/6ca23f73-976a-47c0-86f9-a6a7ab527130/AIR+MAX+PLUS+DRIFT.png"
-                      alt=""
-                    />
-                  </div>
-                  <div className="dashboard-shop-activity-message-data-container">
-                    <div className="dashboard-shop-activity-message">
-                      <p>Brandon favourited your item: Nike hoodie</p>
-                    </div>
-                    <div className="dashboard-shop-activity-data">
-                      <div className="dashboard-shop-activity-icon">
-                        <p>
-                          <IoCalendarOutline />
-                        </p>
-                      </div>
-                      <div className="dashboard-shop-activity-date">
-                        <p>05.01.2025</p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              shopData?.activity?.map((activity) => {
+                return <ActivityCard activity={activity} />;
+              })
             ) : (
               <div>There is no activity yet!</div>
             )}
           </div>
 
-          <div id="dashboard-load-activity-container">
-            <div id="dashboard-button-wrapper">
-              <button>
-                <FaPlus id="dashboard-button-plus" />
-                <span id="dashboard-button-text">Show more</span>
-              </button>
+          {shopData?.activity?.length != 0 && shopData?.activity?.length > 4 ? (
+            <div id="dashboard-load-activity-container">
+              <div id="dashboard-button-wrapper">
+                <button>
+                  <FaPlus id="dashboard-button-plus" />
+                  <span id="dashboard-button-text">Show more</span>
+                </button>
+              </div>
             </div>
-          </div>
+          ) : null}
         </div>
       </div>
     </div>

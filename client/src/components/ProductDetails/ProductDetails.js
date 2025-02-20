@@ -50,10 +50,7 @@ export default function ProductDetails() {
       login(response.result);
       setSelectedFavourite(false);
     } else {
-      const response = await addListingToFavourites(
-        listingData.product,
-        user?.username
-      );
+      const response = await addListingToFavourites(listingData.product, user);
 
       login(response.result);
       setSelectedFavourite(true);
