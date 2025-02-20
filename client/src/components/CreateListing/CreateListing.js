@@ -97,6 +97,7 @@ export default function CreateListing() {
       date: new Date().toLocaleString(),
       color: "White",
       gender,
+      totalViews: 0,
     };
 
     const response = await createListing(data, user.username);

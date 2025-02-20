@@ -139,6 +139,7 @@ app.post("/create-shop", async (req, res) => {
     orders,
     activity,
     createdOn,
+    totalViews,
   } = req.body;
 
   const shop = await Shop.create({
@@ -153,6 +154,7 @@ app.post("/create-shop", async (req, res) => {
     orders,
     activity,
     createdOn,
+    totalViews,
   });
 
   return res.status(200).json({ shop });
@@ -201,8 +203,21 @@ app.get("/product-details", async (req, res) => {
   const { id } = req.query;
 
   const product = await Listings.findOne({ _id: id });
+  const shop = await Shop.findOne({ name: product.productName });
 
-  return res.json({ product });
+  const editShopTotalViews = await Shop.findOneAndUpdate(
+    { name: product.productName }, // Find the shop by owner email
+    { $set: { views: shop.views + 1 } }, // Add new object to listings array
+    { new: true }
+  );
+
+  const editQuantity = await Listings.findOneAndUpdate(
+    { _id: id },
+    { $set: { totalViews: product.totalViews + 1 } }, // Add new object to listings array
+    { new: true }
+  );
+
+  return res.json({ product: editQuantity });
 });
 
 app.patch("/product-details", async (req, res) => {

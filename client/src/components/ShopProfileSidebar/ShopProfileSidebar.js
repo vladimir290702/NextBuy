@@ -12,7 +12,7 @@ import { useUser } from "../../contexts/UserContext";
 export default function ShopProfileSidebar() {
   const navigate = useNavigate();
   const { user } = useUser();
-  const [hasShop, setHasShop] = useState(null);
+  const [hasShop, setHasShop] = useState(true);
 
   useEffect(() => {
     const fetchedShopData = async () => {

@@ -13,6 +13,7 @@ const shopSchema = new mongoose.Schema({
   activity: { type: Array },
   createdOn: { type: String },
   orders: { type: Array },
+  totalViews: { type: Number },
 });
 
 const Shop = mongoose.model("Shop", shopSchema);

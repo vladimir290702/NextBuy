@@ -12,6 +12,7 @@ const listingsSchema = new mongoose.Schema({
   date: { type: String },
   color: { type: String },
   gender: { type: String },
+  totalViews: { type: Number },
 });
 
 const Listings = mongoose.model("Listings", listingsSchema);
