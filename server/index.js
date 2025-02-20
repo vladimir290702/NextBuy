@@ -161,11 +161,24 @@ app.post("/create-shop", async (req, res) => {
 });
 
 app.get("/dashboard", async (req, res) => {
-  const { name } = req.query;
-
+  const { name, page } = req.query;
+  const limit = 3;
   const shop = await Shop.findOne({ owner: name });
 
-  return res.json({ shop });
+  const totalActivities = shop.activity.length;
+
+  // Reverse the array to get the latest activities first
+  const sortedActivities = [...shop.activity].reverse();
+
+  // Apply pagination
+  const endIndex = 0 + limit * page;
+
+  const paginatedActivities = sortedActivities.slice(
+    0,
+    endIndex > totalActivities ? totalActivities : endIndex
+  );
+
+  return res.json({ shop, activities: paginatedActivities, totalActivities });
 });
 
 app.patch("/create-listing", async (req, res) => {
