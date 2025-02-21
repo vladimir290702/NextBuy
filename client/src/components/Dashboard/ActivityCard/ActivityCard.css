@@ -1,6 +1,6 @@
 .dashboard-shop-activity-card {
   display: flex;
-  border: 2px #001f54 solid;
+  border: 1px #001f54 solid;
   border-radius: 5px;
   padding: 0.5rem 1rem;
   margin-bottom: 1rem;
@@ -10,9 +10,9 @@
 }
 
 .dashboard-shop-image-container {
-  width: 6rem;
+  width: 7rem;
   height: 7rem;
-  border: 2px #001f54 solid;
+  border: 1px#001f54 solid;
 }
 
 .dashboard-shop-image-container img {
@@ -26,6 +26,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  width: 80%;
 }
 
 .dashboard-shop-activity-message p {

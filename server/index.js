@@ -201,8 +201,6 @@ app.patch("/create-listing", async (req, res) => {
 app.get("/other-shops", async (req, res) => {
   const shops = await Shop.find();
 
-  console.log(shops);
-
   return res.json(shops);
 });
 
@@ -358,13 +356,35 @@ app.patch("/checkout", async (req, res) => {
     trackingNumber,
   };
 
+  const newActivity = {
+    type: "ordered",
+    firstName,
+    lastName,
+    email: user,
+    date: new Date().toLocaleString(),
+    item: orderedProducts,
+  };
+
+  const pushNewActivity = await Shop.findOneAndUpdate(
+    { name: shopOwner },
+    { $push: { activity: newActivity } }
+  );
+
+  const shop = await Shop.find({ name: shopOwner });
+
+  const emptiedBag = await User.updateMany({}, { $set: { bag: [] } });
+
   const addProductToOrders = await User.findOneAndUpdate(
     { username: user }, // Find the shop by owner email
     { $push: { orders: order } }, // Add new object to listings array
     { new: true } // Return the updated document
   );
 
-  const emptiedBag = await User.updateMany({}, { $set: { bag: [] } });
+  const updatedRevenue = await Shop.findOneAndUpdate(
+    { name: shopOwner },
+    { $set: { revenue: Number(shop[0].revenue) + Number(subtotal) } }, // Add new object to listings array
+    { new: true } // Return the updated document
+  );
 
   const addOrderToShop = await Shop.findOneAndUpdate(
     { name: shopOwner }, // Find the shop by owner email
@@ -386,6 +406,7 @@ app.patch("/checkout", async (req, res) => {
         <p style="margin-top: 20px;"><a href="https://yourwebsite.com" style="background: #001F54; color: #fff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Visit Us</a></p>
     </div>
 `;
+
   const mail = {
     from: "name",
     to: user,
@@ -399,6 +420,8 @@ app.patch("/checkout", async (req, res) => {
       res.json({ code: 200, status: "Email Sent" });
     }
   });
+
+  return res.json({ addProductToOrders });
 });
 
 app.listen(3000, () => {

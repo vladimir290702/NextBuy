@@ -78,6 +78,7 @@ export default function ProductDetails() {
     };
 
     const response = await addListingToBag(productData, user.email);
+    login(response.updatedListings);
   };
 
   return (

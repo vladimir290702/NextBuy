@@ -7,7 +7,7 @@ import { useUser } from "../../contexts/UserContext";
 
 export default function Checkout() {
   const { state } = useLocation();
-  const { user } = useUser();
+  const { user, login } = useUser();
   const navigation = useNavigate();
   const [deliveryPrice, setDeliveryPrice] = useState(5.99);
   const [selectedStandard, setSelectedStandard] = useState(false);
@@ -17,7 +17,6 @@ export default function Checkout() {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [zipcode, setZipcode] = useState(0);
-
   const { subtotal, discountedPrice, cart } = state;
   const totalPrice = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
 
@@ -55,6 +54,8 @@ export default function Checkout() {
     };
 
     const response = await orderCheckout(checkoutData);
+
+    login(response.addProductToOrders);
 
     navigation("/");
   };

@@ -32,5 +32,9 @@ export default function Counter({ end, duration = 2000 }) {
     };
   }, [end, duration]);
 
-  return <div style={{ fontSize: "2rem", fontWeight: "bold" }}>{count}</div>;
+  return (
+    <div style={{ fontSize: "2rem", fontWeight: "bold" }}>
+      {count ? count : 0}
+    </div>
+  );
 }
