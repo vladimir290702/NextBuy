@@ -1,8 +1,11 @@
 import "./ActivityCard.css";
+import { useState } from "react";
 import { IoCalendarOutline, IoHeart } from "react-icons/io5";
 import { MdDeleteForever } from "react-icons/md";
 import { FaMoneyCheckDollar } from "react-icons/fa6";
+import { FaArrowRight } from "react-icons/fa";
 export default function ActivityCard({ activity }) {
+  const [IsHovered, setIsHovered] = useState(false);
   let activityText = "";
 
   if (activity.type === "favourited") {
@@ -25,7 +28,11 @@ export default function ActivityCard({ activity }) {
     }
   };
   return (
-    <div id="dashboard-shop-activities-wrapper">
+    <div
+      onMouseOver={() => setIsHovered(true)}
+      onMouseOut={() => setIsHovered(false)}
+      className="dashboard-shop-activities-wrapper"
+    >
       <div className="dashboard-shop-activity-card">
         <div className="dashboard-shop-image-container">
           <img
@@ -54,6 +61,17 @@ export default function ActivityCard({ activity }) {
             </div>
           </div>
         </div>
+        {IsHovered ? (
+          <div className="dashboard-activity-arrow-redirect-container-active">
+            <FaArrowRight
+              className={"dashboard-activity-arrow-redirect-active"}
+            />
+          </div>
+        ) : (
+          <div className="dashboard-empty-div">
+            <FaArrowRight />
+          </div>
+        )}
       </div>
     </div>
   );
