@@ -49,7 +49,7 @@ export default function Dashboard() {
           </div>
           <div id="dashboard-shop-info-boxes-container">
             <div className="dashboard-shop-info-box-container">
-              <div id="dashboard-shop-info-box-title">
+              <div className="dashboard-shop-info-box-title">
                 <p>Total Views:</p>
               </div>
               <div id="dashboard-shop-info-box-counter">
@@ -57,7 +57,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="dashboard-shop-info-box-container">
-              <div id="dashboard-shop-info-box-title">
+              <div className="dashboard-shop-info-box-title">
                 <p>Listings:</p>
               </div>
               <div id="dashboard-shop-info-box-counter">
@@ -65,7 +65,7 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="dashboard-shop-info-box-container">
-              <div id="dashboard-shop-info-box-title">
+              <div className="dashboard-shop-info-box-title">
                 <p>Orders:</p>
               </div>
               <div id="dashboard-shop-info-box-counter">
@@ -73,11 +73,21 @@ export default function Dashboard() {
               </div>
             </div>
             <div className="dashboard-shop-info-box-container">
-              <div id="dashboard-shop-info-box-title">
+              <div className="dashboard-shop-info-box-title">
                 <p>Revenue in:</p>
               </div>
               <div id="dashboard-shop-info-box-counter">
-                <Counter end={shopData?.revenue.toFixed(2)} duration={2000} />
+                <div id="dashboard-revenue-counter-container">
+                  <div>
+                    <p>$</p>
+                  </div>
+                  <div>
+                    <Counter
+                      end={shopData?.revenue.toFixed(2)}
+                      duration={2000}
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
