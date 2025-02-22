@@ -2,7 +2,6 @@
   display: flex;
   border: 1px #001f54 solid;
   border-radius: 5px;
-  padding: 0.5rem 1rem;
   margin-bottom: 1rem;
   opacity: 0;
   transform: translateY(10px);
@@ -13,6 +12,7 @@
   width: 7rem;
   height: 7rem;
   border: 1px#001f54 solid;
+  margin: 0.5rem 1rem;
 }
 
 .dashboard-shop-image-container img {
@@ -22,7 +22,7 @@
 }
 
 .dashboard-shop-activity-message-data-container {
-  margin: 1rem 1rem 0;
+  padding: 0.5rem 1rem;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -47,6 +47,48 @@
 .dashboard-shop-activity-date {
   margin-left: 0.5rem;
   text-decoration: underline;
+}
+
+.dashboard-activity-arrow-redirect-container-active {
+  display: flex;
+  align-items: center;
+  font-size: 1.75rem;
+  color: #fff;
+  padding: 0 0.5rem;
+  animation: backgroundShow 0.6s ease-in-out forwards;
+}
+
+.dashboard-activity-arrow-redirect-active {
+  transform: translateX(1rem);
+  animation: slideRight 0.3s ease-in-out forwards;
+}
+
+.dashboard-empty-div {
+  opacity: 0;
+  padding: 0 0.5rem;
+  font-size: 1.75rem;
+}
+
+@keyframes backgroundShow {
+  from {
+    opacity: 0;
+    background-color: #fff;
+  }
+  to {
+    opacity: 1;
+    background-color: #001f54;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    opacity: 0;
+    transform: translateX(-1rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
 @keyframes fadeIn {

@@ -18,6 +18,7 @@ import OtherShops from "./components/OtherShops/OtherShops";
 import InitialPage from "./components/CreateShop/InitialPage/InitialPage";
 import CreateShop from "./components/CreateShop/CreateShop";
 import FavouriteProducts from "./components/FavouriteProducts/FavouriteProducts";
+import ReviewOrder from "./components/ReviewOrder/ReviewOrder";
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/cart" element={<UserCart />} />
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/favourite-products" element={<FavouriteProducts />} />
+          <Route path="/review-order" element={<ReviewOrder />} />
         </Routes>
         <Footer />
       </BrowserRouter>

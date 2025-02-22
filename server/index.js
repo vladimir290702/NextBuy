@@ -358,11 +358,7 @@ app.patch("/checkout", async (req, res) => {
 
   const newActivity = {
     type: "ordered",
-    firstName,
-    lastName,
-    email: user,
-    date: new Date().toLocaleString(),
-    item: orderedProducts,
+    order,
   };
 
   const pushNewActivity = await Shop.findOneAndUpdate(
