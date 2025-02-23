@@ -1,14 +1,20 @@
 #review-order-container {
   display: flex;
+  width: 100%;
 }
 
 #review-order-wrapper {
   padding: 1rem 2rem;
+  width: 75%;
 }
 
 #review-order-title-conatainer {
-  border-bottom: 1px #001f54 solid;
   margin-bottom: 1rem;
+  border-bottom: 1px #001f54 solid;
+}
+
+#review-order-title-conatainer > h2 {
+  font-style: italic;
 }
 
 #review-order-images-container {
@@ -16,8 +22,8 @@
 }
 
 .review-order-image-container {
-  width: 14rem;
-  height: 17rem;
+  width: 19rem;
+  height: 22rem;
 }
 
 .review-order-image-container img {
@@ -25,12 +31,47 @@
   height: 100%;
 }
 
+.review-order-image-container p {
+  font-size: 1.5rem;
+}
+
 #review-order-subtotal-container {
-  margin-top: 5rem;
-  border-top: 1px #001f54 solid;
+  margin-top: 7rem;
+  border-bottom: 1px #001f54 solid;
 }
 
 #review-order-shipping-details {
   display: flex;
   justify-content: space-between;
+}
+
+#review-order-shipping-information {
+  width: 50%;
+}
+
+#review-order-shipping-information p {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+#review-order-address-information p {
+  font-size: 1.25rem;
+  font-style: italic;
+  font-weight: 500;
+  margin: 0.4rem 0;
+}
+
+#review-order-status {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+#review-order-status-dropdown select {
+  padding: 0.5rem 5rem;
+  color: #fff;
+  background-color: #001f54;
+  font-weight: 500;
 }

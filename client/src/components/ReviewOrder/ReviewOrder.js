@@ -5,8 +5,6 @@ import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 export default function ReviewOrder({ item }) {
   const { state } = useLocation();
 
-  console.log(state);
-
   return (
     <div id="review-order-container">
       <ShopProfileSidebar />
@@ -17,13 +15,15 @@ export default function ReviewOrder({ item }) {
         <div id="review-order-images-container">
           {state.order.orderedProducts.map((product) => {
             return (
-              <div className="review-order-image-container">
+              <div className="review-order-image-container" key={product.model}>
                 <div>
-                  <img src={product.images[0]} alt="" />
+                  <img src={product.images[0]} alt={product.productName} />
                 </div>
-                <p>
-                  {product.productName} {product.model}
-                </p>
+                <div>
+                  <p>
+                    {product.productName} {product.model}
+                  </p>
+                </div>
               </div>
             );
           })}
@@ -34,20 +34,22 @@ export default function ReviewOrder({ item }) {
           </div>
         </div>
         <div id="review-order-shipping-details">
-          <div>
-            <h3>Ship to:</h3>
-            <p>
-              {state.order.firstName} {state.order.lastName}
-            </p>
-            <p>{state.order.street}</p>
-            <p>
-              {state.order.town} {state.order.zipcode}
-            </p>
+          <div id="review-order-shipping-information">
+            <p>Ship to:</p>
+            <div id="review-order-address-information">
+              <p>
+                {state.order.firstName} {state.order.lastName}
+              </p>
+              <p>{state.order.street}</p>
+              <p>
+                {state.order.city} {state.order.zipcode}
+              </p>
+            </div>
           </div>
-          <div>
-            <h4>Change status:</h4>
+          <div id="review-order-status">
+            <p>Change status:</p>
 
-            <div>
+            <div id="review-order-status-dropdown">
               <select name="" id="">
                 <option value="">Pre-Transit</option>
                 <option value="">In Transit</option>
