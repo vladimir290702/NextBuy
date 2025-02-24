@@ -6,24 +6,116 @@
 #review-order-wrapper {
   padding: 1rem 2rem;
   width: 75%;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
-#review-order-title-conatainer {
-  margin-bottom: 1rem;
-  border-bottom: 1px #001f54 solid;
+.review-order-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+  opacity: 0;
+  transform: translateX(-50px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
-#review-order-title-conatainer > h2 {
-  font-style: italic;
+/* Slide-in animation */
+.review-order-container.slide-in {
+  opacity: 1;
+}
+
+/* Circles (Default Gray) */
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: gray;
+  border-radius: 50%;
+  opacity: 0.3;
+  transition: background-color 0.5s, opacity 0.5s;
+}
+
+/* Active Circles */
+.circle.active {
+  background-color: green;
+  opacity: 1;
+  color: #fff;
+}
+
+/* Lines (Default Red) */
+.line {
+  width: 30%;
+  height: 4px;
+  background-color: grey;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Animated Line Filling */
+.line.fill::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(65, 200, 65);
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: fillLine 1s ease-out forwards;
+}
+
+/* Keyframes for Line Filling */
+@keyframes fillLine {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+#review-order-product-information-and-shipping-wrapper {
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+  background-color: lightgray;
+  padding: 0.5rem;
+}
+
+#review-order-shipping-information {
+  width: 50%;
+  background-color: #fff;
+  text-align: start;
+  padding-left: 1rem;
+  padding-bottom: 1rem;
+}
+
+#review-order-shipping-details {
+  width: 50%;
+  background-color: #fff;
 }
 
 #review-order-images-container {
+  padding: 0.5rem;
+  background-color: lightgray;
+}
+
+#review-order-images-container > div {
+  background-color: #fff;
+  padding-left: 1rem;
   display: flex;
+  flex-direction: column;
+  align-items: start;
 }
 
 .review-order-image-container {
-  width: 19rem;
+  display: flex;
   height: 22rem;
+  width: 100%;
+  background-color: #fff;
 }
 
 .review-order-image-container img {
@@ -31,8 +123,38 @@
   height: 100%;
 }
 
+.review-order-product-description {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  margin-left: 1rem;
+}
+
+.review-order-product-model {
+  margin-bottom: 0.5rem;
+}
+
+.review-order-product-description p {
+  margin: 0.25rem;
+}
+
 .review-order-image-container p {
   font-size: 1.5rem;
+}
+
+#review-order-contact-custommer-container {
+  background-color: lightgray;
+  text-align: start;
+}
+
+#review-order-contact-custommer {
+  background-color: #fff;
+  margin: 0.5rem 0.5rem;
+  padding: 0.5rem 1rem;
+}
+
+#review-order-contact-custommer p {
+  margin: 0.25rem 0;
 }
 
 #review-order-subtotal-container {
@@ -57,7 +179,6 @@
 #review-order-address-information p {
   font-size: 1.25rem;
   font-style: italic;
-  font-weight: 500;
   margin: 0.4rem 0;
 }
 
