@@ -10,7 +10,7 @@
   flex-direction: column;
   text-align: center;
 }
-
+/* Default Container */
 .review-order-container {
   display: flex;
   align-items: center;
@@ -21,9 +21,10 @@
   transition: opacity 1s ease-out, transform 1s ease-out;
 }
 
-/* Slide-in animation */
+/* Trigger Animation */
 .review-order-container.slide-in {
   opacity: 1;
+  transform: translateX(0);
 }
 
 /* Circles (Default Gray) */
@@ -46,7 +47,7 @@
   color: #fff;
 }
 
-/* Lines (Default Red) */
+/* Default Line (Gray Background) */
 .line {
   width: 30%;
   height: 4px;
@@ -55,25 +56,40 @@
   overflow: hidden;
 }
 
-/* Animated Line Filling */
-.line.fill::before {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: rgb(65, 200, 65);
-  transform: scaleX(0);
-  transform-origin: left;
-  animation: fillLine 1s ease-out forwards;
+/* Ensure Green Line Fills Properly */
+.line.fill {
+  position: relative;
 }
 
-/* Keyframes for Line Filling */
+/* Animated Green Fill */
+.line.fill::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0%; /* Start empty */
+  height: 100%;
+  background-color: green;
+  animation: fillLine 2s ease-out forwards;
+}
+
+/* First Line Animation (Starts Immediately) */
+.step-1.fill::after {
+  animation-delay: 0s; /* First line starts immediately */
+}
+
+/* Second Line Animation (Starts AFTER First Line) */
+.step-2.fill::after {
+  animation-delay: 2.2s; /* Second line waits for first to finish */
+}
+
+/* Keyframes for Left-to-Right Filling */
 @keyframes fillLine {
   from {
-    transform: scaleX(0);
+    width: 0%;
   }
   to {
-    transform: scaleX(1);
+    width: 100%;
   }
 }
 
