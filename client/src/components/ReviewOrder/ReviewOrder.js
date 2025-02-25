@@ -8,7 +8,9 @@ export default function ReviewOrder({ item }) {
   const [animate, setAnimate] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => setAnimate(true), 200); // Delay start for smoother effect
+    setTimeout(() => {
+      setAnimate(true);
+    }, 100); // Small delay to start animation smoothly
   }, []);
 
   const statuses = ["pre-transit", "in-transit", "delivered"];
@@ -19,18 +21,23 @@ export default function ReviewOrder({ item }) {
       <ShopProfileSidebar />
       <div id="review-order-wrapper">
         <div className={`review-order-container ${animate ? "slide-in" : ""}`}>
+          {/* Step 1 */}
           <div className={`circle ${statusIndex >= 0 ? "active" : ""}`}>
             <FaCheck />
           </div>
           <div
-            className={`line ${animate && statusIndex >= 1 ? "fill" : ""}`}
+            className={`line ${statusIndex >= 1 ? "fill step-1" : ""}`}
           ></div>
+
+          {/* Step 2 */}
           <div className={`circle ${statusIndex >= 1 ? "active" : ""}`}>
             <FaCheck />
           </div>
           <div
-            className={`line ${animate && statusIndex >= 2 ? "fill" : ""}`}
+            className={`line ${statusIndex >= 2 ? "fill step-2" : ""}`}
           ></div>
+
+          {/* Step 3 */}
           <div className={`circle ${statusIndex >= 2 ? "active" : ""}`}>
             <FaCheck />
           </div>
