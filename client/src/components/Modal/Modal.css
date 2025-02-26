@@ -1,0 +1,121 @@
+/* Center the button */
+.modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+/* Modal Overlay (Background) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Modal Content */
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+  width: 350px;
+  position: relative;
+  animation: scaleUp 0.3s ease-in-out;
+}
+
+/* Close Button (X) */
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+  color: black;
+  transition: color 0.2s;
+}
+
+.close-btn:hover {
+  color: #001f54;
+}
+
+/* Modal Text */
+.modal-text {
+  font-size: 18px;
+  margin: 30px 0;
+}
+
+/* Button Container */
+.modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+/* Apply Changes Button */
+.apply-btn {
+  padding: 0.5rem 1rem;
+  background-color: #001f54;
+  color: white;
+  border: 1px #001f54 solid;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.apply-btn:hover {
+  background-color: #fff;
+  color: #001f54;
+  border: 1px #001f54 solid;
+  padding: 0.5rem 1rem;
+}
+
+/* Continue Reviewing Button */
+.review-btn {
+  padding: 8px 15px;
+  font-size: 14px;
+  background-color: gray;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.review-btn:hover {
+  background-color: darkgray;
+}
+
+/* Fade-in Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Scale-up Animation */
+@keyframes scaleUp {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
