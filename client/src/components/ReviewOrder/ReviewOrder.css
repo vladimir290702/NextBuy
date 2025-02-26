@@ -114,6 +114,24 @@
   background-color: #fff;
 }
 
+#review-order-status {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+}
+
+#review-order-status p {
+  font-size: 1.25rem;
+}
+
+#review-order-status-dropdown select {
+  padding: 1rem 6rem;
+  color: #fff;
+  background-color: #001f54;
+}
+
 #review-order-images-container {
   padding: 0.5rem;
   background-color: lightgray;
@@ -173,11 +191,6 @@
   margin: 0.25rem 0;
 }
 
-#review-order-subtotal-container {
-  margin-top: 7rem;
-  border-bottom: 1px #001f54 solid;
-}
-
 #review-order-shipping-details {
   display: flex;
   justify-content: space-between;
@@ -198,17 +211,22 @@
   margin: 0.4rem 0;
 }
 
-#review-order-status {
-  width: 50%;
+#review-order-button-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  justify-content: end;
+  align-items: end;
+  margin-top: 1rem;
 }
 
-#review-order-status-dropdown select {
-  padding: 0.5rem 5rem;
-  color: #fff;
+#save-changes-button-wrapper button {
+  padding: 0.75rem 3rem;
   background-color: #001f54;
-  font-weight: 500;
+  color: #fff;
+  border: 1px #001f54 solid;
+  transition: 0.3s ease-in;
+}
+
+#save-changes-button-wrapper button:hover {
+  background-color: #fff;
+  color: #001f54;
 }

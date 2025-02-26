@@ -6,15 +6,18 @@ import { FaCheck } from "react-icons/fa";
 export default function ReviewOrder({ item }) {
   const { state } = useLocation();
   const [animate, setAnimate] = useState(false);
+  const [newStatus, setNewStatus] = useState(null);
+
+  const statuses = ["pre-transit", "in-transit", "delivered"];
+  const statusIndex = statuses.indexOf("in-transit");
+
+  console.log(newStatus);
 
   useEffect(() => {
     setTimeout(() => {
       setAnimate(true);
     }, 100); // Small delay to start animation smoothly
   }, []);
-
-  const statuses = ["pre-transit", "in-transit", "delivered"];
-  const statusIndex = statuses.indexOf("in-transit");
 
   return (
     <div id="review-order-container">
@@ -42,7 +45,6 @@ export default function ReviewOrder({ item }) {
             <FaCheck />
           </div>
         </div>
-
         <div id="review-order-product-information-and-shipping-wrapper">
           <div id="review-order-shipping-information">
             <h2>Ship to:</h2>
@@ -60,10 +62,10 @@ export default function ReviewOrder({ item }) {
             <div id="review-order-status">
               <p>Change status:</p>
               <div id="review-order-status-dropdown">
-                <select name="" id="">
-                  <option value="">Pre-Transit</option>
-                  <option value="">In Transit</option>
-                  <option value="">Completed</option>
+                <select onChange={(e) => setNewStatus(e.target.value)}>
+                  <option value="pre-transit">Pre-Transit</option>
+                  <option value="in-transit">In Transit</option>
+                  <option value="completed">Completed</option>
                 </select>
               </div>
             </div>
@@ -106,9 +108,9 @@ export default function ReviewOrder({ item }) {
             </p>
           </div>
         </div>
-        <div id="review-order-subtotal-container">
-          <div>
-            <h3>TO DO: Payment + Billing Address</h3>
+        <div id="review-order-button-container">
+          <div id="save-changes-button-wrapper">
+            <button>Save Changes</button>
           </div>
         </div>
       </div>
