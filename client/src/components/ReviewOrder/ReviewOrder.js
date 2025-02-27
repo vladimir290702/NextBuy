@@ -3,10 +3,13 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 import { FaCheck } from "react-icons/fa";
+import Modal from "../Modal/Modal";
+
 export default function ReviewOrder({ item }) {
   const { state } = useLocation();
   const [animate, setAnimate] = useState(false);
   const [newStatus, setNewStatus] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
   const statuses = ["pre-transit", "in-transit", "delivered"];
   const statusIndex = statuses.indexOf("in-transit");
@@ -18,6 +21,15 @@ export default function ReviewOrder({ item }) {
       setAnimate(true);
     }, 100); // Small delay to start animation smoothly
   }, []);
+
+  const handleSaveChangesClick = (e) => {
+    e.preventDefault();
+    setIsOpen(true);
+  };
+
+  const handleClose = (e) => {
+    setIsOpen(false);
+  };
 
   return (
     <div id="review-order-container">
@@ -109,11 +121,15 @@ export default function ReviewOrder({ item }) {
           </div>
         </div>
         <div id="review-order-button-container">
-          <div id="save-changes-button-wrapper">
+          <div
+            id="save-changes-button-wrapper"
+            onClick={(e) => handleSaveChangesClick(e)}
+          >
             <button>Save Changes</button>
           </div>
         </div>
       </div>
+      {isOpen ? <Modal handleClose={handleClose} /> : null}
     </div>
   );
 }

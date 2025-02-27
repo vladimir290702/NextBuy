@@ -15,7 +15,7 @@ export default function ActivityCard({ activity }) {
   } else if (activity.type === "removed") {
     activityText = `${activity.order.firstName} ${activity.order.lastName} removed your item from favourites: ${activity.order.productName} ${activity.order.model}`;
   } else if (activity.type === "ordered") {
-    activityText = `${activity.order.email} ordered ${
+    activityText = `${activity.order.user} ordered ${
       activity.order.orderedProducts.length
     } ${activity.order.orderedProducts.length > 1 ? "items" : "item"}`;
   }
