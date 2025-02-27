@@ -13,6 +13,10 @@
   margin: 0 1rem;
 }
 
+.shop-profile-sidebar-icon {
+  scale: 1.3;
+}
+
 .shop-profile-category h3 {
-  margin: 1rem 0;
+  margin: 1rem;
 }
