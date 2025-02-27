@@ -39,7 +39,7 @@ export default function ShopProfileSidebar() {
           className="shop-profile-category"
           onClick={(e) => handleSelectedCategory(e, "create-shop-initial")}
         >
-          <CiShop />
+          <CiShop className="shop-profile-sidebar-icon" />
           <h3>Create Shop</h3>
         </div>
       )}
@@ -47,35 +47,35 @@ export default function ShopProfileSidebar() {
         className="shop-profile-category"
         onClick={(e) => handleSelectedCategory(e, "create-listing")}
       >
-        <IoCreateOutline />
+        <IoCreateOutline className="shop-profile-sidebar-icon" />
         <h3>Add Listings</h3>
       </div>
       <div
         className="shop-profile-category"
         onClick={(e) => handleSelectedCategory(e, "shop-orders")}
       >
-        <GoListUnordered />
+        <GoListUnordered className="shop-profile-sidebar-icon" />
         <h3>Orders</h3>
       </div>
       <div
         className="shop-profile-category"
         onClick={(e) => handleSelectedCategory(e, "dashboard")}
       >
-        <LuLayoutDashboard />
+        <LuLayoutDashboard className="shop-profile-sidebar-icon" />
         <h3>Dashboard</h3>
       </div>
       <div
         className="shop-profile-category"
         onClick={(e) => handleSelectedCategory(e, "other-shops")}
       >
-        <AiFillShop />
+        <AiFillShop className="shop-profile-sidebar-icon" />
         <h3>Other shops</h3>
       </div>
       <div
         className="shop-profile-category"
         onClick={(e) => handleSelectedCategory(e, "shop-settings")}
       >
-        <IoSettingsOutline />
+        <IoSettingsOutline className="shop-profile-sidebar-icon" />
         <h3>Settings</h3>
       </div>
     </div>

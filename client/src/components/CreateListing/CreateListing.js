@@ -117,7 +117,7 @@ export default function CreateListing() {
             <div id="productMainData">
               <div className="main-data-option">
                 <div id="add-listing-category-label">
-                  <label>Category</label>
+                  <label>Category:</label>
                 </div>
                 <div id="add-listing-category-options">
                   <select onChange={(e) => handleProductCategories(e)}>
@@ -185,6 +185,18 @@ export default function CreateListing() {
             </div>
           </div>
           <div id="secondary-product-data">
+            <div id="color-options">
+              <div className="main-data-label-container">
+                <label>Color:</label>
+              </div>
+              <div id="color-input">
+                <input
+                  type="text"
+                  placeholder="Model..."
+                  onChange={(e) => setModel(e.target.value)}
+                />
+              </div>
+            </div>
             {hasParentCategory ? (
               <div id="productSizes">
                 <div className="main-data-label-container">
