@@ -1,0 +1,120 @@
+#edit-shop-container {
+  display: flex;
+}
+
+#change-shop-data-wrapper {
+  border: 2px #001f54 solid;
+  border-radius: 5px;
+  padding: 2rem 4rem;
+}
+
+#change-shop-data-wrapper h3 {
+  margin-top: 0;
+}
+
+#edit-shop-data {
+  padding: 2rem 3rem;
+  width: 100%;
+}
+
+#edit-shop-logo {
+  width: 16rem;
+  height: 15rem;
+  margin-bottom: 1rem;
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+#edit-shop-logo img {
+  width: 100%;
+  height: 100%;
+  transition: 0.3s ease;
+}
+
+.edit-shop-logo-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+#edit-shop-logo:hover img {
+  filter: brightness(30%);
+}
+
+#edit-shop-logo:hover .edit-shop-logo-overlay {
+  opacity: 1;
+}
+
+#edit-owner-data {
+  display: flex;
+}
+
+#shop-owner-email {
+  margin-right: 2rem;
+}
+
+.shop-input {
+  padding-left: 0.5rem;
+  width: 16.5rem;
+  height: 2rem;
+  font-size: 1rem;
+  border: 2px #001f54 solid;
+}
+
+.shop-data-label {
+  margin-bottom: 0.5rem;
+}
+
+.apply-changes-edit-shop {
+  margin-top: 1rem;
+  text-align: end;
+}
+
+.apply-changes-edit-shop button {
+  padding: 0.75rem 3rem;
+  background-color: #001f54;
+  border: 2px #001f54 solid;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.3s ease-in;
+}
+
+.apply-changes-edit-shop button:hover {
+  background-color: #fff;
+  border: 2px #001f54 solid;
+  color: #001f54;
+  font-weight: 500;
+}
+
+#change-password-container {
+  border: 2px #001f54 solid;
+  border-radius: 5px;
+  padding: 2rem 4rem;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+#change-password-container h3 {
+  margin-top: 0;
+}
+
+#change-password-rules-container {
+  margin-top: 2rem;
+}
+
+.password-rules {
+  display: flex;
+  align-items: center;
+}
+
+.password-rule {
+  margin-left: 0.5rem;
+}
