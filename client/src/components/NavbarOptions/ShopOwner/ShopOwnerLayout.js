@@ -39,9 +39,9 @@ export default function ShopOwnerLayout() {
     <>
       <li className="nav-item" onClick={() => handleProfileRedirect()}>
         <Link className="nav-link" to="/dashboard">
-          {shopData.shop.logo ? (
+          {shopData?.shop?.logo ? (
             <div id="shop-owner-navbar-logo">
-              <img src={shopData.shop.logo} alt={shopData.shop.name} />
+              <img src={shopData?.shop?.logo} alt={shopData.shop.name} />
             </div>
           ) : (
             <FaUserCircle />

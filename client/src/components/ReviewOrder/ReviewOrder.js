@@ -14,8 +14,6 @@ export default function ReviewOrder({ item }) {
   const statuses = ["pre-transit", "in-transit", "delivered"];
   const statusIndex = statuses.indexOf("in-transit");
 
-  console.log(newStatus);
-
   useEffect(() => {
     setTimeout(() => {
       setAnimate(true);

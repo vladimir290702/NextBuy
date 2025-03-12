@@ -53,7 +53,7 @@ export default function ShopOrders() {
             </div>
             {shopData?.orders.map((order) => {
               return (
-                <div class="order-card" key={order.dateOfOrder}>
+                <div className="order-card" key={order.dateOfOrder}>
                   <div className="order-creation-info-container">
                     <p>Completed on: 16.01.2025</p>
                   </div>
