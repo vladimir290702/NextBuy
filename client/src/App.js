@@ -19,6 +19,7 @@ import InitialPage from "./components/CreateShop/InitialPage/InitialPage";
 import CreateShop from "./components/CreateShop/CreateShop";
 import FavouriteProducts from "./components/FavouriteProducts/FavouriteProducts";
 import ReviewOrder from "./components/ReviewOrder/ReviewOrder";
+import EditShopProfile from "./components/EditShopProfile/EditShopProfile";
 
 function App() {
   return (
@@ -42,6 +43,7 @@ function App() {
           <Route path="/checkout" element={<Checkout />} />
           <Route path="/favourite-products" element={<FavouriteProducts />} />
           <Route path="/review-order" element={<ReviewOrder />} />
+          <Route path="/shop/edit-profile" element={<EditShopProfile />} />
         </Routes>
         <Footer />
       </BrowserRouter>
