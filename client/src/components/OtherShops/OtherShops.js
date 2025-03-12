@@ -26,17 +26,17 @@ export default function OtherShops() {
       <div id="selected-shop-category">
         <div id="other-shops-wrapper">
           <div id="other-shops-searchbar">
-            <div class="search-bar">
-              <form action="/search" method="GET" class="search-form">
+            <div className="search-bar">
+              <form action="/search" method="GET" className="search-form">
                 <input
                   type="text"
                   name="query"
-                  class="search-input"
+                  className="search-input"
                   placeholder="Search for products, brands, or categories..."
                   aria-label="Search"
                 />
-                <button type="submit" class="search-button">
-                  <span class="search-icon">🔍</span>
+                <button type="submit" className="search-button">
+                  <span className="search-icon">🔍</span>
                 </button>
               </form>
             </div>

@@ -192,7 +192,7 @@ export default function CreateListing() {
               <div id="color-input">
                 <input
                   type="text"
-                  placeholder="Model..."
+                  placeholder="Color..."
                   onChange={(e) => setModel(e.target.value)}
                 />
               </div>
