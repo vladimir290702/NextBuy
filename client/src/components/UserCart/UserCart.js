@@ -1,5 +1,5 @@
 import "./UserCart.css";
-import { useState, useEffect, Link } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import { getUserCart } from "../../services/custommerOperations";
