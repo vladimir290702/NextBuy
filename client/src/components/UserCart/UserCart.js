@@ -71,21 +71,36 @@ export default function UserCart() {
 
     navigate("/checkout", { state: checkoutData });
   };
+
+  const handleNavigate = (e) => {
+    e.preventDefault();
+
+    navigate("/apparel");
+  };
+
   return (
     <div id="cart-wrapper">
       <div id="cart-products">
         <div className="cart-section">
           <h3>Your Shopping Cart</h3>
         </div>
-        {cart.map((product) => (
-          <Product
-            key={product.id}
-            product={product}
-            username={user.username}
-            sendDataToParent={handleBagSize}
-            changeQuantity={handleQuantityChange}
-          />
-        ))}
+        {cart.length === 0 ? (
+          <div id="no-products-content">
+            <h2>You have no products in cart...</h2>
+            <button onClick={(e) => handleNavigate(e)}>Shop now!</button>
+          </div>
+        ) : (
+          cart.map((product) => (
+            <Product
+              key={product.id}
+              product={product}
+              username={user.username}
+              sendDataToParent={handleBagSize}
+              changeQuantity={handleQuantityChange}
+            />
+          ))
+        )}
+        {}
       </div>
       <div id="cart-overview">
         <div className="cart-section">
