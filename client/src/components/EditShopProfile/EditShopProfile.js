@@ -9,6 +9,11 @@ import { RxCross1 } from "react-icons/rx";
 export default function EditShopProfile() {
   const { user } = useUser();
   const [shopData, setShopData] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [isPasswordLongEnough, setIsPasswordLongEnough] = useState(false);
+  const [containsUppercase, setContainsUppercase] = useState(false);
+  const [containsNumber, setContainsNumber] = useState(false);
+  const [containSpecialCharacter, setContainSpecialCharacter] = useState(false);
 
   useEffect(() => {
     const fetchedShopData = async () => {
@@ -16,8 +21,26 @@ export default function EditShopProfile() {
 
       setShopData(response?.shop);
     };
+
     fetchedShopData();
   }, []);
+
+  // Handle input change
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+
+    // Check if the length is at least 8
+    if (value.length >= 8) {
+      setIsPasswordLongEnough(true);
+    } else {
+      setIsPasswordLongEnough(false);
+    }
+
+    setContainsUppercase(/[A-Z]/.test(value));
+    setContainsNumber(/\d/.test(value));
+    setContainSpecialCharacter(/[^a-zA-Z0-9]/.test(value));
+  };
 
   return (
     <div id="edit-shop-container">
@@ -76,26 +99,56 @@ export default function EditShopProfile() {
             </div>
             <div>
               <p className="shop-data-label">New Password:</p>
-              <input className="shop-input" type="text" />
+              <input
+                className="shop-input"
+                type="text"
+                value={inputValue}
+                onChange={(e) => handleChange(e)}
+                placeholder="Your new password..."
+              />
             </div>
           </div>
           <div id="change-password-rules-container">
             <div className="password-rules">
-              <RxCross1 />
+              <div className="password-icon-wrapper">
+                {isPasswordLongEnough ? (
+                  <FaCheck className="edit-shop-password-icon" />
+                ) : (
+                  <RxCross1 className="edit-shop-password-icon" />
+                )}
+              </div>
               <p className="password-rule">
                 Must be at least 8 characters long!
               </p>
             </div>
             <div className="password-rules">
-              <RxCross1 />
+              <div className="password-icon-wrapper">
+                {containsUppercase ? (
+                  <FaCheck className="edit-shop-password-icon" />
+                ) : (
+                  <RxCross1 className="edit-shop-password-icon" />
+                )}
+              </div>
               <p className="password-rule">Must contain Uppercase character!</p>
             </div>
             <div className="password-rules">
-              <RxCross1 />
+              <div className="password-icon-wrapper">
+                {containsNumber ? (
+                  <FaCheck className="edit-shop-password-icon" />
+                ) : (
+                  <RxCross1 className="edit-shop-password-icon" />
+                )}
+              </div>
               <p className="password-rule">Must contain a number!</p>
             </div>
             <div className="password-rules">
-              <RxCross1 />
+              <div className="password-icon-wrapper">
+                {containSpecialCharacter ? (
+                  <FaCheck className="edit-shop-password-icon" />
+                ) : (
+                  <RxCross1 className="edit-shop-password-icon" />
+                )}
+              </div>
               <p className="password-rule">Must contain a special character!</p>
             </div>
           </div>

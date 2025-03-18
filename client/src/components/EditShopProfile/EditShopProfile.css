@@ -118,3 +118,18 @@
 .password-rule {
   margin-left: 0.5rem;
 }
+
+.password-icon-wrapper {
+  display: inline-block; /* Make the wrapper fit the icon */
+  padding: 10px; /* Optional: Add some padding */
+  background: transparent; /* Ensure background is transparent */
+  filter: drop-shadow(
+    0 4px 8px rgba(0, 0, 1, 0.8)
+  ); /* Shadow effec
+}
+
+.edit-shop-password-icon {
+  font-size: 1.25rem; /* Adjust size as needed */
+  color: rgb(106, 211, 106); /* Icon color */
+  background: transparent; /* Ensure background is transparent */
+}
