@@ -9,6 +9,11 @@ import { RxCross1 } from "react-icons/rx";
 export default function EditShopProfile() {
   const { user } = useUser();
   const [shopData, setShopData] = useState(null);
+  const [shopOwner, setShopOwner] = useState(null);
+  const [shopName, setShopName] = useState(null);
+  const [shopFirstname, setShopFirstname] = useState(user.name);
+  const [shopLastname, setShopLastname] = useState(user.surname);
+
   const [inputValue, setInputValue] = useState("");
   const [isPasswordLongEnough, setIsPasswordLongEnough] = useState(false);
   const [containsUppercase, setContainsUppercase] = useState(false);
@@ -20,6 +25,8 @@ export default function EditShopProfile() {
       const response = await getShopData(user.email);
 
       setShopData(response?.shop);
+      setShopOwner(response?.shop.owner);
+      setShopName(response?.shop.name);
     };
 
     fetchedShopData();
@@ -60,7 +67,8 @@ export default function EditShopProfile() {
               <input
                 className="shop-input"
                 type="text"
-                value={shopData?.owner}
+                value={shopOwner}
+                onChange={(e) => setShopOwner(e.target.value)}
               />
             </div>
             <div id="shop-name">
@@ -68,18 +76,29 @@ export default function EditShopProfile() {
               <input
                 className="shop-input"
                 type="text"
-                value={shopData?.name}
+                value={shopName}
+                onChange={(e) => setShopName(e.target.value)}
               />
             </div>
           </div>
           <div id="edit-owner-data">
             <div id="shop-owner-email">
               <p className="shop-data-label">FirstName:</p>
-              <input className="shop-input" type="text" value={user.name} />
+              <input
+                className="shop-input"
+                type="text"
+                value={shopFirstname}
+                onChange={(e) => setShopFirstname(e.target.value)}
+              />
             </div>
             <div id="shop-name">
               <p className="shop-data-label">LastName:</p>
-              <input className="shop-input" type="text" value={user.surname} />
+              <input
+                className="shop-input"
+                type="text"
+                value={shopLastname}
+                onChange={(e) => setShopLastname(e.target.value)}
+              />
             </div>
           </div>
         </div>
@@ -91,11 +110,19 @@ export default function EditShopProfile() {
             <h3>Change Password:</h3>
             <div>
               <p className="shop-data-label">Current Password:</p>
-              <input className="shop-input" type="text" />
+              <input
+                className="shop-input"
+                type="text"
+                placeholder="Your password..."
+              />
             </div>
             <div>
               <p className="shop-data-label">Repeat Current Password:</p>
-              <input className="shop-input" type="text" />
+              <input
+                className="shop-input"
+                type="text"
+                placeholder="Repeat your password..."
+              />
             </div>
             <div>
               <p className="shop-data-label">New Password:</p>
@@ -114,7 +141,7 @@ export default function EditShopProfile() {
                 {isPasswordLongEnough ? (
                   <FaCheck className="edit-shop-password-icon" />
                 ) : (
-                  <RxCross1 className="edit-shop-password-icon" />
+                  <RxCross1 className="edit-shop-password-icon cross" />
                 )}
               </div>
               <p className="password-rule">
@@ -126,7 +153,7 @@ export default function EditShopProfile() {
                 {containsUppercase ? (
                   <FaCheck className="edit-shop-password-icon" />
                 ) : (
-                  <RxCross1 className="edit-shop-password-icon" />
+                  <RxCross1 className="edit-shop-password-icon cross" />
                 )}
               </div>
               <p className="password-rule">Must contain Uppercase character!</p>
@@ -136,7 +163,7 @@ export default function EditShopProfile() {
                 {containsNumber ? (
                   <FaCheck className="edit-shop-password-icon" />
                 ) : (
-                  <RxCross1 className="edit-shop-password-icon" />
+                  <RxCross1 className="edit-shop-password-icon cross" />
                 )}
               </div>
               <p className="password-rule">Must contain a number!</p>
@@ -146,7 +173,7 @@ export default function EditShopProfile() {
                 {containSpecialCharacter ? (
                   <FaCheck className="edit-shop-password-icon" />
                 ) : (
-                  <RxCross1 className="edit-shop-password-icon" />
+                  <RxCross1 className="edit-shop-password-icon cross" />
                 )}
               </div>
               <p className="password-rule">Must contain a special character!</p>
