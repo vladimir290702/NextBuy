@@ -1,0 +1,85 @@
+#edit-shop-listings-container {
+  display: flex;
+}
+
+#edit-listings-container {
+  padding: 3rem 4rem;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+#edit-listings-title-container h2 {
+  margin: 0;
+  color: #001f54;
+}
+
+#edit-listings-title-container {
+  width: 100%;
+  border-bottom: 2px #001f54 solid;
+}
+
+#all-shop-listings {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex: 1 1 calc(20%);
+  margin-top: 2rem;
+}
+
+#edit-shop-filter-shop-listings-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+
+#edit-shop-listings-search {
+  border: 1px solid #ccc; /* Border around the container */
+  border-radius: 0.25rem; /* Rounded corners */
+}
+
+.search-input {
+  padding: 0.5rem; /* Padding inside the input */
+  border: none; /* Remove default border */
+  outline: none; /* Remove outline on focus */
+}
+
+.search-button {
+  padding: 0.75rem 1.5rem; /* Padding for the button */
+  background-color: #001f54; /* Button background color */
+  color: white; /* Button text color */
+  border: 1px #001f54 solid; /* Remove default border */
+  cursor: pointer; /* Change cursor to pointer on hover */
+}
+
+.edit-shop-listings-sort-container {
+  display: flex; /* Use Flexbox for alignment */
+  align-items: center; /* Center items vertically */
+}
+
+.sort-label {
+  margin-right: 15px; /* Space between label and select */
+  font-weight: bold; /* Make the label bold */
+  color: #001f54; /* Darker text color */
+  font-size: 16px; /* Font size for the label */
+}
+
+.sort-select {
+  padding: 0.5rem 2.5rem; /* Padding inside the select */
+  border: 1px solid #ccc; /* Border around the select */
+  border-radius: 5px; /* Rounded corners */
+  font-size: 16px; /* Font size for the select */
+  cursor: pointer; /* Change cursor to pointer on hover */
+  background-color: #fff; /* White background */
+  transition: border-color 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+.sort-select:hover {
+  border-color: #001f54; /* Change border color on hover */
+  background-color: #f0f8ff; /* Light blue background on hover */
+}
+
+.sort-select:focus {
+  outline: none; /* Remove default outline */
+  border-color: #001f54; /* Change border color on focus */
+  box-shadow: 0 0 5px #001f54; /* Add shadow on focus */
+}

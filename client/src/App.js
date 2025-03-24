@@ -20,6 +20,7 @@ import CreateShop from "./components/CreateShop/CreateShop";
 import FavouriteProducts from "./components/FavouriteProducts/FavouriteProducts";
 import ReviewOrder from "./components/ReviewOrder/ReviewOrder";
 import EditShopProfile from "./components/EditShopProfile/EditShopProfile";
+import EditListings from "./components/EditShopListings/EditShopListings";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
           <Route path="/favourite-products" element={<FavouriteProducts />} />
           <Route path="/review-order" element={<ReviewOrder />} />
           <Route path="/shop/edit-profile" element={<EditShopProfile />} />
+          <Route path="/shop/edit-listings" element={<EditListings />} />
         </Routes>
         <Footer />
       </BrowserRouter>

@@ -59,7 +59,7 @@ export default function EditShopProfile() {
           <p className="shop-data-label">Logo:</p>
           <div id="edit-shop-logo">
             <img src={shopData?.logo} alt={shopData?.name} />
-            <div class="edit-shop-logo-overlay">Upload Logo</div>
+            <div className="edit-shop-logo-overlay">Upload Logo</div>
           </div>
           <div id="edit-owner-data">
             <div id="shop-owner-email">
