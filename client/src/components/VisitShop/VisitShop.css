@@ -1,0 +1,47 @@
+#visit-shop-container {
+  display: flex;
+}
+
+#visit-shop-wrapper {
+  width: 80%;
+  padding: 2rem 4rem;
+}
+
+#visit-shop-title {
+  display: flex;
+  align-items: center;
+}
+
+#visit-shop-logo {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin-right: 1rem;
+}
+
+#visit-shop-logo img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+#visit-shop-inforamtion {
+  display: flex;
+  justify-content: space-between;
+}
+
+#visit-shop-listings {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: 1 1 calc(20%);
+  margin-bottom: 2rem;
+}
+
+.visit-shop-listing {
+  width: 15rem;
+  height: 17rem;
+}
+
+.visit-shop-listing img {
+  width: 100%;
+  height: 100%;
+}
