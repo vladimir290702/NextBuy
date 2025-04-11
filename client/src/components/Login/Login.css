@@ -1,6 +1,23 @@
 #login-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   text-align: center;
-  margin-top: 3rem;
+  background-image: url(https://images.unsplash.com/photo-1483985988355-763728e1935b?fm=jpg&q=60&w=3000&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8M3x8ZmFzaGlvbnxlbnwwfHwwfHx8MA%3D%3D);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+
+#login-form-container {
+  margin: 5rem 30%;
+  border-radius: 10px;
+  align-items: center;
+  background-color: black;
+  color: #fff;
+  opacity: 0.7;
 }
 
 #title {
@@ -9,8 +26,7 @@
 
 #options-container {
   margin: 0 auto;
-  width: 35%;
-  padding-top: 1rem;
+  width: 75%;
 }
 
 #options-container h2 {
@@ -44,15 +60,17 @@
 }
 
 .selected-option h2 {
-  color: #000;
+  color: #fff;
   border-bottom: 3px solid #001f54;
   transition: 1s;
   cursor: pointer;
+  opacity: 1;
 }
 
 .selected-option:focus {
-  color: #000;
+  color: #fff;
   border-bottom: 3px solid #001f54;
+  opacity: 1;
 }
 
 .input input {
@@ -78,6 +96,7 @@
   font-size: 20px;
   border-width: 3px;
   border-style: ridge;
+  opacity: 1;
 }
 
 #button-wrapper button:hover {
