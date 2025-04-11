@@ -73,98 +73,100 @@ export default function Register() {
 
   return (
     <div id="register-wrapper">
-      <div>
-        <h1 id="title">Welcome to NextBuy</h1>
-      </div>
-      <div id="options-container">
-        <h2>Continue as:</h2>
-        <div className="options">
-          <div
-            className={custommer}
-            onClick={async (e) => {
-              e.preventDefault();
-              setOption("custommer");
+      <div id="register-form-wrapper">
+        <div>
+          <h1 id="title">Welcome to NextBuy</h1>
+        </div>
+        <div id="options-container">
+          <h2>Continue as:</h2>
+          <div className="options">
+            <div
+              className={custommer}
+              onClick={async (e) => {
+                e.preventDefault();
+                setOption("custommer");
+              }}
+            >
+              <h2>Custommer</h2>
+            </div>
+            <div
+              className={creator}
+              onClick={async (e) => {
+                e.preventDefault();
+                setOption("creator");
+              }}
+            >
+              <h2>Creator</h2>
+            </div>
+          </div>
+        </div>
+        <div id="user-data">
+          <div className="input">
+            <input
+              type="text"
+              placeholder="Email*"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="input">
+            <input
+              type="text"
+              placeholder="Password*"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+          <div className="input">
+            <input
+              type="text"
+              placeholder="Repeat Password*"
+              onChange={(e) => setRepeatPassword(e.target.value)}
+            />
+          </div>
+          <div className="input">
+            <input
+              type="text"
+              placeholder="Name*"
+              onChange={(e) => setName(e.target.value)}
+            />
+          </div>
+          <div className="input">
+            <input
+              type="text"
+              placeholder="Surname*"
+              onChange={(e) => setSurname(e.target.value)}
+            />
+          </div>
+          <div className="input">
+            <input
+              type="text"
+              placeholder="Age*"
+              onChange={(e) => setAge(e.target.value)}
+            />
+          </div>
+          <div className="input">
+            <select
+              id="gender-options"
+              onChange={(e) => setGender(e.currentTarget.value)}
+            >
+              <option disabled selected value>
+                Gender*
+              </option>
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+              <option value="Prefer not ot answer">Prefer not ot answer</option>
+            </select>
+          </div>
+        </div>
+        <div id="button-wrapper">
+          <button
+            disabled={isSelected}
+            onClick={(e) => {
+              handleRegister(e);
             }}
           >
-            <h2>Custommer</h2>
-          </div>
-          <div
-            className={creator}
-            onClick={async (e) => {
-              e.preventDefault();
-              setOption("creator");
-            }}
-          >
-            <h2>Creator</h2>
-          </div>
+            Register
+          </button>
         </div>
-      </div>
-      <div id="user-data">
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Email*"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Password*"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Repeat Password*"
-            onChange={(e) => setRepeatPassword(e.target.value)}
-          />
-        </div>
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Name*"
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Surname*"
-            onChange={(e) => setSurname(e.target.value)}
-          />
-        </div>
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Age*"
-            onChange={(e) => setAge(e.target.value)}
-          />
-        </div>
-        <div className="input">
-          <select
-            id="gender-options"
-            onChange={(e) => setGender(e.currentTarget.value)}
-          >
-            <option disabled selected value>
-              Gender*
-            </option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
-            <option value="Prefer not ot answer">Prefer not ot answer</option>
-          </select>
-        </div>
-      </div>
-      <div id="button-wrapper">
-        <button
-          disabled={isSelected}
-          onClick={(e) => {
-            handleRegister(e);
-          }}
-        >
-          Register
-        </button>
       </div>
     </div>
   );

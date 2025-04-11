@@ -48,56 +48,63 @@ export default function Register() {
 
   return (
     <div id="login-wrapper">
-      <div>
-        <h1 id="title">Welcome to NextBuy</h1>
-      </div>
-      <div id="options-container">
-        <h2>Continue as:</h2>
-        <div className="options">
-          <div
-            className={custommer}
-            onClick={async (e) => {
-              e.preventDefault();
-              setOption("custommer");
+      <div id="login-form-container">
+        <div>
+          <h1 id="title">Welcome to NextBuy</h1>
+        </div>
+        <div id="options-container">
+          <h2>Continue as:</h2>
+          <div className="options">
+            <div
+              className={custommer}
+              onClick={async (e) => {
+                e.preventDefault();
+                setOption("custommer");
+              }}
+            >
+              <h2>Custommer</h2>
+            </div>
+            <div
+              className={creator}
+              onClick={async (e) => {
+                e.preventDefault();
+                setOption("creator");
+              }}
+            >
+              <h2>Creator</h2>
+            </div>
+          </div>
+        </div>
+        <div id="user-data">
+          <div className="input">
+            <input
+              type="text"
+              placeholder="Email*"
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+          <div className="input">
+            <input
+              type="text"
+              placeholder="Password*"
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+        </div>
+        <div id="forgot-password-wrapper">
+          <div id="forgot-password">
+            <h4>Forgot Password?</h4>
+          </div>
+        </div>
+        <div id="button-wrapper">
+          <button
+            onClick={(e) => {
+              handleLogin(e);
             }}
           >
-            <h2>Custommer</h2>
-          </div>
-          <div
-            className={creator}
-            onClick={async (e) => {
-              e.preventDefault();
-              setOption("creator");
-            }}
-          >
-            <h2>Creator</h2>
-          </div>
+            Login
+          </button>
         </div>
-      </div>
-      <div id="user-data">
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Email*"
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div className="input">
-          <input
-            type="text"
-            placeholder="Password*"
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-      </div>
-      <div id="button-wrapper">
-        <button
-          onClick={(e) => {
-            handleLogin(e);
-          }}
-        >
-          Login
-        </button>
       </div>
     </div>
   );
