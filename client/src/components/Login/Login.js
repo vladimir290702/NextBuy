@@ -91,6 +91,11 @@ export default function Register() {
             />
           </div>
         </div>
+        <div id="forgot-password-wrapper">
+          <div id="forgot-password">
+            <h4>Forgot Password?</h4>
+          </div>
+        </div>
         <div id="button-wrapper">
           <button
             onClick={(e) => {

@@ -12,6 +12,9 @@
 }
 
 #login-form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin: 5rem 30%;
   border-radius: 10px;
   align-items: center;
@@ -108,4 +111,17 @@
 
 #button-wrapper {
   margin-bottom: 3rem;
+}
+
+#forgot-password-wrapper #forgot-password {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+  width: 450px;
+  margin-bottom: 1.5rem;
+}
+
+#forgot-password-wrapper #forgot-password h4 {
+  margin: 0;
+  align-items: end;
 }
