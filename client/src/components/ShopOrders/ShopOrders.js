@@ -10,6 +10,7 @@ export default function ShopOrders() {
   const [selectedDestination, setSelectedDestination] = useState(null);
   const [selectedOrderStatus, setSelectedOrderStatus] = useState(null);
   const [shopData, setShopData] = useState(null);
+  const [status, setStatus] = useState(null);
 
   useEffect(() => {
     const fetchedShopData = async () => {
@@ -38,6 +39,16 @@ export default function ShopOrders() {
     setSelectedOrderStatus(orderStatus);
   };
 
+  const handleStatus = (e, status) => {
+    e.preventDefault();
+
+    if (status === "new") {
+      setStatus("new");
+    } else if (status === "completed") {
+      setStatus("completed");
+    }
+  };
+
   return (
     <div id="shop-profile-wrapper">
       <ShopProfileSidebar />
@@ -48,8 +59,24 @@ export default function ShopOrders() {
               <h2>Orders</h2>
             </div>
             <div id="orders-status-options-container">
-              <div>New</div>
-              <div>Completed</div>
+              <div
+                className={
+                  status === "new" ? "active-sorting-status" : "sorting-status"
+                }
+                onClick={(e) => handleStatus(e, "new")}
+              >
+                New
+              </div>
+              <div
+                className={
+                  status === "completed"
+                    ? "active-sorting-status"
+                    : "sorting-status"
+                }
+                onClick={(e) => handleStatus(e, "completed")}
+              >
+                Completed
+              </div>
             </div>
             {shopData?.orders.map((order) => {
               return (

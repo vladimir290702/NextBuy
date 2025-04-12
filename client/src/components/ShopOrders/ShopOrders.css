@@ -14,6 +14,7 @@
 #orders-title-container h2 {
   margin: 0;
   font-size: 2rem;
+  color: #001f54;
 }
 
 #orders-status-options-container {
@@ -35,6 +36,7 @@
 
 .order-creation-info-container {
   padding: 0 1rem;
+  color: #001f54;
 }
 
 .order-product {
@@ -109,6 +111,14 @@
 #orders-initial-div-active {
   border-bottom: 1px #001f54 solid;
   margin-bottom: 1rem;
+}
+
+.sorting-status {
+  border-bottom: 2px #fff solid;
+}
+
+.active-sorting-status {
+  border-bottom: 2px #001f54 solid;
 }
 
 .orders-empty-div {
