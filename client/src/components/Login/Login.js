@@ -50,10 +50,10 @@ export default function Register() {
     <div id="login-wrapper">
       <div id="login-form-container">
         <div>
-          <h1 id="title">Welcome to NextBuy</h1>
+          <h2 id="title">Welcome to NextBuy</h2>
         </div>
         <div id="options-container">
-          <h2>Continue as:</h2>
+          <h3>Continue as:</h3>
           <div className="options">
             <div
               className={custommer}
@@ -62,7 +62,7 @@ export default function Register() {
                 setOption("custommer");
               }}
             >
-              <h2>Custommer</h2>
+              <h3>Custommer</h3>
             </div>
             <div
               className={creator}
@@ -71,7 +71,7 @@ export default function Register() {
                 setOption("creator");
               }}
             >
-              <h2>Creator</h2>
+              <h3>Creator</h3>
             </div>
           </div>
         </div>

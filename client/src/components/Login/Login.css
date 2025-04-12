@@ -8,14 +8,14 @@
   background-position: center;
   background-repeat: no-repeat;
   width: 100vw;
-  height: 100vh;
+  height: 90vh;
 }
 
 #login-form-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin: 5rem 30%;
+  margin: 6rem 30%;
   border-radius: 10px;
   align-items: center;
   background-color: black;
@@ -55,14 +55,14 @@
   margin: 0 1rem;
 }
 
-.option h2 {
+.option h3 {
   border-bottom: 3px solid #d1c5c5;
   color: #d1c5c5;
   font-weight: 400;
   cursor: pointer;
 }
 
-.selected-option h2 {
+.selected-option h3 {
   color: #fff;
   border-bottom: 3px solid #001f54;
   transition: 1s;
