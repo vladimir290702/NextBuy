@@ -3,9 +3,11 @@ import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 import OtherShopCard from "./OtherShopCard/OtherShopCard";
 import { useState, useEffect } from "react";
 import { getAllShopData } from "../../services/createShop";
+import Paging from "../Paging/Paging";
 
 export default function OtherShops() {
   const [data, setData] = useState(null);
+  const [selectedPage, setSelectedPage] = useState(1);
 
   useEffect(() => {
     const fetchedShopData = async () => {
@@ -20,6 +22,12 @@ export default function OtherShops() {
     };
     fetchedShopData();
   }, []);
+
+  const handleSelectPage = (e, page) => {
+    e.preventDefault();
+
+    setSelectedPage(page);
+  };
 
   return (
     <div id="shop-profile-wrapper">
@@ -47,8 +55,8 @@ export default function OtherShops() {
               return <OtherShopCard shop={shop} />;
             })}
           </div>
-          <div id="shops-paging">TO DO paging</div>
         </div>
+        <Paging page={selectedPage} selectPage={handleSelectPage} />
       </div>
     </div>
   );
