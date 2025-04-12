@@ -1,6 +1,7 @@
 import "./VisitShop.css";
 import { useLocation } from "react-router-dom";
 import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
+import VisitShopListing from "./VisitShopListing/VisitShopListings";
 
 export default function VisitShop() {
   const location = useLocation();
@@ -19,25 +20,29 @@ export default function VisitShop() {
             <h2>{shop.name}</h2>
           </div>
         </div>
-        <div id="visit-shop-inforamtion">
-          <div>
-            <p>Owner email: {shop.owner}</p>
+        <div id="visit-shop-information">
+          <div className="visit-shop-information-details">
+            <div className="option">
+              <h4>Owner email:</h4>
+              <h4>{shop.owner}</h4>
+            </div>
           </div>
-          <div>
-            <p>Shop creation: {shop.createdOn}</p>
+          <div className="visit-shop-information-details">
+            <div className="option">
+              <h4>Shop creation:</h4>
+              <h4>{shop.createdOn}</h4>
+            </div>
           </div>
-          <div>
-            <p>Shop listings: {shop.listings.length}</p>
+          <div className="visit-shop-information-details">
+            <div className="option">
+              <h4>Shop listings:</h4>
+              <h4>{shop.listings.length}</h4>
+            </div>
           </div>
         </div>
         <div id="visit-shop-listings">
           {shop.listings.map((listing) => {
-            return (
-              <div className="visit-shop-listing">
-                <img src={listing.images[0]} alt={listing.productName} />
-                <p>{listing.productName}</p>
-              </div>
-            );
+            return <VisitShopListing key={listing.model} listing={listing} />;
           })}
         </div>
       </div>
