@@ -7,9 +7,11 @@ import { getShopData } from "../../services/createShop";
 import { useUser } from "../../contexts/UserContext";
 import Counter from "../Counter/Counter";
 import ActivityCard from "./ActivityCard/ActivityCard";
+import { useNavigate } from "react-router-dom";
 
 export default function Dashboard() {
   const { user } = useUser();
+  const navigate = useNavigate();
   const [shopData, setShopData] = useState(null);
   const [activity, setActivity] = useState([]);
   const [activitiesCount, setActivitiesCount] = useState(null);
@@ -31,6 +33,12 @@ export default function Dashboard() {
     fetchedShopData();
   }, [page]);
 
+  const openShopMessanger = (e) => {
+    e.preventDefault();
+
+    navigate("/shop-messanger");
+  };
+
   return (
     <div id="shop-profile-wrapper">
       <ShopProfileSidebar />
@@ -49,7 +57,7 @@ export default function Dashboard() {
                 </p>
               </div>
             </div>
-            <div id="dashboard-messages">
+            <div id="dashboard-messages" onClick={(e) => openShopMessanger(e)}>
               <BsChatRightText />
             </div>
           </div>

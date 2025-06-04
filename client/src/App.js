@@ -22,6 +22,7 @@ import ReviewOrder from "./components/ReviewOrder/ReviewOrder";
 import EditShopProfile from "./components/EditShopProfile/EditShopProfile";
 import EditListings from "./components/EditShopListings/EditShopListings";
 import VisitShop from "./components/VisitShop/VisitShop";
+import ShopMessanger from "./components/ShopMessanger/ShopMessanger";
 
 function App() {
   return (
@@ -48,6 +49,7 @@ function App() {
           <Route path="/shop/edit-profile" element={<EditShopProfile />} />
           <Route path="/shop/edit-listings" element={<EditListings />} />
           <Route path="/shop/other-shops/:id" element={<VisitShop />} />
+          <Route path="/shop-messanger" element={<ShopMessanger />} />
         </Routes>
         <Footer />
       </BrowserRouter>
