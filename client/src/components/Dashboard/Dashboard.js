@@ -1,6 +1,7 @@
 import "./Dashboard.css";
 import { useState, useEffect } from "react";
 import { FaPlus } from "react-icons/fa";
+import { BsChatRightText } from "react-icons/bs";
 import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 import { getShopData } from "../../services/createShop";
 import { useUser } from "../../contexts/UserContext";
@@ -36,15 +37,20 @@ export default function Dashboard() {
       <div id="selected-shop-category">
         <div id="dashboard-shop-wrapper">
           <div id="dashboard-shop-data">
-            <div id="dashboard-shop-data-image-container">
-              <img src={shopData?.logo} alt={shopData?.name} />
+            <div id="dashboard-shop-data-main-info">
+              <div id="dashboard-shop-data-image-container">
+                <img src={shopData?.logo} alt={shopData?.name} />
+              </div>
+              <div id="dashboard-shop-data-name-container">
+                <p>What's new, {shopData?.name}?</p>
+                <p id="dashboard-shop-default-info">
+                  {shopData?.orders?.length} sales |{" "}
+                  {shopData?.listings?.length} active listings
+                </p>
+              </div>
             </div>
-            <div id="dashboard-shop-data-name-container">
-              <p>What's new, {shopData?.name}?</p>
-              <p id="dashboard-shop-default-info">
-                {shopData?.orders?.length} sales | {shopData?.listings?.length}{" "}
-                active listings
-              </p>
+            <div id="dashboard-messages">
+              <BsChatRightText />
             </div>
           </div>
           <div id="dashboard-shop-info-boxes-container">

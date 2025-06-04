@@ -4,6 +4,11 @@
 
 #dashboard-shop-data {
   display: flex;
+  justify-content: space-between;
+}
+
+#dashboard-shop-data-main-info {
+  display: flex;
 }
 
 #dashboard-shop-data-image-container {
@@ -26,14 +31,21 @@
 #dashboard-shop-data-name-container {
   font-size: 1.5rem;
   color: #001f54;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
 }
 
 #dashboard-shop-default-info {
   font-size: 1rem;
   color: grey;
+}
+
+#dashboard-messages {
+  font-size: 2rem;
+  color: #001f54;
+}
+
+#dashboard-messages:hover {
+  transform: scale(1.2) translateY(0.3rem);
+  transition: ease-in-out 0.3s;
 }
 
 #dashboard-revenue-counter-container {
