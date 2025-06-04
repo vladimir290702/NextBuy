@@ -46,6 +46,7 @@
 #dashboard-messages:hover {
   transform: scale(1.2) translateY(0.3rem);
   transition: ease-in-out 0.3s;
+  cursor: pointer;
 }
 
 #dashboard-revenue-counter-container {
