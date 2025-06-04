@@ -20,9 +20,37 @@
 }
 
 #product-details-information-container {
-  padding-top: 4rem;
+  padding-top: 3rem;
   padding-left: 3rem;
   width: 40%;
+}
+
+#contact-shop {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+#contact-shop-icon-container {
+  font-size: 1.5rem;
+  color: #001f54;
+  cursor: pointer;
+}
+
+#contact-shop-message {
+  margin-left: 1.5rem;
+  color: #001f54;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(-1rem);
+  transition: opacity 0.3s ease, transform 0.5s ease;
+}
+
+#contact-shop-icon-container:hover + #contact-shop-message {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0.5rem);
 }
 
 #routes {
