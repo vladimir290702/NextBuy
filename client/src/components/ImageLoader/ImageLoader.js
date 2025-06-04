@@ -46,8 +46,44 @@ const ImageLoader = ({ onImageUpload }) => {
     setImages(images.filter((image) => image !== id));
   };
 
+  const handleFileUploadAndSendToServer = async (e) => {
+    const files = Array.from(e.target.files);
+
+    for (const file of files) {
+      if (file.type.startsWith("image/")) {
+        const formData = new FormData();
+        formData.append("image", file);
+
+        try {
+          const res = await fetch("http://localhost:4000/upload", {
+            method: "POST",
+            body: formData,
+          });
+          const data = await res.json();
+
+          if (data.url && !images.includes(data.url)) {
+            setImages((prev) => [...prev, data.url]);
+          }
+        } catch (err) {
+          console.error("Upload failed:", err);
+        }
+      }
+    }
+
+    // Reset the input so the same file can be selected again if needed
+    e.target.value = null;
+  };
+
   return (
     <div>
+      <input
+        type="file"
+        accept="image/*"
+        multiple
+        ref={fileInputRef}
+        style={{ display: "none" }}
+        onChange={handleFileUploadAndSendToServer}
+      />
       <div
         id="image-uploader-input-container"
         onClick={() => fileInputRef.current.click()}
