@@ -1,6 +1,7 @@
 import "./ProductDetails.css";
 import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { TbTruckDelivery, TbPackageImport } from "react-icons/tb";
+import { BsChatLeftText } from "react-icons/bs";
 import { useState, useEffect } from "react";
 import ProductCategories from "../ProductCategories/ProductCategories";
 import { useLocation } from "react-router-dom";
@@ -97,6 +98,14 @@ export default function ProductDetails() {
               })}
             </div>
             <div id="product-details-information-container">
+              <div id="contact-shop">
+                <div id="contact-shop-icon-container">
+                  <BsChatLeftText id="contact-shop-icon" />
+                </div>
+                <div id="contact-shop-message">
+                  <h3>Contact shop for this product!</h3>
+                </div>
+              </div>
               <div id="routes">
                 <p>
                   Man - {listingData?.product.parentCategory} -{" "}
