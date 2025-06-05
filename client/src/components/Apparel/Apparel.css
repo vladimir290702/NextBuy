@@ -14,10 +14,9 @@
 
 #products-container {
   width: 75%;
-  padding-left: 2rem;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
 }
 
 #paging {
