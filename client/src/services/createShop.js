@@ -32,6 +32,8 @@ export const getShopData = async (id, page) => {
 };
 
 export const createListing = async (listingData, user) => {
+  console.log(user);
+
   try {
     const response = await fetch(
       `http://localhost:3000/create-listing?name=${user}`,
