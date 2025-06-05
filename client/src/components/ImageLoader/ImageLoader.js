@@ -55,7 +55,7 @@ const ImageLoader = ({ onImageUpload }) => {
         formData.append("image", file);
 
         try {
-          const res = await fetch("http://localhost:4000/upload", {
+          const res = await fetch("http://localhost:3000/upload", {
             method: "POST",
             body: formData,
           });
@@ -70,7 +70,6 @@ const ImageLoader = ({ onImageUpload }) => {
       }
     }
 
-    // Reset the input so the same file can be selected again if needed
     e.target.value = null;
   };
 
