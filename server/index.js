@@ -1,17 +1,44 @@
 const express = require("express");
 const connectDB = require("./database.js");
+const multer = require("multer");
+const { CloudinaryStorage } = require("multer-storage-cloudinary");
+const cloudinary = require("cloudinary").v2;
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
 const itemModel = require("./models/Item.js");
+
 const User = require("./models/User.js");
 const Shop = require("./models/Shop");
 const Listings = require("./models/Listings");
+const Image = require("./models/Image");
+
+//Znbn6YwoTp_SQW5YThljK4_062s
+//334356963411882
+//dldt9bjpg
+
 const app = express();
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
 connectDB();
+
+cloudinary.config({
+  cloud_name: "dldt9bjpg",
+  api_key: "334356963411882",
+  api_secret: "Znbn6YwoTp_SQW5YThljK4_062s",
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary,
+  params: {
+    folder: "image-uploader",
+    allowed_formats: ["jpg", "jpeg", "png"],
+  },
+});
+
+const upload = multer({ storage });
 
 const contactEmail = nodemailer.createTransport({
   service: "gmail",
@@ -26,6 +53,18 @@ contactEmail.verify((error) => {
     console.log(error);
   } else {
     console.log("Ready to send!");
+  }
+});
+
+app.post("/upload", upload.single("image"), async (req, res) => {
+  try {
+    const imageUrl = req.file.path;
+
+    const savedImage = await Image.create({ url: imageUrl });
+    res.status(200).json({ url: savedImage.url });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "Failed to upload image" });
   }
 });
 
