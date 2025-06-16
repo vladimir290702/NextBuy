@@ -13,10 +13,6 @@ const Shop = require("./models/Shop");
 const Listings = require("./models/Listings");
 const Image = require("./models/Image");
 
-//Znbn6YwoTp_SQW5YThljK4_062s
-//334356963411882
-//dldt9bjpg
-
 const app = express();
 
 app.use(express.json());
