@@ -4,8 +4,6 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { orderCheckout } from "../../services/custommerOperations";
 import { generateTrackingNumber } from "../../services/generateTrackingNumber";
 import { useUser } from "../../contexts/UserContext";
-import { loadStripe } from "@stripe/stripe-js";
-import { createPayment } from "../../services/payment";
 
 export default function Checkout() {
   const { state } = useLocation();
@@ -19,7 +17,15 @@ export default function Checkout() {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [zipcode, setZipcode] = useState(0);
-  const { subtotal, discountedPrice, cart } = state;
+
+  const fallbackData = JSON.parse(localStorage.getItem("checkoutData") || "{}");
+
+  const {
+    subtotal = fallbackData.subtotal || 0,
+    discountedPrice = fallbackData.discountedPrice || 0,
+    cart = fallbackData.cart || [],
+  } = state || {};
+
   const totalPrice = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
 
   const handleDeliveryOption = (e, option) => {
@@ -63,6 +69,26 @@ export default function Checkout() {
   const handleClick = async (e) => {
     e.preventDefault();
 
+    localStorage.setItem("checkoutData", JSON.stringify(state));
+
+    const checkoutData = {
+      shopOwner: cart[0].productName,
+      user: user.email,
+      subtotal,
+      totalPrice,
+      discountedPrice,
+      orderedProducts: cart,
+      firstName,
+      lastName,
+      street,
+      city,
+      zipcode,
+      dateOfOrder: new Date().toLocaleString(),
+      trackingNumber: generateTrackingNumber(),
+    };
+
+    const responseFromMongo = await orderCheckout(checkoutData);
+
     const response = await fetch(
       "http://localhost:5000/create-checkout-session",
       {
@@ -73,10 +99,10 @@ export default function Checkout() {
         body: JSON.stringify({ products: cart }),
       }
     );
-    console.log(response);
 
     const data = await response.json();
-    window.location.href = data.url; // Redirect to Stripe Checkout
+
+    window.location.href = data.url;
   };
 
   return (
