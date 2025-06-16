@@ -1,14 +1,13 @@
 import "./Checkout.css";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { orderCheckout } from "../../services/custommerOperations";
 import { generateTrackingNumber } from "../../services/generateTrackingNumber";
 import { useUser } from "../../contexts/UserContext";
 
 export default function Checkout() {
   const { state } = useLocation();
-  const { user, login } = useUser();
-  const navigation = useNavigate();
+  const { user } = useUser();
   const [deliveryPrice, setDeliveryPrice] = useState(5.99);
   const [selectedStandard, setSelectedStandard] = useState(false);
   const [selectedExpress, setSelectedExpress] = useState(false);
@@ -40,30 +39,6 @@ export default function Checkout() {
       setSelectedExpress(true);
       setDeliveryPrice(14.99);
     }
-  };
-
-  const handleCheckout = async () => {
-    const checkoutData = {
-      shopOwner: cart[0].productName,
-      user: user.email,
-      subtotal,
-      totalPrice,
-      discountedPrice,
-      orderedProducts: cart,
-      firstName,
-      lastName,
-      street,
-      city,
-      zipcode,
-      dateOfOrder: new Date().toLocaleString(),
-      trackingNumber: generateTrackingNumber(),
-    };
-
-    const response = await orderCheckout(checkoutData);
-
-    login(response?.addProductToOrders);
-
-    navigation("/");
   };
 
   const handleClick = async (e) => {

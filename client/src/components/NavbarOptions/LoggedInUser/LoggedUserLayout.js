@@ -27,7 +27,7 @@ export default function LoggedUserLayout() {
           <IoIosHeartEmpty />
           <div className={`dropdown ${isHovered ? "visible" : ""}`}>
             {user.favouriteProducts.map((product) => {
-              return <DropdownCart product={product} />;
+              return <DropdownCart product={product} key={product._id} />;
             })}
             {user.favouriteProducts.length > 3 ? (
               <div

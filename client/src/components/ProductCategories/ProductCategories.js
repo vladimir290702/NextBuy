@@ -7,7 +7,9 @@ export default function ProductCategories({ type }) {
   const location = useLocation();
   const [toggle, setToggle] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(null);
+  const [previousSelectedCategories, setPreviousSelectedCategories] = useState(
+    []
+  );
   const apparelType = location.state;
 
   const data = apparelType === "man" ? manApparel : womanApparel;
@@ -17,9 +19,16 @@ export default function ProductCategories({ type }) {
     e.preventDefault();
 
     setSelectedIndex(index);
-    setSelectedCategory(category);
+    setPreviousSelectedCategories((prevCategories) => [
+      ...prevCategories,
+      category,
+    ]);
 
-    if (category === selectedCategory) {
+    if (
+      category ===
+        previousSelectedCategories[previousSelectedCategories.length - 1] &&
+      toggle
+    ) {
       setToggle(false);
     } else {
       setToggle(true);
