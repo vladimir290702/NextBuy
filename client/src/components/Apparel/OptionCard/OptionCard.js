@@ -27,7 +27,8 @@ export default function OptionCard({ data, setDataToParent }) {
             <p>{data.category}</p>
           </div>
           <div className="apparel-toggle-function">
-            <p>{option ? "-" : "+"}</p>
+            <p className={`plus-icon ${option ? "hidden" : "visible"}`}>+</p>
+            <p className={`minus-icon ${option ? "visible" : "hidden"}`}>−</p>
           </div>
         </div>
         <div
@@ -39,7 +40,7 @@ export default function OptionCard({ data, setDataToParent }) {
         >
           {data.options?.map((item, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="sorting-option-container">
                 <p>{item}</p>
               </div>
             );

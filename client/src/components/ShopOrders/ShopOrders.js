@@ -78,62 +78,61 @@ export default function ShopOrders() {
                 Completed
               </div>
             </div>
-            {shopData?.orders.map((order) => {
-              return (
-                <div className="order-card" key={order.dateOfOrder}>
-                  <div className="order-creation-info-container">
-                    <p>Completed on: 16.01.2025</p>
-                  </div>
-                  <div className="order-product-details">
-                    <div className="order-product">
-                      <div className="order-product-information-container">
+            {shopData?.orders
+              .map((order) => {
+                return (
+                  <div className="order-card" key={order.dateOfOrder}>
+                    <div className="order-creation-info-container">
+                      <p>Ordered on: {order.dateOfOrder}</p>
+                    </div>
+                    <div className="order-product-details">
+                      <div className="order-product">
+                        <div className="order-product-information-container">
+                          <div>
+                            <p className="order-product-brand-name">
+                              {order.orderedProducts[0].productName}
+                            </p>
+                          </div>
+                          <div className="order-product-image-container">
+                            <img
+                              src={order.orderedProducts[0].images[0]}
+                              alt={order.orderedProducts[0].productName}
+                            />
+                          </div>
+                        </div>
+                        <div className="order-product-additional-details">
+                          <div>Quantity: 1</div>
+                          <div>Model: {order.orderedProducts[0].model}</div>
+                          <div>Size: {order.orderedProducts[0].size}</div>
+                        </div>
+                      </div>
+                      <div className="order-delivery">
                         <div>
-                          <p className="order-product-brand-name">
-                            {order.orderedProducts[0].productName}
+                          <p>Tracking Number: {order.trackingNumber}</p>
+                        </div>
+                        <div>
+                          <p>Ship to: </p>
+                        </div>
+                        <div>
+                          <p>
+                            {order.firstName} {order.lastName}
                           </p>
                         </div>
-                        <div className="order-product-image-container">
-                          <img
-                            src={order.orderedProducts[0].images[0]}
-                            alt={order.orderedProducts[0].productName}
-                          />
+                        <div>
+                          <p>{order.street}</p>
                         </div>
+                        <div>
+                          <p>
+                            {order.city} {order.zipcode}
+                          </p>
+                        </div>
+                        <div></div>
                       </div>
-                      <div className="order-product-additional-details">
-                        <div>Quantity: 1</div>
-                        <div>Model: {order.orderedProducts[0].model}</div>
-                        <div>Size: {order.orderedProducts[0].size}</div>
-                      </div>
-                    </div>
-                    <div className="order-delivery">
-                      <div>
-                        <p>Ordered: {order.dateOfOrder}</p>
-                      </div>
-                      <div>
-                        <p>Tracking Number: 0034043471769852</p>
-                      </div>
-                      <div>
-                        <p>Ship to: </p>
-                      </div>
-                      <div>
-                        <p>
-                          {order.firstName} {order.lastName}
-                        </p>
-                      </div>
-                      <div>
-                        <p>{order.street}</p>
-                      </div>
-                      <div>
-                        <p>
-                          {order.city} {order.zipcode}
-                        </p>
-                      </div>
-                      <div></div>
                     </div>
                   </div>
-                </div>
-              );
-            })}
+                );
+              })
+              .reverse()}
           </div>
           <div id="orders-sorting-container">
             <div

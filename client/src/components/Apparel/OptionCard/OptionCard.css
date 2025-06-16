@@ -10,18 +10,60 @@
 
 .apparel-toggle-function {
   margin-left: 3rem;
+  cursor: pointer;
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  z-index: 1;
 }
 
 .apparel-sorting-option-toggle p {
   margin: 0;
   font-size: 1.25rem;
   font-weight: 500;
+  text-align: center;
+  position: absolute;
+  line-height: 24px;
+  user-select: none;
+  transition: opacity 0.4s ease;
+}
+
+.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
 }
 
 .apparel-sorting-option-subcategories {
-  display: none;
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 .apparel-sorting-option-subcategories-active {
-  display: block;
+  max-height: 30rem;
+  opacity: 1;
+}
+
+.apparel-sorting-option-subcategories,
+.apparel-sorting-option-subcategories-active {
+  transition: max-height 0.4s ease, padding 0.3s ease, margin 0.3s ease,
+    opacity 0.3s ease;
+  overflow: hidden;
+}
+
+.sorting-option-container {
+  cursor: pointer;
+}
+
+.sorting-option-container p {
+  margin-top: 0;
 }

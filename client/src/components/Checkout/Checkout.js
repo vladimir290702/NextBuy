@@ -1,16 +1,13 @@
 import "./Checkout.css";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { orderCheckout } from "../../services/custommerOperations";
 import { generateTrackingNumber } from "../../services/generateTrackingNumber";
 import { useUser } from "../../contexts/UserContext";
-import { loadStripe } from "@stripe/stripe-js";
-import { createPayment } from "../../services/payment";
 
 export default function Checkout() {
   const { state } = useLocation();
-  const { user, login } = useUser();
-  const navigation = useNavigate();
+  const { user } = useUser();
   const [deliveryPrice, setDeliveryPrice] = useState(5.99);
   const [selectedStandard, setSelectedStandard] = useState(false);
   const [selectedExpress, setSelectedExpress] = useState(false);
@@ -19,7 +16,15 @@ export default function Checkout() {
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [zipcode, setZipcode] = useState(0);
-  const { subtotal, discountedPrice, cart } = state;
+
+  const fallbackData = JSON.parse(localStorage.getItem("checkoutData") || "{}");
+
+  const {
+    subtotal = fallbackData.subtotal || 0,
+    discountedPrice = fallbackData.discountedPrice || 0,
+    cart = fallbackData.cart || [],
+  } = state || {};
+
   const totalPrice = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
 
   const handleDeliveryOption = (e, option) => {
@@ -36,7 +41,11 @@ export default function Checkout() {
     }
   };
 
-  const handleCheckout = async () => {
+  const handleClick = async (e) => {
+    e.preventDefault();
+
+    localStorage.setItem("checkoutData", JSON.stringify(state));
+
     const checkoutData = {
       shopOwner: cart[0].productName,
       user: user.email,
@@ -53,15 +62,7 @@ export default function Checkout() {
       trackingNumber: generateTrackingNumber(),
     };
 
-    const response = await orderCheckout(checkoutData);
-
-    login(response?.addProductToOrders);
-
-    navigation("/");
-  };
-
-  const handleClick = async (e) => {
-    e.preventDefault();
+    const responseFromMongo = await orderCheckout(checkoutData);
 
     const response = await fetch(
       "http://localhost:5000/create-checkout-session",
@@ -73,10 +74,10 @@ export default function Checkout() {
         body: JSON.stringify({ products: cart }),
       }
     );
-    console.log(response);
 
     const data = await response.json();
-    window.location.href = data.url; // Redirect to Stripe Checkout
+
+    window.location.href = data.url;
   };
 
   return (
