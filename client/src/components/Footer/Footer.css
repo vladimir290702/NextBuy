@@ -1,0 +1,74 @@
+#footer-wrapper {
+  display: flex;
+  padding: 1rem 3rem;
+  background-color: #f5e6ca;
+  border-top: 3px solid #800020;
+}
+
+#promo {
+  padding: 1rem 2rem;
+  text-align: start;
+  border-right: 3px solid #800020;
+  border-collapse: collapse;
+}
+
+#promo ul {
+  list-style-type: none;
+}
+
+#promo-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+
+#btn-wrapper {
+  padding-top: 1rem;
+}
+
+.promo-item {
+  font-size: 18px;
+}
+
+.footer-icon {
+  margin-right: 0.8rem;
+}
+
+#footer-btn {
+  background-color: #800020;
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 0.8rem 3.5rem;
+  margin-top: 1rem;
+}
+
+#footer-btn:hover {
+  font-size: 1.2rem;
+  padding: 0.7rem 2.9rem;
+  transition: 0.8s;
+}
+
+#sections {
+  display: flex;
+  padding-top: 1.5rem;
+}
+
+.section {
+  margin: 0 1rem;
+}
+
+.section-option {
+  margin-top: 0.5rem;
+}
+
+.section ul {
+  list-style-type: none;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}

@@ -1,0 +1,33 @@
+.edit-listing-wrapper {
+  width: 17rem;
+  height: 20rem;
+  margin-bottom: 1rem;
+  position: relative;
+  cursor: pointer;
+}
+
+.edit-listing-wrapper img {
+  width: 100%;
+  height: 100%;
+  transition: 0.3s ease;
+}
+
+.edit-shop-listing-overlay {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 1.25rem;
+  font-weight: bold;
+  opacity: 0;
+  transition: 0.3s ease;
+}
+
+.edit-listing-wrapper:hover img {
+  filter: brightness(30%);
+}
+
+.edit-listing-wrapper:hover .edit-shop-listing-overlay {
+  opacity: 1;
+}

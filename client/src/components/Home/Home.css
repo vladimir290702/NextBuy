@@ -1,0 +1,50 @@
+#home-image-wrapper {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+    url(https://img.guess.com/image/upload/f_auto,q_auto/v1/EU/Asset/Europe/E-Commerce/00_splash_page/101224_splashpage/hero_Guess);
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#title-wrapper > h1 {
+  color: #fff;
+  font-size: 3.5rem;
+}
+
+#collection-selection-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.collection-button {
+  padding: 0.5rem 2rem;
+  margin: 0 1.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  background-color: #f5e6ca;
+  color: #001f54;
+  cursor: pointer;
+  border-bottom: 2px solid #f5e6ca;
+  border-right: 2px solid #f5e6ca;
+  border-top: 2px solid #f5e6ca;
+  border-left: 2px solid #f5e6ca;
+  border-radius: 5px;
+}
+
+.collection-button:hover {
+  background-color: #001f54;
+  border-color: #f5e6ca;
+  color: #f5e6ca;
+  transition: 0.8s;
+  border-color: #001f54;
+  border-bottom: 2px solid #001f54;
+  border-right: 2px solid #001f54;
+  border-top: 2px solid #001f54;
+  border-left: 2px solid #001f54;
+}

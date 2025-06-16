@@ -1,0 +1,27 @@
+#apparel-products {
+  padding: 1rem 2rem;
+  display: flex;
+}
+
+#apparel-results-container p {
+  color: gray;
+  font-size: 1rem;
+}
+
+#apparel-products-container {
+  width: 25%;
+}
+
+#products-container {
+  width: 75%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+#paging {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 2rem;
+}

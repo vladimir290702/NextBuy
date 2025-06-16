@@ -1,0 +1,191 @@
+#product-details-wrapper {
+  display: flex;
+  padding: 1rem;
+}
+
+#product-details-images-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  justify-content: space-between;
+}
+
+.product-details-image {
+  padding: 0.25rem;
+  flex: 1 1 calc(45%);
+}
+
+.product-details-image img {
+  width: 100%;
+}
+
+#product-details-information-container {
+  padding-top: 3rem;
+  padding-left: 3rem;
+  width: 40%;
+}
+
+#contact-shop {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+#contact-shop-icon-container {
+  font-size: 1.5rem;
+  color: #001f54;
+  cursor: pointer;
+}
+
+#contact-shop-message {
+  margin-left: 1.5rem;
+  color: #001f54;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateX(-1rem);
+  transition: opacity 0.3s ease, transform 0.5s ease;
+}
+
+#contact-shop-icon-container:hover + #contact-shop-message {
+  visibility: visible;
+  opacity: 1;
+  transform: translateX(0.5rem);
+}
+
+#routes {
+  color: grey;
+}
+
+#product-name p {
+  margin-bottom: 0;
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+#product-price p {
+  margin-top: 0;
+  font-size: 1.2rem;
+}
+
+#product-details-sizes-container {
+  display: flex;
+}
+
+.product-size-selected {
+  padding: 0.5rem 1.5rem;
+  border: 1px #001f54 solid;
+  background-color: #001f54;
+  color: #fff;
+}
+
+.product-size {
+  padding: 0.5rem 1.5rem;
+  border: 1px grey solid;
+}
+
+.product-size:hover {
+  border: 1px #001f54 solid;
+  background-color: #001f54;
+  color: #fff;
+}
+
+#product-details-quantity-container {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+#quantity-counter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+#product-details-quantity {
+  font-size: 1.2rem;
+  height: 2rem;
+  padding: 0 0.5rem;
+}
+
+.arrow-container {
+  border: 1px #001f54 solid;
+  padding: 0 0.5rem;
+}
+
+.quantity-arrow {
+  font-size: 1.2rem;
+  height: 2rem;
+}
+
+#product-details-buttons-container {
+  display: flex;
+  margin-top: 2rem;
+}
+
+#add-to-bag-button button {
+  background-color: #001f54;
+  color: #fff;
+  border: 2px #001f54 solid;
+  font-size: 1.25rem;
+  padding: 0.5rem 6.25rem;
+}
+
+#add-to-bag-button button:hover {
+  background-color: #fff;
+  color: #001f54;
+  border: 2px #001f54 solid;
+}
+
+#favourite-pressed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  margin-left: 0.5rem;
+  border: 2px #001f54 solid;
+  color: #001f54;
+}
+
+#favourite-not-pressed {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  padding: 0.5rem 2rem;
+  margin-left: 0.5rem;
+  border: 2px #001f54 solid;
+  color: #001f54;
+}
+
+#delivery-container {
+  margin-top: 1.5rem;
+}
+
+.delivery-info {
+  display: flex;
+  align-items: center;
+}
+
+#delivery-container p {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.delivery-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 1rem;
+  font-size: 1.5rem;
+}
+
+#details-container {
+  padding-right: 6rem;
+}
+
+#details-container p {
+  font-size: 1.25rem;
+}
