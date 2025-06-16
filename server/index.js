@@ -66,8 +66,9 @@ app.post("/create-checkout-session", async (req, res) => {
         currency: "usd",
         product_data: {
           name: item.productName,
+          images: item.images?.length ? [item.images[0]] : [],
         },
-        unit_amount: Math.round(item.price * 100),
+        unit_amount: Math.round(Number(item.price) * 100),
       },
       quantity: item.quantity,
     }));
@@ -82,7 +83,7 @@ app.post("/create-checkout-session", async (req, res) => {
 
     res.json({ url: session.url }); // ✅ ensure this
   } catch (error) {
-    console.error("Stripe session error:", session.url);
+    console.error("Stripe session error:", error);
     res.status(500).json({ error: error.message });
   }
 });
@@ -421,14 +422,6 @@ app.patch("/checkout", async (req, res) => {
     totalPrice,
     trackingNumber,
   };
-
-  const paymentIntent = await stripe.paymentIntents.create({
-    totalPrice,
-    currency: "usd",
-    automatic_payment_methods: { enabled: true },
-  });
-
-  res.send({ clientSecret: paymentIntent.client_secret });
 
   const newActivity = {
     type: "ordered",
