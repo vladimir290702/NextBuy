@@ -6,22 +6,19 @@ const cloudinary = require("cloudinary").v2;
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
-const itemModel = require("./models/Item.js");
 
+const itemModel = require("./models/Item.js");
 const User = require("./models/User.js");
 const Shop = require("./models/Shop");
 const Listings = require("./models/Listings");
 const Image = require("./models/Image");
-
-//Znbn6YwoTp_SQW5YThljK4_062s
-//334356963411882
-//dldt9bjpg
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cors());
+
 connectDB();
 
 cloudinary.config({
@@ -38,6 +35,10 @@ const storage = new CloudinaryStorage({
   },
 });
 
+const stripe = require("stripe")(
+  "sk_test_51RWevgCOJIs8rFk7aib3sn3k1ltrQD64EJE3Gu5UBUQxJNok1fuPOkxjtoMCn7N8jhKG1wy88nwesxy93FP1x4Xb00Cxmd0Jfi"
+);
+
 const upload = multer({ storage });
 
 const contactEmail = nodemailer.createTransport({
@@ -53,6 +54,36 @@ contactEmail.verify((error) => {
     console.log(error);
   } else {
     console.log("Ready to send!");
+  }
+});
+
+app.post("/create-checkout-session", async (req, res) => {
+  try {
+    const { products } = req.body;
+
+    const line_items = products.map((item) => ({
+      price_data: {
+        currency: "usd",
+        product_data: {
+          name: item.productName,
+        },
+        unit_amount: Math.round(item.price * 100),
+      },
+      quantity: item.quantity,
+    }));
+
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      mode: "payment",
+      line_items,
+      success_url: "http://localhost:3000/",
+      cancel_url: "http://localhost:3000/checkout",
+    });
+
+    res.json({ url: session.url }); // ✅ ensure this
+  } catch (error) {
+    console.error("Stripe session error:", session.url);
+    res.status(500).json({ error: error.message });
   }
 });
 
@@ -136,7 +167,6 @@ app.post("/login", async (req, res) => {
   return res.status(200).json({ user, status: true });
 });
 
-// POST /register
 app.post("/register", async (req, res) => {
   const {
     role,
@@ -159,7 +189,7 @@ app.post("/register", async (req, res) => {
     surname,
     age,
     gender: gender,
-    promocode, // In a real app, you should hash the password before storing it
+    promocode,
   });
 
   return res.status(200).json({ user });
@@ -206,10 +236,8 @@ app.get("/dashboard", async (req, res) => {
 
   const totalActivities = shop.activity.length;
 
-  // Reverse the array to get the latest activities first
   const sortedActivities = [...shop.activity].reverse();
 
-  // Apply pagination
   const endIndex = 0 + limit * page;
 
   const paginatedActivities = sortedActivities.slice(
@@ -225,11 +253,10 @@ app.patch("/create-listing", async (req, res) => {
 
   const shop = await Shop.find({ owner: name });
 
-  // Update only the "listings" field
   const updatedListings = await Shop.findOneAndUpdate(
-    { owner: name }, // Find the shop by owner email
-    { $push: { listings: req.body } }, // Add new object to listings array
-    { new: true } // Return the updated document
+    { owner: name },
+    { $push: { listings: req.body } },
+    { new: true }
   );
 
   const newListingToCollection = await Listings.create(req.body);
@@ -256,14 +283,14 @@ app.get("/product-details", async (req, res) => {
   const shop = await Shop.findOne({ name: product.productName });
 
   const editShopTotalViews = await Shop.findOneAndUpdate(
-    { name: product.productName }, // Find the shop by owner email
-    { $set: { views: shop.views + 1 } }, // Add new object to listings array
+    { name: product.productName },
+    { $set: { views: shop.views + 1 } },
     { new: true }
   );
 
   const editQuantity = await Listings.findOneAndUpdate(
     { _id: id },
-    { $set: { totalViews: product.totalViews + 1 } }, // Add new object to listings array
+    { $set: { totalViews: product.totalViews + 1 } },
     { new: true }
   );
 
@@ -288,9 +315,9 @@ app.patch("/product-details", async (req, res) => {
   );
 
   const result = await User.findOneAndUpdate(
-    { username: name.username }, // Find the shop by owner email
-    { $push: { favouriteProducts: product } }, // Add new object to listings array
-    { new: true } // Return the updated document
+    { username: name.username },
+    { $push: { favouriteProducts: product } },
+    { new: true }
   );
 
   return res.json({ result });
@@ -314,9 +341,9 @@ app.delete("/product-details", async (req, res) => {
   );
 
   const result = await User.findOneAndUpdate(
-    { username: name.username }, // Find the document by user ID
+    { username: name.username },
     { $pull: { favouriteProducts: { _id: product._id } } },
-    { new: true } // Remove the object with the matching ID from `bag`
+    { new: true }
   );
 
   return res.json({ result });
@@ -327,9 +354,9 @@ app.post("/product-details", async (req, res) => {
   const data = req.body;
 
   const updatedListings = await User.findOneAndUpdate(
-    { username: name }, // Find the shop by owner email
-    { $push: { bag: data } }, // Add new object to listings array
-    { new: true } // Return the updated document
+    { username: name },
+    { $push: { bag: data } },
+    { new: true }
   );
 
   return res.json({ updatedListings });
@@ -346,8 +373,8 @@ app.delete("/cart", async (req, res) => {
   const { productId, user } = req.body;
 
   const result = await User.updateOne(
-    { username: user }, // Find the document by user ID
-    { $pull: { bag: { id: productId } } } // Remove the object with the matching ID from `bag`
+    { username: user },
+    { $pull: { bag: { id: productId } } }
   );
 });
 
@@ -355,9 +382,9 @@ app.patch("/cart", async (req, res) => {
   const { productId, quantity, user } = req.body;
 
   const editQuantity = await User.findOneAndUpdate(
-    { username: user, "bag.id": productId }, // Find the shop by owner email
-    { $set: { "bag.$.quantity": quantity } }, // Add new object to listings array
-    { new: true } // Return the updated document
+    { username: user, "bag.id": productId },
+    { $set: { "bag.$.quantity": quantity } },
+    { new: true }
   );
 
   return res.json({ editQuantity });
@@ -395,6 +422,14 @@ app.patch("/checkout", async (req, res) => {
     trackingNumber,
   };
 
+  const paymentIntent = await stripe.paymentIntents.create({
+    totalPrice,
+    currency: "usd",
+    automatic_payment_methods: { enabled: true },
+  });
+
+  res.send({ clientSecret: paymentIntent.client_secret });
+
   const newActivity = {
     type: "ordered",
     order,
@@ -410,21 +445,21 @@ app.patch("/checkout", async (req, res) => {
   const emptiedBag = await User.updateMany({}, { $set: { bag: [] } });
 
   const addProductToOrders = await User.findOneAndUpdate(
-    { username: user }, // Find the shop by owner email
-    { $push: { orders: order } }, // Add new object to listings array
-    { new: true } // Return the updated document
+    { username: user },
+    { $push: { orders: order } },
+    { new: true }
   );
 
   const updatedRevenue = await Shop.findOneAndUpdate(
     { name: shopOwner },
-    { $set: { revenue: Number(shop[0].revenue) + Number(subtotal) } }, // Add new object to listings array
-    { new: true } // Return the updated document
+    { $set: { revenue: Number(shop[0].revenue) + Number(subtotal) } },
+    { new: true }
   );
 
   const addOrderToShop = await Shop.findOneAndUpdate(
-    { name: shopOwner }, // Find the shop by owner email
-    { $push: { orders: order } }, // Add new object to listings array
-    { new: true } // Return the updated document
+    { name: shopOwner },
+    { $push: { orders: order } },
+    { new: true }
   );
 
   const htmlContent = `
@@ -459,6 +494,6 @@ app.patch("/checkout", async (req, res) => {
   return res.json({ addProductToOrders });
 });
 
-app.listen(3000, () => {
+app.listen(5000, () => {
   console.log("app is running");
 });
