@@ -35,9 +35,7 @@ const storage = new CloudinaryStorage({
   },
 });
 
-const stripe = require("stripe")(
-  "sk_test_51RWevgCOJIs8rFk7aib3sn3k1ltrQD64EJE3Gu5UBUQxJNok1fuPOkxjtoMCn7N8jhKG1wy88nwesxy93FP1x4Xb00Cxmd0Jfi"
-);
+const stripe = require("stripe")(proccess.env.STRIPE_SK);
 
 const upload = multer({ storage });
 
