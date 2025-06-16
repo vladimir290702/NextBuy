@@ -1,0 +1,62 @@
+#finish-create-shop-container {
+  padding: 3rem 4rem;
+}
+
+#finish-create-shop-container > div {
+  margin-bottom: 2rem;
+}
+
+#finish-create-shop-options {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.finish-create-shop-option-container {
+  flex: 1 1 calc(22% - 10px);
+  padding: 1rem 0;
+  margin: 1rem;
+  background-color: #fff;
+  border: 2px #001f54 solid;
+  color: #001f54;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.finish-create-shop-option-container-selected {
+  flex: 1 1 calc(22% - 10px);
+  padding: 1rem 0;
+  margin: 1rem;
+  background-color: #001f54;
+  border: 2px #001f54 solid;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#finish-create-shop-button-wrapper button {
+  padding: 1rem 2rem;
+  width: 16rem;
+  background-color: #001f54;
+  color: #fff;
+  border: 2px #fff solid;
+  font-size: 1rem;
+}
+
+#finish-create-shop-button-wrapper button:hover {
+  padding: 1rem 2rem;
+  width: 16rem;
+  background-color: #fff;
+  color: #001f54;
+  border: 2px #001f54 solid;
+  font-size: 1rem;
+}
+
+.finish-create-shop-input input {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0;
+  padding-left: 0.5rem;
+  width: 15rem;
+}

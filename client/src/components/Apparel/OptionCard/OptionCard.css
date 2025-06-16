@@ -1,0 +1,27 @@
+.apparel-sorting-option {
+  border-bottom: 1px grey solid;
+}
+
+.apparel-sorting-option-toggle {
+  display: flex;
+  justify-content: space-between;
+  margin: 1rem 0;
+}
+
+.apparel-toggle-function {
+  margin-left: 3rem;
+}
+
+.apparel-sorting-option-toggle p {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 500;
+}
+
+.apparel-sorting-option-subcategories {
+  display: none;
+}
+
+.apparel-sorting-option-subcategories-active {
+  display: block;
+}

@@ -1,0 +1,15 @@
+#favourite-products-main-container {
+  padding: 1rem 2rem;
+}
+
+#favoruite-products-title-container {
+  border-bottom: 1px #001f54 solid;
+  margin-bottom: 2rem;
+}
+
+#favourite-products-card-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  max-width: 100vw;
+}

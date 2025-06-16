@@ -1,0 +1,132 @@
+#dashboard-shop-wrapper {
+  padding: 2rem 4rem;
+}
+
+#dashboard-shop-data {
+  display: flex;
+  justify-content: space-between;
+}
+
+#dashboard-shop-data-main-info {
+  display: flex;
+}
+
+#dashboard-shop-data-image-container {
+  width: 4rem;
+  height: 3.5rem;
+  border: 1px grey solid;
+  border-radius: 5px;
+}
+
+#dashboard-shop-data-image-container img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+#dashboard-shop-data-name-container p {
+  margin: 0 1rem;
+}
+
+#dashboard-shop-data-name-container {
+  font-size: 1.5rem;
+  color: #001f54;
+}
+
+#dashboard-shop-default-info {
+  font-size: 1rem;
+  color: grey;
+}
+
+#dashboard-messages {
+  font-size: 2rem;
+  color: #001f54;
+}
+
+#dashboard-messages:hover {
+  transform: scale(1.2) translateY(0.3rem);
+  transition: ease-in-out 0.3s;
+  cursor: pointer;
+}
+
+#dashboard-revenue-counter-container {
+  display: flex;
+  align-items: center;
+}
+
+#dashboard-shop-info-boxes-container {
+  display: flex;
+  border: 1px grey solid;
+  margin-top: 2rem;
+}
+
+.dashboard-shop-info-box-container {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 calc(25%);
+  justify-content: center;
+  align-items: center;
+  border: 1px grey solid;
+  padding: 1rem 2rem;
+  color: #001f54;
+}
+
+.dashboard-shop-info-box-title p {
+  font-size: 0.75rem;
+  margin: 0;
+  color: gray;
+}
+
+#dashboard-shop-info-box-counter p {
+  font-size: 2rem;
+  font-weight: 500;
+  margin: 0.25rem;
+}
+
+#dashboard-shop-info-box-currency-counter {
+  display: flex;
+  justify-content: space-around;
+}
+
+#dashboard-shop-info-box-currency-counter p {
+  margin: 0;
+}
+
+#dashboard-button-wrapper {
+  margin-top: 1rem;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 2s ease-out, visibility 0s 2s;
+}
+
+#dashboard-button-wrapper {
+  opacity: 0; /* Start fading out */
+  visibility: hidden;
+}
+
+#dashboard-button-wrapper-visible button {
+  display: inline-flex; /* Aligns children in a row */
+  align-items: center;
+  background-color: #001f54;
+  color: #fff;
+  font-size: 1rem;
+  border: 2px #001f54 solid;
+  padding: 0.5rem 3rem;
+}
+
+#dashboard-button-wrapper-visible button:hover {
+  background-color: #fff;
+  color: #001f54;
+  border: 2px #001f54 solid;
+  padding: 0.5rem 3rem;
+}
+
+#dashboard-button-plus {
+  margin-right: 8px; /* Space between icon and text */
+  font-size: inherit; /* Inherits font size from parent */
+  line-height: 1; /* Ensures proper alignment */
+}
+
+#dashboard-button-text {
+  line-height: 1; /* Ensures proper alignment */
+}

@@ -1,0 +1,8 @@
+.product-card {
+  flex: 1 1 calc(20%);
+  padding: 0 1rem;
+}
+
+.product-image-container img {
+  width: 100%;
+}

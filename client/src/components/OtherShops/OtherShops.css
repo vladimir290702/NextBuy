@@ -1,0 +1,50 @@
+#other-shops-wrapper {
+  padding: 2rem 3rem;
+}
+
+.shop-button button {
+  width: 100%;
+  background-color: #001f54;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  margin-top: 0.5rem;
+}
+
+.search-bar {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+.search-form {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.search-input {
+  flex: 1; /* Allows the input to take up available space */
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 16px;
+}
+
+.search-button {
+  background-color: #001f54;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: #001f54;
+}
+
+.search-icon {
+  font-size: 18px; /* Icon size */
+}
