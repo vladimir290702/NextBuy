@@ -10,6 +10,8 @@ export default function LoggedUserLayout() {
   const { user, logout } = useUser();
   const navigate = useNavigate();
   const [isHovered, setIsHovered] = useState(false);
+  const displayableProductsLength =
+    user.favouriteProducts.length - (user.favouriteProducts.length - 2);
 
   const handeLogout = () => {
     logout(null);
@@ -26,7 +28,7 @@ export default function LoggedUserLayout() {
         <Link className="nav-link" to="/favourite-products">
           <IoIosHeartEmpty />
           <div className={`dropdown ${isHovered ? "visible" : ""}`}>
-            {user.favouriteProducts.map((product) => {
+            {user.favouriteProducts.slice(0, 2).map((product) => {
               return <DropdownCart product={product} key={product._id} />;
             })}
             {user.favouriteProducts.length > 3 ? (
@@ -34,7 +36,10 @@ export default function LoggedUserLayout() {
                 id="favourite-products-count-container"
                 onClick={() => navigate("/favourite-products")}
               >
-                <h3>See {user.favouriteProducts.length - 3} products </h3>
+                <h3>
+                  See {displayableProductsLength} more{" "}
+                  {displayableProductsLength > 1 ? "products" : "product"}
+                </h3>
               </div>
             ) : null}
           </div>

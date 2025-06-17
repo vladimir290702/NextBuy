@@ -15,6 +15,7 @@
   width: 1.5rem;
   height: 1.5rem;
   z-index: 1;
+  color: var(--accent-color);
 }
 
 .apparel-sorting-option-toggle p {

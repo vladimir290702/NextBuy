@@ -4,18 +4,19 @@
   right: 0.25rem;
   width: 25rem;
   background: white;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 4px 8px var(--black);
+  color: var(--accent-color);
   border-radius: 8px;
   padding: 10px;
   opacity: 0;
-  transform: translateY(-10px);
+  transform: translateY(-20px);
   transition: opacity 0.3s ease, transform 0.3s ease;
   pointer-events: none; /* Prevent interaction when hidden */
 }
 
 .dropdown.visible {
   opacity: 1;
-  transform: translateY(3.5rem);
+  transform: translateY(4rem);
   pointer-events: auto;
 }
 

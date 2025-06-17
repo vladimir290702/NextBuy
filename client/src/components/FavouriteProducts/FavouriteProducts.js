@@ -14,7 +14,7 @@ export default function FavouriteProducts() {
       <div id="favourite-products-card-wrapper">
         {user.favouriteProducts.length > 0 ? (
           user.favouriteProducts.map((product) => (
-            <FavouriteProductCard product={product} />
+            <FavouriteProductCard product={product} key={product._id} />
           ))
         ) : (
           <h2>No favourite products yet!</h2>

@@ -1,14 +1,15 @@
 #footer-wrapper {
   display: flex;
-  padding: 1rem 3rem;
-  background-color: #f5e6ca;
-  border-top: 3px solid #800020;
+  padding: 1rem 2.5rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border-top: 3px solid var(--accent-color);
 }
 
 #promo {
   padding: 1rem 2rem;
   text-align: start;
-  border-right: 3px solid #800020;
+  border-right: 3px solid var(--accent-color);
   border-collapse: collapse;
 }
 
@@ -35,8 +36,8 @@
 }
 
 #footer-btn {
-  background-color: #800020;
-  color: #fff;
+  background-color: var(--accent-color);
+  color: var(--primary-color);
   font-size: 1rem;
   font-weight: 500;
   text-decoration: none;

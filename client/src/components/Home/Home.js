@@ -1,6 +1,5 @@
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import EmailSubscribtion from "../EmailSubscription/EmailSubscription";
 
 export default function Home() {
@@ -14,25 +13,20 @@ export default function Home() {
   return (
     <>
       <div id="home-image-wrapper">
-        <div id="title-wrapper">
-          <h1>NEXT BUY</h1>
-        </div>
         <div id="collection-selection-buttons">
-          <div>
-            <Link
-              className="collection-button"
-              onClick={(e) => handleApparel(e, "man")}
-            >
-              FOR HIM
-            </Link>
+          <div
+            onClick={(e) => handleApparel(e, "woman")}
+            id="collection-man-section"
+          >
+            <div className="apparel-picture-overlay"></div>
+            <button class="apparel-collection-button">Shop Men's</button>
           </div>
-          <div>
-            <Link
-              className="collection-button"
-              onClick={(e) => handleApparel(e, "woman")}
-            >
-              FOR HER
-            </Link>
+          <div
+            onClick={(e) => handleApparel(e, "woman")}
+            id="collection-woman-section"
+          >
+            <div className="apparel-picture-overlay"></div>
+            <button class="apparel-collection-button">Shop Women's</button>
           </div>
         </div>
       </div>

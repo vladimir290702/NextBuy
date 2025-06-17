@@ -1,7 +1,5 @@
 import "./Navbar.css";
-import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../public/images/logo.png";
 import GuestUserLayout from "../NavbarOptions/GuestUser/GuestUserLayout";
 import LoggedUserLayout from "../NavbarOptions/LoggedInUser/LoggedUserLayout";
 import ShopOwner from "../NavbarOptions/ShopOwner/ShopOwnerLayout";
@@ -25,7 +23,7 @@ export default function Navbar() {
     <div id="navbar">
       <div id="logo">
         <Link id="logo-wrapper" to="/">
-          <img src={logo} to="/" alt="Logo" />
+          <h1>NextBuy</h1>
         </Link>
       </div>
 

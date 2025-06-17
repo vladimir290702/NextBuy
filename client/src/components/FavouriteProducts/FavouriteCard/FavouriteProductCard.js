@@ -16,7 +16,11 @@ export default function FavouriteProductCard({ product }) {
           <p>Color: {product.color}</p>
           <p>Avalible sizes: {product.sizes.join(" / ")}</p>
           <div className="favourite-product-description">
-            <p>{product.description}</p>
+            <p>
+              {product.description.length > 350
+                ? product.description.slice(0, 350) + "..."
+                : product.description}
+            </p>
           </div>
         </div>
       </div>

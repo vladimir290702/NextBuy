@@ -9,7 +9,7 @@
 
 #apparel-products-container {
   width: 25%;
-  border-right: 1px lightgray solid;
+  border-right: 1px var(--secondary-color) solid;
   padding: 1rem 2rem;
 }
 
@@ -17,8 +17,7 @@
   width: 75%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-  padding: 1rem 2rem;
+  padding: 3rem 2rem;
 }
 
 #paging {
