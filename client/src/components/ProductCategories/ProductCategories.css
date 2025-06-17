@@ -1,7 +1,7 @@
 #apparel-wrapper {
   display: flex;
   padding-left: 1rem;
-  border-bottom: 1px #000 solid;
+  border-bottom: 1px lightgray solid;
   /* position: fixed;*/
 }
 
@@ -12,7 +12,7 @@
 }
 
 .item-selected {
-  border-bottom: #000 solid;
+  border-bottom: 3px #001f54 solid;
   cursor: pointer;
   margin: 0 1.5rem;
 }
@@ -26,7 +26,7 @@
 }
 
 .item:hover {
-  border-bottom: #000 solid;
+  border-bottom: 1px #001f54 solid;
   transition: 2s ease;
 }
 
@@ -42,6 +42,7 @@
   z-index: 10;
   border-top: 1px #000 solid;
   padding-left: 2rem;
+  border-bottom: 2px #001f54 solid;
 }
 
 .man-apparel-item {
