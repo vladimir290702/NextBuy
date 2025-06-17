@@ -25,15 +25,15 @@
 }
 
 #visit-shop-listings {
-  display: flex;
-  justify-content: space-between;
-  flex-direction: 1 1 calc(20%);
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 1;
   margin-bottom: 5rem;
   margin-top: 2rem;
 }
 
 #visit-shop-information {
-  border: 2px #001f54 solid;
+  border: 2px var(--primary-color) solid;
   margin-top: 0.5rem;
 }
 
@@ -51,5 +51,5 @@
 }
 
 .visit-shop-information-details .option:last-child {
-  color: #001f54;
+  color: var(--primary-color);
 }

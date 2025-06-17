@@ -1,5 +1,15 @@
+#shop-profile-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+#selected-shop-category {
+  width: 80%;
+}
+
 #dashboard-shop-wrapper {
-  padding: 2rem 4rem;
+  padding: 2rem 5rem;
 }
 
 #dashboard-shop-data {
@@ -30,7 +40,7 @@
 
 #dashboard-shop-data-name-container {
   font-size: 1.5rem;
-  color: #001f54;
+  color: var(--accent-color);
 }
 
 #dashboard-shop-default-info {
@@ -68,7 +78,7 @@
   align-items: center;
   border: 1px grey solid;
   padding: 1rem 2rem;
-  color: #001f54;
+  color: var(--primary-color);
 }
 
 .dashboard-shop-info-box-title p {
@@ -107,17 +117,17 @@
 #dashboard-button-wrapper-visible button {
   display: inline-flex; /* Aligns children in a row */
   align-items: center;
-  background-color: #001f54;
+  background-color: var(--primary-color);
   color: #fff;
   font-size: 1rem;
-  border: 2px #001f54 solid;
+  border: 2px var(--accent-color) solid;
   padding: 0.5rem 3rem;
 }
 
 #dashboard-button-wrapper-visible button:hover {
   background-color: #fff;
-  color: #001f54;
-  border: 2px #001f54 solid;
+  color: var(--primary-color);
+  border: 2px var(--accent-color) solid;
   padding: 0.5rem 3rem;
 }
 

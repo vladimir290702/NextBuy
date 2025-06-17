@@ -10,12 +10,12 @@
 
 #edit-listings-title-container h2 {
   margin: 0;
-  color: #001f54;
+  color: var(--primary-color);
 }
 
 #edit-listings-title-container {
   width: 100%;
-  border-bottom: 2px #001f54 solid;
+  border-bottom: 2px var(--accent-color) solid;
 }
 
 #all-shop-listings {
@@ -45,9 +45,9 @@
 
 .search-button {
   padding: 0.75rem 1.5rem; /* Padding for the button */
-  background-color: #001f54; /* Button background color */
+  background-color: var(--primary-color); /* Button background color */
   color: white; /* Button text color */
-  border: 1px #001f54 solid; /* Remove default border */
+  border: 1px var(--accent-color) solid; /* Remove default border */
   cursor: pointer; /* Change cursor to pointer on hover */
 }
 
@@ -59,7 +59,7 @@
 .sort-label {
   margin-right: 15px; /* Space between label and select */
   font-weight: bold; /* Make the label bold */
-  color: #001f54; /* Darker text color */
+  color: var(--primary-color); /* Darker text color */
   font-size: 16px; /* Font size for the label */
 }
 
@@ -74,7 +74,7 @@
 }
 
 .sort-select:hover {
-  border-color: #001f54; /* Change border color on hover */
+  border-color: var(--primary-color); /* Change border color on hover */
   background-color: #f0f8ff; /* Light blue background on hover */
 }
 

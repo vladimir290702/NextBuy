@@ -1,6 +1,7 @@
 .visit-shop-listing {
-  width: 15rem;
+  width: 14rem;
   height: 17rem;
+  margin-bottom: 5rem;
 }
 
 .visit-shop-listing img {
@@ -9,7 +10,7 @@
 }
 
 .visit-shop-listing p {
-  color: #001f54;
+  color: var(--primary-color);
   font-weight: 500;
   font-size: 1.25rem;
   margin-top: 0.25rem;

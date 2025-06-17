@@ -11,11 +11,11 @@ export default function ActivityCard({ activity }) {
   let activityText = "";
 
   if (activity.type === "favourited") {
-    activityText = `${activity.order.firstName} ${activity.order.lastName} favourited your item: ${activity.order.productName} ${activity.order.model}`;
+    activityText = `${activity.firstName} ${activity.lastName} favourited your item: ${activity.item.productName} ${activity.item.model}`;
   } else if (activity.type === "removed") {
-    activityText = `${activity.order.firstName} ${activity.order.lastName} removed your item from favourites: ${activity.order.productName} ${activity.order.model}`;
+    activityText = `${activity.firstName} ${activity.lastName} removed your item from favourites: ${activity.item.productName} ${activity.item.model}`;
   } else if (activity.type === "ordered") {
-    activityText = `${activity.order.user} ordered ${
+    activityText = `${activity.order.email} ordered ${
       activity.order.orderedProducts.length
     } ${activity.order.orderedProducts.length > 1 ? "items" : "item"}`;
   }
@@ -49,7 +49,7 @@ export default function ActivityCard({ activity }) {
             src={
               activity.type === "ordered"
                 ? "https://www.shutterstock.com/image-vector/shopping-cart-check-mark-icon-600nw-1708233319.jpg"
-                : activity.order.orderedProducts.images[0]
+                : activity.item.images[0]
             }
             alt=""
           />
@@ -66,7 +66,7 @@ export default function ActivityCard({ activity }) {
             </div>
             <div className="dashboard-shop-activity-date">
               <p>
-                {activity.order.dateOfOrder} <Icon />
+                {activity?.item?.date} <Icon />
               </p>
             </div>
           </div>
