@@ -3,11 +3,9 @@ import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 import OtherShopCard from "./OtherShopCard/OtherShopCard";
 import { useState, useEffect } from "react";
 import { getAllShopData } from "../../services/createShop";
-import Paging from "../Paging/Paging";
 
 export default function OtherShops() {
   const [data, setData] = useState(null);
-  const [selectedPage, setSelectedPage] = useState(1);
 
   useEffect(() => {
     const fetchedShopData = async () => {
@@ -22,12 +20,6 @@ export default function OtherShops() {
     };
     fetchedShopData();
   }, []);
-
-  const handleSelectPage = (e, page) => {
-    e.preventDefault();
-
-    setSelectedPage(page);
-  };
 
   return (
     <div id="shop-profile-wrapper">
@@ -44,7 +36,7 @@ export default function OtherShops() {
                   placeholder="Search for products, brands, or categories..."
                   aria-label="Search"
                 />
-                <button type="submit" className="search-button">
+                <button type="submit" className="other-shops-search-button">
                   <span className="search-icon">🔍</span>
                 </button>
               </form>
@@ -56,7 +48,6 @@ export default function OtherShops() {
             })}
           </div>
         </div>
-        <Paging page={selectedPage} selectPage={handleSelectPage} />
       </div>
     </div>
   );

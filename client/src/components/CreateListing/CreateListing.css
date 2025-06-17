@@ -18,12 +18,13 @@
 }
 
 #add-listing-category-options select {
-  background-color: #001f54;
+  background-color: var(--accent-color);
   color: #fff;
   padding: 0.5rem 2rem;
   font-size: 1rem;
   margin-top: 0.5rem;
   border-radius: 5px;
+  border: 1px var(--primary-color) solid;
 }
 
 #productMainData {
@@ -53,7 +54,7 @@
 
 #add-listing-category-options select option {
   background-color: #fff;
-  color: #001f54;
+  color: var(--accent-color);
 }
 
 .add-listing-category-input input {
@@ -68,7 +69,7 @@
 }
 
 #add-listing-gender-man {
-  border: 2px #001f54 solid;
+  border: 2px var(--accent-color) solid;
   border-right-width: 1px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -76,7 +77,7 @@
 }
 
 #add-listing-gender-woman {
-  border: 2px #001f54 solid;
+  border: 2px var(--accent-color) solid;
   border-top-right-radius: 10px;
   border-left-width: 1px;
 
@@ -86,8 +87,8 @@
 
 #add-listing-gender-man-active {
   color: #fff;
-  background-color: #001f54;
-  border: 2px #001f54 solid;
+  background-color: var(--accent-color);
+  border: 2px var(--accent-color) solid;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
   padding: 0.5rem 2rem;
@@ -95,8 +96,8 @@
 
 #add-listing-gender-woman-active {
   color: #fff;
-  background-color: #001f54;
-  border: 2px #001f54 solid;
+  background-color: var(--accent-color);
+  border: 2px var(--accent-color) solid;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   padding: 0.5rem 2rem;
@@ -129,8 +130,8 @@
   padding: 0.5rem 0;
   font-weight: 500;
   text-align: center;
-  border: 1px #001f54 solid;
-  background-color: #001f54;
+  border: 1px var(--primary-color) solid;
+  background-color: var(--accent-color);
   color: #fff;
 }
 
@@ -139,7 +140,7 @@
   padding: 0.5rem 0;
   font-weight: 500;
   text-align: center;
-  border: 1px grey solid;
+  border: 1px var(--primary-color) solid;
 }
 
 #add-listing-discription {
@@ -163,8 +164,8 @@
 }
 
 #createProductButton button {
-  border: 2px #001f54 solid;
-  background-color: #001f54;
+  border: 2px var(--accent-color) solid;
+  background-color: var(--primary-color);
   color: #fff;
   padding: 0.5rem 7rem;
   font-size: 1.2rem;
@@ -173,5 +174,5 @@
 
 #createProductButton button:hover {
   background-color: #fff;
-  color: #001f54;
+  color: var(--accent-color);
 }

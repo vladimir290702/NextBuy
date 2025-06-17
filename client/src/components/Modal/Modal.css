@@ -46,7 +46,7 @@
 }
 
 .close-btn:hover {
-  color: #001f54;
+  color: var(--primary-color);
 }
 
 /* Modal Text */

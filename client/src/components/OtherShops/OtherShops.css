@@ -4,9 +4,10 @@
 
 .shop-button button {
   width: 100%;
-  background-color: #001f54;
+  background-color: var(--primary-color);
   color: #fff;
   padding: 0.5rem 1rem;
+  border: 2px var(--accent-color) solid;
   margin-top: 0.5rem;
 }
 
@@ -26,25 +27,20 @@
 }
 
 .search-input {
-  flex: 1; /* Allows the input to take up available space */
+  flex: 1;
   padding: 10px;
   border: none;
   outline: none;
   font-size: 16px;
 }
 
-.search-button {
-  background-color: #001f54;
+.other-shops-search-button {
+  background-color: var(--primary-color);
   color: #fff;
-  border: none;
   padding: 10px 20px;
   cursor: pointer;
 }
 
-.search-button:hover {
-  background-color: #001f54;
-}
-
 .search-icon {
-  font-size: 18px; /* Icon size */
+  font-size: 18px;
 }

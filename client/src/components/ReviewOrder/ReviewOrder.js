@@ -17,7 +17,7 @@ export default function ReviewOrder({ item }) {
   useEffect(() => {
     setTimeout(() => {
       setAnimate(true);
-    }, 100); // Small delay to start animation smoothly
+    }, 100);
   }, []);
 
   const handleSaveChangesClick = (e) => {
@@ -60,11 +60,11 @@ export default function ReviewOrder({ item }) {
             <h2>Ship to:</h2>
             <div id="review-order-address-information">
               <p>
-                {state.order.firstName} {state.order.lastName}
+                {state.firstName} {state.lastName}
               </p>
-              <p>{state.order.street}</p>
+              <p>{state.street}</p>
               <p>
-                {state.order.city} {state.order.zipcode}
+                {state.city} {state.zipcode}
               </p>
             </div>
           </div>
@@ -84,37 +84,33 @@ export default function ReviewOrder({ item }) {
         <div id="review-order-images-container">
           <div>
             <h3>Item(s):</h3>
-            {state.order.orderedProducts.map((product) => {
-              return (
-                <div
-                  className="review-order-image-container"
-                  key={product.model}
-                >
-                  <div>
-                    <img src={product.images[0]} alt={product.productName} />
-                  </div>
-                  <div className="review-order-product-description">
-                    <h1 className="review-order-product-model">
-                      {product.productName} {product.model}
-                    </h1>
-                    <p>Category: {product.category}</p>
-                    <p>Price: ${product.price}</p>
-                    <p>Qantity: {product.quantity}</p>
-                    <p>Total: ${product.price * product.quantity}</p>
-                    <p>Arrives: Fri, 19/04 - Mon, 21/04</p>
-                  </div>
-                </div>
-              );
-            })}
+            <div
+              className="review-order-image-container"
+              key={state.item.model}
+            >
+              <div>
+                <img src={state.item.images[0]} alt={state.item.productName} />
+              </div>
+              <div className="review-order-product-description">
+                <h1 className="review-order-product-model">
+                  {state.item.productName} {state.item.model}
+                </h1>
+                <p>Category: {state.item.category}</p>
+                <p>Price: ${state.item.price}</p>
+                <p>Qantity: {state.item.quantity}</p>
+                <p>Total: ${state.item.price * state.item.quantity}</p>
+                <p>Arrives: Fri, 19/04 - Mon, 21/04</p>
+              </div>
+            </div>
           </div>
         </div>
         <div id="review-order-contact-custommer-container">
           <div id="review-order-contact-custommer">
             <h2>Contact custommer:</h2>
 
-            <p>Email: {state.order.user}</p>
+            <p>Email: {state.email}</p>
             <p>
-              Name: {state.order.firstName} {state.order.lastName}
+              Name: {state.firstName} {state.lastName}
             </p>
           </div>
         </div>
