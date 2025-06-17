@@ -1,14 +1,15 @@
 #navbar {
   display: flex;
   justify-content: space-between;
-  background-color: #f5e6ca;
+  background-color: var(--primary-color);
   padding: 0.5rem 2rem;
-  border-bottom: 3px solid #800020;
+  border-bottom: 3px solid var(--accent-color);
 }
 
-#logo #logo-wrapper img {
-  width: 70px;
-  height: 70px;
+#logo #logo-wrapper h1 {
+  font-family: "Unique", sans-serif;
+  color: var(--accent-color);
+  text-decoration: none;
 }
 
 #options {

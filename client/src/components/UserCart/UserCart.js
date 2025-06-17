@@ -4,30 +4,48 @@ import { useNavigate } from "react-router-dom";
 import { useUser } from "../../contexts/UserContext";
 import { getUserCart } from "../../services/custommerOperations";
 import Product from "./Product/Product";
+import { RingLoader } from "react-spinners";
 
 export default function UserCart() {
   const navigate = useNavigate();
   const { user } = useUser();
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(
+    JSON.parse(localStorage.getItem("Bag")) || null
+  );
   const [promocode, setPromocode] = useState("");
   const [discount, setDiscount] = useState(1);
   const [subtotal, setSubtotal] = useState(0);
   const deliveryPrice = 5.99;
   const discountedPrice = (subtotal * (1 - discount)).toFixed(2);
   const total = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
+  const [loading, setLoading] = useState(cart ? false : true);
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getUserCart(user.username);
+      if (loading) {
+        try {
+          setLoading(true);
 
-      setCart(response.user.bag);
+          const response = await getUserCart(user.username);
 
-      let allPrices = 0;
-      if (cart) {
-        for (const product of response.user.bag) {
-          allPrices += Number(product.price) * Number(product.quantity);
+          let allPrices = 0;
+          if (cart) {
+            for (const product of response.user.bag) {
+              allPrices += Number(product.price) * Number(product.quantity);
 
-          setSubtotal(allPrices);
+              setSubtotal(allPrices);
+            }
+          }
+
+          localStorage.setItem("Bag", JSON.stringify(response.user.bag));
+
+          setTimeout(() => {
+            setCart(response.user.bag);
+            setLoading(false);
+          }, 1000);
+        } catch (err) {
+          console.error("Error fetching products:", err);
+          setLoading(false);
         }
       }
     };
@@ -84,23 +102,29 @@ export default function UserCart() {
         <div className="cart-section">
           <h3>Your Shopping Cart</h3>
         </div>
-        {cart.length === 0 ? (
-          <div id="no-products-content">
-            <h2>You have no products in cart...</h2>
-            <button onClick={(e) => handleNavigate(e)}>Shop now!</button>
-          </div>
+        {!loading && cart.length !== 0 ? (
+          cart.length === 0 ? (
+            <div id="no-products-content">
+              <h2>You have no products in cart...</h2>
+              <button onClick={(e) => handleNavigate(e)}>Shop now!</button>
+            </div>
+          ) : (
+            cart.map((product) => (
+              <Product
+                key={product.id}
+                product={product}
+                username={user.username}
+                sendDataToParent={handleBagSize}
+                changeQuantity={handleQuantityChange}
+              />
+            ))
+          )
         ) : (
-          cart.map((product) => (
-            <Product
-              key={product.id}
-              product={product}
-              username={user.username}
-              sendDataToParent={handleBagSize}
-              changeQuantity={handleQuantityChange}
-            />
-          ))
+          <div id="apparel-loader-container">
+            <RingLoader id="apparel-loader" color="#001f54" size={150} />
+            <h2>Wait a second, the products are ariving!</h2>
+          </div>
         )}
-        {}
       </div>
       <div id="cart-overview">
         <div className="cart-section">
@@ -156,7 +180,7 @@ export default function UserCart() {
         <div id="overview-total-items">
           <div>
             <p>
-              Total ({cart.length} {cart.length > 1 ? "items" : "item"})
+              Total ({cart?.length} {cart?.length > 1 ? "items" : "item"})
             </p>
           </div>
           <div className="overview-prices-container">

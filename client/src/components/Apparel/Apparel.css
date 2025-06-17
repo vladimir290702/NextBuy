@@ -1,5 +1,4 @@
 #apparel-products {
-  padding: 1rem 2rem;
   display: flex;
 }
 
@@ -10,13 +9,15 @@
 
 #apparel-products-container {
   width: 25%;
+  border-right: 1px var(--secondary-color) solid;
+  padding: 1rem 2rem;
 }
 
 #products-container {
   width: 75%;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
+  padding: 3rem 2rem;
 }
 
 #paging {
@@ -24,4 +25,18 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 2rem;
+}
+
+#apparel-loader-container {
+  width: 75%;
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+#apparel-loader-container h2 {
+  margin-top: 5rem;
 }

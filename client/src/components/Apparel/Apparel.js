@@ -3,22 +3,39 @@ import { useState, useEffect } from "react";
 import { sortData } from "../../data/apparelSortData";
 import OptionCard from "./OptionCard/OptionCard";
 import ProductCard from "./ProductCard/ProductCard";
-import Paging from "../Paging/Paging";
 import ProductCategories from "../ProductCategories/ProductCategories";
 import { getListingsData } from "../../services/createShop";
+import { RingLoader } from "react-spinners";
 
 export default function Apparel() {
-  const [selectedPage, setSelectedPage] = useState(1);
   const [sortToggle, setSortToggle] = useState(false);
-  const [listings, setListings] = useState(null);
+  const [listings, setListings] = useState(
+    JSON.parse(localStorage.getItem("listings")) || null
+  );
+  const [loading, setLoading] = useState(listings ? false : true);
 
   useEffect(() => {
-    const fetchedShopData = async () => {
-      const response = await getListingsData();
+    const fetchProducts = async () => {
+      if (loading) {
+        try {
+          setLoading(true);
 
-      setListings(response);
+          const response = await getListingsData();
+
+          localStorage.setItem("listings", JSON.stringify(response));
+
+          setTimeout(() => {
+            setListings(response);
+            setLoading(false);
+          }, 1000);
+        } catch (err) {
+          console.error("Error fetching products:", err);
+          setLoading(false);
+        }
+      }
     };
-    fetchedShopData();
+
+    fetchProducts();
   }, []);
 
   const handleSelectOption = (e, category) => {
@@ -31,11 +48,6 @@ export default function Apparel() {
     }
   };
 
-  const handleSelectPage = (e, page) => {
-    e.preventDefault();
-
-    setSelectedPage(page);
-  };
   return (
     <>
       <ProductCategories type={"man"} />
@@ -43,7 +55,7 @@ export default function Apparel() {
         <div id="apparel-products">
           <div id="apparel-products-container">
             <div id="apparel-results-container">
-              <p>Total results: 1186</p>
+              <p>Total results: {listings?.listings.length}</p>
             </div>
             <div id="apparel-sorting-options">
               {sortData?.map((item, index) => {
@@ -58,14 +70,20 @@ export default function Apparel() {
               })}
             </div>
           </div>
-          <div id="products-container">
-            {listings?.listings.map((item, index) => {
-              return <ProductCard key={index} listing={item} />;
-            })}
-          </div>
+          {!loading && listings?.listings.length ? (
+            <div id="products-container">
+              {listings?.listings.map((item, index) => {
+                return <ProductCard key={index} listing={item} />;
+              })}
+            </div>
+          ) : (
+            <div id="apparel-loader-container">
+              <RingLoader id="apparel-loader" color="#001f54" size={150} />
+              <h2>Wait a second, the products are ariving!</h2>
+            </div>
+          )}
         </div>
       </div>
-      <Paging page={selectedPage} selectPage={handleSelectPage} />
     </>
   );
 }

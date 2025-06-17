@@ -6,11 +6,12 @@
 
 #cart-products {
   width: 70%;
+  height: 80vh;
   margin-right: 3rem;
 }
 
 .cart-section {
-  border-bottom: 1px #001f54 solid;
+  border-bottom: 1px var(--accent-color) solid;
 }
 
 #cart-overview {
@@ -61,12 +62,17 @@
 
 #promocode-apply-button {
   width: 30%;
+  border: 2px var(--accent-color) solid;
+}
+
+#promocode-apply-button button {
+  border: 0;
 }
 
 #promocode-apply-button button {
   width: 100%;
   padding: 0.75rem 2rem;
-  background-color: #001f54;
+  background-color: var(--accent-color);
   color: #fff;
   font-weight: 500;
 }
@@ -75,7 +81,7 @@
   display: flex;
   justify-content: space-between;
   color: grey;
-  border-bottom: 1px #001f54 solid;
+  border-bottom: 1px var(--accent-color) solid;
 }
 
 #procceed-button {
@@ -86,16 +92,16 @@
 #procceed-button button {
   width: 100%;
   padding: 0.75rem;
-  background-color: #001f54;
+  background-color: var(--accent-color);
   color: #fff;
-  border: 2px #001f54 solid;
+  border: 2px var(--accent-color) solid;
   font-weight: 600;
 }
 
 #procceed-button button:hover {
   background-color: #fff;
-  color: #001f54;
-  border: 2px #001f54 solid;
+  color: var(--accent-color);
+  border: 2px var(--accent-color) solid;
 }
 
 #no-products-content {
@@ -117,13 +123,13 @@
 #no-products-content button {
   padding: 0.5rem 3rem;
   margin: 1.5rem;
-  background-color: #001f54;
+  background-color: var(--accent-color);
   color: #fff;
-  border: 2px #001f54 solid;
+  border: 2px var(--accent-color) solid;
   transition: 0.3s ease-in;
 }
 
 #no-products-content button:hover {
   background-color: #fff;
-  color: #001f54;
+  color: var(--accent-color);
 }

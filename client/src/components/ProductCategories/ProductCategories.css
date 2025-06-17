@@ -1,18 +1,17 @@
 #apparel-wrapper {
   display: flex;
   padding-left: 1rem;
-  border-bottom: 1px #000 solid;
-  /* position: fixed;*/
+  border-bottom: 1px var(--secondary-color) solid;
 }
 
 .item {
   cursor: pointer;
-  border-bottom: #fff solid;
+  border-bottom: 2px #fff solid;
   margin: 0 1.5rem;
 }
 
 .item-selected {
-  border-bottom: #000 solid;
+  border-bottom: 2px var(--accent-color) solid;
   cursor: pointer;
   margin: 0 1.5rem;
 }
@@ -26,7 +25,7 @@
 }
 
 .item:hover {
-  border-bottom: #000 solid;
+  border-bottom: 2px var(--accent-color) solid;
   transition: 2s ease;
 }
 
@@ -40,17 +39,17 @@
   width: 100%;
   background-color: rgba(255, 255, 255, 5);
   z-index: 10;
-  border-top: 1px #000 solid;
   padding-left: 2rem;
+  border-bottom: 2px var(--accent-color) solid;
 }
 
 .man-apparel-item {
-  color: grey;
+  color: var(--secondary-color);
 }
 
 .man-apparel-item:hover {
   color: #000;
   text-decoration: underline;
-  text-decoration-color: #000; /* Customize the underline color */
+  text-decoration-color: var(--secondary-color);
   text-decoration-thickness: 2px;
 }

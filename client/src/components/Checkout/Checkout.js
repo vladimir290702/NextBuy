@@ -4,18 +4,20 @@ import { useLocation } from "react-router-dom";
 import { orderCheckout } from "../../services/custommerOperations";
 import { generateTrackingNumber } from "../../services/generateTrackingNumber";
 import { useUser } from "../../contexts/UserContext";
+import { ImWarning } from "react-icons/im";
 
 export default function Checkout() {
   const { state } = useLocation();
   const { user } = useUser();
   const [deliveryPrice, setDeliveryPrice] = useState(5.99);
-  const [selectedStandard, setSelectedStandard] = useState(false);
+  const [selectedStandard, setSelectedStandard] = useState(true);
   const [selectedExpress, setSelectedExpress] = useState(false);
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [street, setStreet] = useState("");
   const [city, setCity] = useState("");
   const [zipcode, setZipcode] = useState(0);
+  const [warnClient, setWarnClient] = useState(false);
 
   const fallbackData = JSON.parse(localStorage.getItem("checkoutData") || "{}");
 
@@ -44,40 +46,48 @@ export default function Checkout() {
   const handleClick = async (e) => {
     e.preventDefault();
 
-    localStorage.setItem("checkoutData", JSON.stringify(state));
+    if (!firstName && !lastName && !street && !city && !zipcode) {
+      setWarnClient(true);
+      setTimeout(() => {
+        setWarnClient(false);
+      }, 2000);
+      return;
+    } else {
+      localStorage.setItem("checkoutData", JSON.stringify(state));
 
-    const checkoutData = {
-      shopOwner: cart[0].productName,
-      user: user.email,
-      subtotal,
-      totalPrice,
-      discountedPrice,
-      orderedProducts: cart,
-      firstName,
-      lastName,
-      street,
-      city,
-      zipcode,
-      dateOfOrder: new Date().toLocaleString(),
-      trackingNumber: generateTrackingNumber(),
-    };
+      const checkoutData = {
+        shopOwner: cart[0].productName,
+        user: user.email,
+        subtotal,
+        totalPrice,
+        discountedPrice,
+        orderedProducts: cart,
+        firstName,
+        lastName,
+        street,
+        city,
+        zipcode,
+        dateOfOrder: new Date().toLocaleString(),
+        trackingNumber: generateTrackingNumber(),
+      };
 
-    const responseFromMongo = await orderCheckout(checkoutData);
+      const responseFromMongo = await orderCheckout(checkoutData);
 
-    const response = await fetch(
-      "http://localhost:5000/create-checkout-session",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ products: cart }),
-      }
-    );
+      const response = await fetch(
+        "http://localhost:5000/create-checkout-session",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ products: cart }),
+        }
+      );
 
-    const data = await response.json();
+      const data = await response.json();
 
-    window.location.href = data.url;
+      window.location.href = data.url;
+    }
   };
 
   return (
@@ -199,6 +209,12 @@ export default function Checkout() {
         </div>
         <div id="checkout-button-container">
           <button onClick={(e) => handleClick(e)}>Checkout</button>
+        </div>
+        <div className={`checkout-warning ${warnClient ? "show" : ""}`}>
+          <h3>
+            <ImWarning id="checkout-warning-icon" /> Please enter your delivery
+            information!
+          </h3>
         </div>
       </div>
     </div>

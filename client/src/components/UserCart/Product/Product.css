@@ -4,7 +4,7 @@
 }
 
 .cart-product-image-container {
-  width: 15rem;
+  width: 16rem;
 }
 
 .cart-product-image-container img {
@@ -38,16 +38,16 @@
 .cart-product-button button {
   padding: 0.5rem 2rem;
   margin-right: 0.5rem;
-  background-color: #001f54;
-  border: 2px #001f54 solid;
+  background-color: var(--accent-color);
+  border: 2px var(--accent-color) solid;
   color: #fff;
   transition: 0.3s ease-in-out;
 }
 
 .cart-product-button button:hover {
   background-color: #fff;
-  border: 2px #001f54 solid;
-  color: #001f54;
+  border: 2px var(--accent-color) solid;
+  color: var(--accent-color);
 }
 
 .edit-quantity-input {
