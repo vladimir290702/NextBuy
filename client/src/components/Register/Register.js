@@ -16,7 +16,6 @@ export default function Register() {
   const [password, setPassword] = useState(null);
   const [repeatPassword, setRepeatPassword] = useState(null);
   const [age, setAge] = useState(null);
-  const [gender, setGender] = useState(null);
   const [role, setRole] = useState(null);
 
   const userData = {
@@ -28,7 +27,6 @@ export default function Register() {
     repeatPassword,
     age,
     role: role,
-    gender,
     promocode: null,
   };
 
@@ -41,8 +39,7 @@ export default function Register() {
       surname === null &&
       password === null &&
       repeatPassword === null &&
-      age === null &&
-      gender === null
+      age === null
     ) {
       return;
     } else if (password !== repeatPassword) {
@@ -73,11 +70,17 @@ export default function Register() {
 
   return (
     <div id="register-wrapper">
+      <div id="login-image-container">
+        <img
+          src="https://images.pexels.com/photos/2584269/pexels-photo-2584269.jpeg?cs=srgb&dl=pexels-alipazani-2584269.jpg&fm=jpg"
+          alt=""
+        />
+      </div>
       <div id="register-form-wrapper">
-        <div>
-          <h2 id="title">Welcome to NextBuy</h2>
+        <div id="register-title-container">
+          <h2 className="register-title-text">Welcome to NextBuy </h2>
         </div>
-        <div id="options-container">
+        <div className="options-container">
           <h3>Continue as:</h3>
           <div className="options">
             <div
@@ -144,28 +147,15 @@ export default function Register() {
             />
           </div>
           <div className="input">
-            <select
-              id="gender-options"
-              onChange={(e) => setGender(e.currentTarget.value)}
+            <button
+              disabled={isSelected}
+              onClick={(e) => {
+                handleRegister(e);
+              }}
             >
-              <option disabled selected value>
-                Gender*
-              </option>
-              <option value="Male">Male</option>
-              <option value="Female">Female</option>
-              <option value="Prefer not ot answer">Prefer not ot answer</option>
-            </select>
+              Register
+            </button>
           </div>
-        </div>
-        <div id="button-wrapper">
-          <button
-            disabled={isSelected}
-            onClick={(e) => {
-              handleRegister(e);
-            }}
-          >
-            Register
-          </button>
         </div>
       </div>
     </div>

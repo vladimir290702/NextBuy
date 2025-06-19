@@ -32,12 +32,10 @@ export default function EditShopProfile() {
     fetchedShopData();
   }, []);
 
-  // Handle input change
-  const handleChange = (e) => {
+  const handleChange = (e, type) => {
     const value = e.target.value;
     setInputValue(value);
 
-    // Check if the length is at least 8
     if (value.length >= 8) {
       setIsPasswordLongEnough(true);
     } else {

@@ -48,11 +48,17 @@ export default function Register() {
 
   return (
     <div id="login-wrapper">
-      <div id="login-form-container">
-        <div>
-          <h2 id="title">Welcome to NextBuy</h2>
+      <div id="login-image-container">
+        <img
+          src="https://images.pexels.com/photos/2584269/pexels-photo-2584269.jpeg?cs=srgb&dl=pexels-alipazani-2584269.jpg&fm=jpg"
+          alt=""
+        />
+      </div>
+      <div id="login-form-wrapper">
+        <div id="login-title-container">
+          <h2 className="login-title-text">Welcome to NextBuy </h2>
         </div>
-        <div id="options-container">
+        <div className="options-container">
           <h3>Continue as:</h3>
           <div className="options">
             <div
@@ -90,20 +96,20 @@ export default function Register() {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-        </div>
-        <div id="forgot-password-wrapper">
-          <div id="forgot-password">
-            <h4>Forgot Password?</h4>
+          <div id="forgot-password-wrapper">
+            <div id="forgot-password">
+              <h4>Forgot Password?</h4>
+            </div>
           </div>
-        </div>
-        <div id="button-wrapper">
-          <button
-            onClick={(e) => {
-              handleLogin(e);
-            }}
-          >
-            Login
-          </button>
+          <div className="input">
+            <button
+              onClick={(e) => {
+                handleLogin(e);
+              }}
+            >
+              Login
+            </button>
+          </div>
         </div>
       </div>
     </div>
