@@ -23,6 +23,7 @@ export default function CreateListing() {
   const [sizes, setSizes] = useState([]);
   const [price, setPrice] = useState([]);
   const [gender, setGender] = useState("");
+  const [color, setColor] = useState("");
 
   useEffect(() => {
     const fetchedShopData = async () => {
@@ -93,9 +94,9 @@ export default function CreateListing() {
       category,
       parentCategory: clothing.parentCategory,
       sizes,
-      price,
+      price: Number(price),
       date: new Date().toLocaleString(),
-      color: "White",
+      color,
       gender,
       totalViews: 0,
     };
@@ -193,7 +194,7 @@ export default function CreateListing() {
                 <input
                   type="text"
                   placeholder="Color..."
-                  onChange={(e) => setModel(e.target.value)}
+                  onChange={(e) => setColor(e.target.value)}
                 />
               </div>
             </div>

@@ -65,11 +65,13 @@ export const getAllShopData = async () => {
   }
 };
 
-export const getListingsData = async (search = "") => {
+export const getListingsData = async (search = "", query) => {
   try {
     const url = search
-      ? `http://localhost:5000/apparel?search=${encodeURIComponent(search)}`
-      : `http://localhost:5000/apparel`;
+      ? `http://localhost:5000/apparel?${query}&search=${encodeURIComponent(
+          search
+        )}`
+      : `http://localhost:5000/apparel?${query}`;
 
     const response = await fetch(url);
     const data = await response.json();

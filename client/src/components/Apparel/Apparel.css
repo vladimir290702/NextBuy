@@ -84,3 +84,18 @@
 #apparel-search-bar:has(button:hover) {
   border-color: var(--primary-color);
 }
+
+#apparel-filter-container {
+  margin-top: 1rem;
+  width: 100%;
+}
+
+#apparel-filter-container button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: 2px var(--accent-color) solid;
+  font-weight: 600;
+  font-size: 1.25rem;
+}

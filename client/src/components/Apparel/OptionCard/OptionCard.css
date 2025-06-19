@@ -54,6 +54,19 @@
   opacity: 1;
 }
 
+.apparel-sorting-option-subcategories-active.colors {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.apparel-sorting-option-subcategories.colors {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
+}
+
 .apparel-sorting-option-subcategories,
 .apparel-sorting-option-subcategories-active {
   transition: max-height 0.4s ease, padding 0.3s ease, margin 0.3s ease,
@@ -67,4 +80,41 @@
 
 .sorting-option-container p {
   margin-top: 0;
+}
+
+.color-sorting-option-container {
+  width: 2rem;
+  height: 2rem;
+  border-radius: 5px;
+  padding: 0.2rem;
+}
+
+.sizes-sorting-option-container {
+  display: flex;
+  justify-content: center;
+  border: 1px var(--accent-color) solid;
+}
+
+.sizes-sorting-option-container-active {
+  display: flex;
+  justify-content: center;
+  border: 1px var(--accent-color) solid;
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+.sizes-sorting-option-container p {
+  text-align: center;
+  padding: 0 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.sizes-sorting-option-container-active p {
+  padding: 0 0.5rem;
+  margin: 0.5rem 0;
+}
+
+.sorting-option-selected-price {
+  color: var(--accent-color);
+  text-decoration: underline;
 }
