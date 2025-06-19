@@ -13,6 +13,10 @@ const Shop = require("./models/Shop");
 const Listings = require("./models/Listings");
 const Image = require("./models/Image");
 
+require("dotenv").config();
+
+const stripeSecretKey = process.env.STRIPE_SK;
+
 const app = express();
 
 app.use(express.json());
@@ -35,7 +39,7 @@ const storage = new CloudinaryStorage({
   },
 });
 
-const stripe = require("stripe")(proccess.env.STRIPE_SK);
+const stripe = require("stripe")(stripeSecretKey);
 
 const upload = multer({ storage });
 
@@ -270,9 +274,53 @@ app.get("/other-shops", async (req, res) => {
 });
 
 app.get("/apparel", async (req, res) => {
-  const listings = await Listings.find();
+  try {
+    const { search = "", colors, sizes, minPrice, maxPrice } = req.query;
 
-  return res.json({ listings });
+    let query = {};
+
+    if (search.trim()) {
+      query.model = { $regex: search.trim(), $options: "i" };
+    }
+
+    if (colors) {
+      const colorArray = Array.isArray(colors)
+        ? colors
+        : colors.split(",").filter(Boolean);
+      if (colorArray.length) {
+        query.color = { $in: colorArray };
+      }
+    }
+
+    if (sizes) {
+      const sizeArray = Array.isArray(sizes)
+        ? sizes
+        : sizes.split(",").filter(Boolean);
+      if (sizeArray.length) {
+        query.sizes = { $in: sizeArray };
+      }
+    }
+
+    const parsedMinPrice = parseFloat(minPrice);
+    const parsedMaxPrice = parseFloat(maxPrice);
+
+    if (
+      !isNaN(parsedMinPrice) &&
+      !isNaN(parsedMaxPrice) &&
+      !(parsedMinPrice === 0 && parsedMaxPrice === 5000)
+    ) {
+      query.price = {
+        $gte: parsedMinPrice,
+        $lte: parsedMaxPrice,
+      };
+    }
+
+    const listings = await Listings.find(query);
+    return res.json({ listings });
+  } catch (error) {
+    console.error("Error fetching listings:", error);
+    res.status(500).json({ error: "Server error" });
+  }
 });
 
 app.get("/product-details", async (req, res) => {

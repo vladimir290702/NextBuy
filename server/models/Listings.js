@@ -8,7 +8,7 @@ const listingsSchema = new mongoose.Schema({
   parentCategory: { type: String },
   category: { type: String },
   sizes: { type: Array },
-  price: { type: String },
+  price: { type: Number },
   date: { type: String },
   color: { type: String },
   gender: { type: String },
