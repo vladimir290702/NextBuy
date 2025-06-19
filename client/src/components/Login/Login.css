@@ -125,10 +125,7 @@
 }
 
 #forgot-password-wrapper #forgot-password {
-  display: flex;
-  justify-content: end;
-  align-items: end;
-  width: 450px;
+  text-align: end;
   margin-bottom: 1.5rem;
 }
 

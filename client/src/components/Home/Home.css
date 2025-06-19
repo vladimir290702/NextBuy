@@ -1,5 +1,5 @@
 #home-image-wrapper {
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   overflow: hidden;
 }
@@ -8,18 +8,17 @@
   display: flex;
   width: 100%;
   height: 100%;
+  overflow-x: hidden;
 }
 
-/* Man Section */
 #collection-man-section,
 #collection-woman-section {
   width: 50%;
   height: 100vh;
   position: relative;
-  overflow: hidden; /* clip overflowing zoomed image */
+  overflow: hidden;
 }
 
-/* Man Section image in ::before */
 #collection-man-section::before {
   content: "";
   position: absolute;
