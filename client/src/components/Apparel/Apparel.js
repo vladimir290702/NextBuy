@@ -13,30 +13,21 @@ export default function Apparel() {
     JSON.parse(localStorage.getItem("listings")) || null
   );
   const [loading, setLoading] = useState(listings ? false : true);
+  const [searchTerm, setSearchTerm] = useState("");
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      if (loading) {
-        try {
-          setLoading(true);
-
-          const response = await getListingsData();
-
-          localStorage.setItem("listings", JSON.stringify(response));
-
-          setTimeout(() => {
-            setListings(response);
-            setLoading(false);
-          }, 1000);
-        } catch (err) {
-          console.error("Error fetching products:", err);
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchProducts();
+    if (!listings) {
+      fetchProducts();
+    }
   }, []);
+
+  const fetchProducts = async (search = "") => {
+    setLoading(true);
+    const response = await getListingsData(search);
+    localStorage.setItem("listings", JSON.stringify(response));
+    setListings(response);
+    setLoading(false);
+  };
 
   const handleSelectOption = (e, category) => {
     e.preventDefault();
@@ -48,12 +39,25 @@ export default function Apparel() {
     }
   };
 
+  const handleSearch = () => {
+    fetchProducts(searchTerm);
+  };
+
   return (
     <>
       <ProductCategories type={"man"} />
       <div id="apparel-content-container">
         <div id="apparel-products">
           <div id="apparel-products-container">
+            <div id="apparel-search-bar">
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button onClick={handleSearch}>Search</button>
+            </div>
             <div id="apparel-results-container">
               <p>Total results: {listings?.listings.length}</p>
             </div>
