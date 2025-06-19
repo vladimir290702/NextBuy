@@ -65,12 +65,16 @@ export const getAllShopData = async () => {
   }
 };
 
-export const getListingsData = async () => {
+export const getListingsData = async (search = "", query) => {
   try {
-    const response = await fetch(`http://localhost:5000/apparel`);
+    const url = search
+      ? `http://localhost:5000/apparel?${query}&search=${encodeURIComponent(
+          search
+        )}`
+      : `http://localhost:5000/apparel?${query}`;
 
+    const response = await fetch(url);
     const data = await response.json();
-
     return data;
   } catch (error) {
     console.log("This is the error: ");

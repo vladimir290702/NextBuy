@@ -17,8 +17,8 @@
   padding: 1rem 0;
   margin: 1rem;
   background-color: #fff;
-  border: 2px #001f54 solid;
-  color: #001f54;
+  border: 2px var(--accent-color) solid;
+  color: var(--accent-color);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,8 +28,8 @@
   flex: 1 1 calc(22% - 10px);
   padding: 1rem 0;
   margin: 1rem;
-  background-color: #001f54;
-  border: 2px #001f54 solid;
+  background-color: var(--primary-color);
+  border: 2px var(--accent-color) solid;
   color: #fff;
   display: flex;
   justify-content: center;
@@ -39,7 +39,7 @@
 #finish-create-shop-button-wrapper button {
   padding: 1rem 2rem;
   width: 16rem;
-  background-color: #001f54;
+  background-color: var(--primary-color);
   color: #fff;
   border: 2px #fff solid;
   font-size: 1rem;
@@ -49,8 +49,8 @@
   padding: 1rem 2rem;
   width: 16rem;
   background-color: #fff;
-  color: #001f54;
-  border: 2px #001f54 solid;
+  color: var(--primary-color);
+  border: 2px var(--accent-color) solid;
   font-size: 1rem;
 }
 

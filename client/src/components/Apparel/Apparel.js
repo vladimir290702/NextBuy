@@ -8,44 +8,75 @@ import { getListingsData } from "../../services/createShop";
 import { RingLoader } from "react-spinners";
 
 export default function Apparel() {
-  const [sortToggle, setSortToggle] = useState(false);
   const [listings, setListings] = useState(
     JSON.parse(localStorage.getItem("listings")) || null
   );
   const [loading, setLoading] = useState(listings ? false : true);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [selectedSizes, setSelectedSizes] = useState([]);
+  const [selectedPrices, setSelectedPrices] = useState({ min: 0, max: 5000 });
+  const [loadingText, setLoadingText] = useState(
+    "Wait a second, the products are ariving!"
+  );
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      if (loading) {
-        try {
-          setLoading(true);
-
-          const response = await getListingsData();
-
-          localStorage.setItem("listings", JSON.stringify(response));
-
-          setTimeout(() => {
-            setListings(response);
-            setLoading(false);
-          }, 1000);
-        } catch (err) {
-          console.error("Error fetching products:", err);
-          setLoading(false);
-        }
-      }
-    };
-
-    fetchProducts();
+    if (!listings) {
+      fetchProducts();
+    }
   }, []);
 
-  const handleSelectOption = (e, category) => {
+  const fetchProducts = async (search = "") => {
+    setLoading(true);
+    const response = await getListingsData(search);
+    localStorage.setItem("listings", JSON.stringify(response));
+    setListings(response);
+    setLoading(false);
+  };
+
+  const handleSelectedColors = (colors) => {
+    setSelectedColors(colors);
+  };
+
+  const handleSelectedSizes = (sizes) => {
+    setSelectedSizes(sizes);
+  };
+
+  const handleSelectedPrices = (prices) => {
+    setSelectedPrices(prices);
+  };
+
+  const handleSearch = () => {
+    fetchProducts(searchTerm);
+  };
+
+  const handleFilter = async (e) => {
     e.preventDefault();
 
-    if (category === sortToggle) {
-      setSortToggle(false);
-    } else {
-      setSortToggle(category);
+    const params = new URLSearchParams();
+
+    if (selectedColors.length) {
+      params.append("colors", selectedColors.join(","));
     }
+
+    if (selectedSizes.length) {
+      params.append("sizes", selectedSizes.join(","));
+    }
+
+    if (selectedPrices) {
+      params.append("minPrice", selectedPrices.min);
+      params.append("maxPrice", selectedPrices.max);
+    }
+
+    const query = params.toString();
+
+    const response = await getListingsData(searchTerm, query);
+
+    if (response.listings.length === 0) {
+      setLoadingText("Sorry there are no products found!");
+    }
+
+    setListings(response);
   };
 
   return (
@@ -54,6 +85,15 @@ export default function Apparel() {
       <div id="apparel-content-container">
         <div id="apparel-products">
           <div id="apparel-products-container">
+            <div id="apparel-search-bar">
+              <input
+                type="text"
+                placeholder="Search products..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <button onClick={handleSearch}>Search</button>
+            </div>
             <div id="apparel-results-container">
               <p>Total results: {listings?.listings.length}</p>
             </div>
@@ -63,11 +103,15 @@ export default function Apparel() {
                   <OptionCard
                     key={index}
                     data={item}
-                    setDataToParent={handleSelectOption}
-                    selectedOption={sortToggle}
+                    setSelectedColorsToParent={handleSelectedColors}
+                    setSelectedSizesToParent={handleSelectedSizes}
+                    setSelectedPricesToParent={handleSelectedPrices}
                   />
                 );
               })}
+            </div>
+            <div id="apparel-filter-container" onClick={(e) => handleFilter(e)}>
+              <button>Filter</button>
             </div>
           </div>
           {!loading && listings?.listings.length ? (
@@ -78,8 +122,8 @@ export default function Apparel() {
             </div>
           ) : (
             <div id="apparel-loader-container">
-              <RingLoader id="apparel-loader" color="#001f54" size={150} />
-              <h2>Wait a second, the products are ariving!</h2>
+              <RingLoader id="apparel-loader" color="#ff3c00" size={150} />
+              <h2>{loadingText}</h2>
             </div>
           )}
         </div>
