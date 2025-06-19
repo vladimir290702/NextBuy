@@ -16,6 +16,7 @@ export default function Apparel() {
   const [selectedColors, setSelectedColors] = useState([]);
   const [selectedSizes, setSelectedSizes] = useState([]);
   const [selectedPrices, setSelectedPrices] = useState({ min: 0, max: 5000 });
+  const [selectedCollection, setSelectedCollection] = useState("");
   const [loadingText, setLoadingText] = useState(
     "Wait a second, the products are ariving!"
   );
@@ -24,7 +25,20 @@ export default function Apparel() {
     if (!listings) {
       fetchProducts();
     }
-  }, []);
+
+    if (getListingsData) {
+      const fetchCollection = async () => {
+        const params = new URLSearchParams();
+        params.append("collection", selectedCollection);
+        const collection = params.toString();
+
+        const response = await getListingsData(searchTerm, collection);
+
+        setListings(response);
+      };
+      fetchCollection();
+    }
+  }, [selectedCollection]);
 
   const fetchProducts = async (search = "") => {
     setLoading(true);
@@ -48,6 +62,10 @@ export default function Apparel() {
 
   const handleSearch = () => {
     fetchProducts(searchTerm);
+  };
+
+  const handleSelectedCollection = (collection) => {
+    setSelectedCollection(collection);
   };
 
   const handleFilter = async (e) => {
@@ -81,7 +99,10 @@ export default function Apparel() {
 
   return (
     <>
-      <ProductCategories type={"man"} />
+      <ProductCategories
+        type={"man"}
+        handleCollection={handleSelectedCollection}
+      />
       <div id="apparel-content-container">
         <div id="apparel-products">
           <div id="apparel-products-container">

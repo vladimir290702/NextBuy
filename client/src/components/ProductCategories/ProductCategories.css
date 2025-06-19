@@ -1,7 +1,12 @@
+#product-categories-wrapper {
+  position: relative;
+}
+
 #apparel-wrapper {
   display: flex;
   padding-left: 1rem;
   border-bottom: 1px var(--secondary-color) solid;
+  overflow-x: hidden;
 }
 
 .item {
@@ -37,10 +42,13 @@
 #toggle-category {
   position: absolute;
   width: 100%;
-  background-color: rgba(255, 255, 255, 5);
+  max-width: 100%;
+  overflow-x: auto;
+  background-color: #fff;
   z-index: 10;
-  padding-left: 2rem;
+  padding: 1rem 2rem;
   border-bottom: 2px var(--accent-color) solid;
+  box-sizing: border-box;
 }
 
 .man-apparel-item {

@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { manApparel, womanApparel } from "../../data/apparelData";
 
-export default function ProductCategories({ type }) {
+export default function ProductCategories({ type, handleCollection }) {
   const location = useLocation();
   const [toggle, setToggle] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(false);
@@ -14,6 +14,11 @@ export default function ProductCategories({ type }) {
 
   const data = apparelType === "man" ? manApparel : womanApparel;
   const subCategoryItems = data[selectedIndex]?.subcategory || null;
+
+  const handleSelectCollectionItem = (e, collection) => {
+    e.preventDefault();
+    handleCollection(collection);
+  };
 
   const handleSelectItem = (e, index, category) => {
     e.preventDefault();
@@ -35,7 +40,7 @@ export default function ProductCategories({ type }) {
     }
   };
   return (
-    <>
+    <div id="product-categories-wrapper">
       <div id="apparel-wrapper">
         {data.map((item, index) => {
           return (
@@ -66,7 +71,14 @@ export default function ProductCategories({ type }) {
             {selectedIndex &&
               subCategoryItems.map((item, index) => {
                 return (
-                  <p key={index} className="man-apparel-item">
+                  <p
+                    key={index}
+                    className="man-apparel-item"
+                    onClick={(e) => {
+                      handleSelectCollectionItem(e, item);
+                      setToggle(false);
+                    }}
+                  >
                     {item}
                   </p>
                 );
@@ -74,6 +86,6 @@ export default function ProductCategories({ type }) {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
