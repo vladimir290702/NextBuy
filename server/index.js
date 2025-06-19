@@ -275,7 +275,14 @@ app.get("/other-shops", async (req, res) => {
 
 app.get("/apparel", async (req, res) => {
   try {
-    const { search = "", colors, sizes, minPrice, maxPrice } = req.query;
+    const {
+      search = "",
+      colors,
+      sizes,
+      minPrice,
+      maxPrice,
+      collection,
+    } = req.query;
 
     let query = {};
 
@@ -315,7 +322,12 @@ app.get("/apparel", async (req, res) => {
       };
     }
 
+    if (collection) {
+      query.category = collection;
+    }
+
     const listings = await Listings.find(query);
+
     return res.json({ listings });
   } catch (error) {
     console.error("Error fetching listings:", error);
