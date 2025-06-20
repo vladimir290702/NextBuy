@@ -23,6 +23,7 @@ import EditShopProfile from "./components/EditShopProfile/EditShopProfile";
 import EditListings from "./components/EditShopListings/EditShopListings";
 import VisitShop from "./components/VisitShop/VisitShop";
 import ShopMessanger from "./components/ShopMessanger/ShopMessanger";
+import UserChat from "./components/UserChat/UserChat";
 
 function App() {
   return (
@@ -50,6 +51,7 @@ function App() {
           <Route path="/shop/edit-listings" element={<EditListings />} />
           <Route path="/shop/other-shops/:id" element={<VisitShop />} />
           <Route path="/shop-messanger" element={<ShopMessanger />} />
+          <Route path="/user-chat" element={<UserChat />} />
         </Routes>
         <Footer />
       </BrowserRouter>
