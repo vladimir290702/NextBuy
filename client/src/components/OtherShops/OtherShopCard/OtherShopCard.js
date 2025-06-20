@@ -14,7 +14,7 @@ export default function OtherShopCard({ shop }) {
       key={shop._id}
       onClick={handleVisitShopRedirect}
     >
-      <div className="asd">
+      <div className="shop-left-side-section">
         <div className="shop-initial-info">
           <div className="shop-initial-image-container">
             <img src={shop.logo} alt={shop.name} />
@@ -32,7 +32,7 @@ export default function OtherShopCard({ shop }) {
           </div>
         </div>
       </div>
-      <div>
+      <div className="shop-right-side-section">
         <div className="shop-listings-info">
           <div>
             <div>Listings:</div>
@@ -46,7 +46,7 @@ export default function OtherShopCard({ shop }) {
             <p>Categories:</p>
           </div>
           <div className="shop-categories-info-names">
-            <p>{shop.categories.join(", ")}</p>
+            <p>{shop.categories.length}</p>
           </div>
         </div>
         <div className="shop-button">

@@ -1,6 +1,6 @@
 export const createPayment = async (products) => {
   try {
-    const response = await fetch("http://localhost:5000/create-payment", {
+    const response = await fetch("http://localhost:5001/create-payment", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

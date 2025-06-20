@@ -28,6 +28,7 @@ export default function Register() {
     age,
     role: role,
     promocode: null,
+    shopCreated: role === "creator" ? true : false,
   };
 
   const handleRegister = async (e) => {
@@ -47,10 +48,10 @@ export default function Register() {
     } else {
       const response = await registerUser(userData);
 
-      register(response);
+      register(response.user);
 
       navigate("/");
-      localStorage.setItem("user", JSON.stringify(response.user));
+      localStorage.setItem("user", JSON.stringify(response?.user));
     }
   };
 

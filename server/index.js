@@ -6,18 +6,22 @@ const cloudinary = require("cloudinary").v2;
 const cors = require("cors");
 const nodemailer = require("nodemailer");
 const bodyParser = require("body-parser");
+const http = require("http");
+const mongoose = require("mongoose");
 
 const itemModel = require("./models/Item.js");
 const User = require("./models/User.js");
 const Shop = require("./models/Shop");
 const Listings = require("./models/Listings");
 const Image = require("./models/Image");
+const Message = require("./models/Message");
+const Conversation = require("./models/Conversation");
+
+const app = express();
 
 require("dotenv").config();
 
 const stripeSecretKey = process.env.STRIPE_SK;
-
-const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -56,6 +60,149 @@ contactEmail.verify((error) => {
     console.log(error);
   } else {
     console.log("Ready to send!");
+  }
+});
+
+const { Server } = require("socket.io");
+const server = http.createServer(app);
+
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:3000",
+    methods: ["GET", "POST"],
+  },
+});
+
+io.on("connection", (socket) => {
+  console.log("Socket connected:", socket.id);
+
+  socket.on("join conversation", async ({ userId, shopId, productId }) => {
+    try {
+      const filter = {
+        participants: { $all: [userId, shopId] },
+      };
+      if (productId) {
+        filter.productId = mongoose.Types.ObjectId(productId);
+      } else {
+        filter.productId = null;
+      }
+
+      const conversation = await Conversation.findOne(filter);
+
+      if (conversation) {
+        socket.join(conversation._id.toString());
+        socket.data.conversationId = conversation._id.toString();
+
+        socket.emit("conversation joined", conversation._id);
+      } else {
+        socket.emit("conversation joined", null);
+      }
+    } catch (err) {
+      console.error("Error in join conversation:", err);
+      socket.emit("conversation joined", null);
+    }
+  });
+
+  socket.on("join room", ({ conversationId }) => {
+    if (!conversationId) return;
+    socket.join(conversationId.toString());
+    socket.data.conversationId = conversationId.toString();
+    socket.emit("conversation joined", conversationId);
+  });
+
+  socket.on("load messages", async ({ conversationId }) => {
+    if (!conversationId) return;
+
+    const messages = await Message.find({ conversationId })
+      .populate("sender", "username")
+      .sort({ createdAt: 1 });
+
+    socket.emit("messages", messages);
+  });
+
+  socket.on(
+    "send message",
+    async ({ conversationId, senderId, text, userId, shopId, productId }) => {
+      let conversation;
+
+      if (!conversationId) {
+        conversation = await Conversation.create({
+          participants: [userId, shopId],
+          productId: productId || null,
+          lastMessage: text,
+          lastUpdated: new Date(),
+        });
+
+        await User.findByIdAndUpdate(userId, {
+          $addToSet: { conversations: conversation._id },
+        });
+        await User.findByIdAndUpdate(shopId, {
+          $addToSet: { conversations: conversation._id },
+        });
+
+        socket.emit("conversation joined", conversation._id);
+      } else {
+        conversation = await Conversation.findById(conversationId);
+        await Conversation.findByIdAndUpdate(conversationId, {
+          lastMessage: text,
+          lastUpdated: new Date(),
+        });
+      }
+
+      const message = await Message.create({
+        conversationId: conversation._id,
+        sender: senderId,
+        text,
+      });
+
+      const populated = await message.populate("sender", "username");
+
+      io.to(conversation._id.toString()).emit("new message", populated);
+    }
+  );
+
+  socket.on("disconnect", () => {
+    console.log("Socket disconnected:", socket.id);
+  });
+});
+
+server.listen(5001, () => {
+  console.log("Server is running on port 5000");
+});
+
+app.get("/user-chat/:clientId", async (req, res) => {
+  try {
+    const { clientId } = req.params;
+
+    const conversations = await Conversation.find({
+      participants: clientId,
+    })
+      .populate("productId", "productName images")
+      .populate("participants", "username")
+      .sort({ lastUpdated: -1 });
+
+    res.json(conversations);
+  } catch (err) {
+    console.error("Error fetching conversations:", err);
+    res.status(500).json({ error: "Failed to fetch conversations" });
+  }
+});
+
+app.get("/shop-chat/:shopId", async (req, res) => {
+  try {
+    const { shopId } = req.params;
+
+    const conversations = await Conversation.find({
+      participants: shopId,
+    })
+      .populate("productId", "productName images")
+      .populate("participants", "username image")
+      .sort({ lastUpdated: -1 });
+
+    res.json(conversations);
+  } catch (err) {
+    console.error("Error fetching shop conversations:", err);
+    res.status(500).json({ error: "Failed to fetch shop conversations" });
   }
 });
 
@@ -199,35 +346,7 @@ app.post("/register", async (req, res) => {
 });
 
 app.post("/create-shop", async (req, res) => {
-  const {
-    ownerId,
-    owner,
-    logo,
-    name,
-    categories,
-    listings,
-    revenue,
-    views,
-    orders,
-    activity,
-    createdOn,
-    totalViews,
-  } = req.body;
-
-  const shop = await Shop.create({
-    ownerId,
-    owner,
-    logo,
-    name,
-    categories,
-    listings,
-    revenue,
-    views,
-    orders,
-    activity,
-    createdOn,
-    totalViews,
-  });
+  const shop = await Shop.create(req.body);
 
   return res.status(200).json({ shop });
 });
@@ -237,18 +356,24 @@ app.get("/dashboard", async (req, res) => {
   const limit = 3;
   const shop = await Shop.findOne({ owner: name });
 
-  const totalActivities = shop.activity.length;
+  if (shop) {
+    const totalActivities = shop.activity.length;
 
-  const sortedActivities = [...shop.activity].reverse();
+    const sortedActivities = [...shop.activity].reverse();
 
-  const endIndex = 0 + limit * page;
+    const endIndex = 0 + limit * page;
 
-  const paginatedActivities = sortedActivities.slice(
-    0,
-    endIndex > totalActivities ? totalActivities : endIndex
-  );
+    const paginatedActivities = sortedActivities.slice(
+      0,
+      endIndex > totalActivities ? totalActivities : endIndex
+    );
 
-  return res.json({ shop, activities: paginatedActivities, totalActivities });
+    return res.json({
+      shop,
+      activities: paginatedActivities,
+      totalActivities,
+    });
+  }
 });
 
 app.patch("/create-listing", async (req, res) => {

@@ -142,7 +142,7 @@ export default function Apparel() {
               })}
             </div>
           ) : (
-            <div id="apparel-loader-container">
+            <div className="apparel-loader-container">
               <RingLoader id="apparel-loader" color="#ff3c00" size={150} />
               <h2>{loadingText}</h2>
             </div>

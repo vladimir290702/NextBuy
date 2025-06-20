@@ -14,6 +14,13 @@ const userSchema = new mongoose.Schema({
   bag: { type: Array },
   orders: { type: Array },
   favouriteProducts: { type: Array },
+  shopCreated: { type: Boolean, default: false },
+  conversations: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Conversation",
+    },
+  ],
 });
 
 // Hash the password before saving the user

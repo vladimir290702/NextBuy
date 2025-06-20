@@ -1,6 +1,6 @@
 export const sendPromoCode = async (userData) => {
   try {
-    const response = await fetch("http://localhost:3000/promo", {
+    const response = await fetch("http://localhost:5001/promo", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

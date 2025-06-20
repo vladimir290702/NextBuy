@@ -7,9 +7,13 @@ import { useUser } from "../../contexts/UserContext";
 export default function Navbar() {
   const { user } = useUser();
 
+  console.log(user);
+
   const NavbarLayout = () => {
     if (user) {
       if (user?.role === "creator") {
+        console.log(user.role);
+
         return <ShopOwner />;
       } else {
         return <LoggedUserLayout />;

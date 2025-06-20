@@ -12,8 +12,10 @@ import {
   removeListingFromFavourites,
 } from "../../services/custommerOperations";
 import { useUser } from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function ProductDetails() {
+  const navigate = useNavigate();
   const location = useLocation();
   const { user, login } = useUser();
   const id = location.state.id;
@@ -82,6 +84,18 @@ export default function ProductDetails() {
     login(response.updatedListings);
   };
 
+  const handleRedirectToChat = async (e) => {
+    e.preventDefault();
+
+    navigate("/user-chat", {
+      state: {
+        client: user._id,
+        shop: listingData?.product.ownerId,
+        productId: listingData?.product._id,
+      },
+    });
+  };
+
   return (
     <>
       {loading ? null : (
@@ -99,7 +113,10 @@ export default function ProductDetails() {
             </div>
             <div id="product-details-information-container">
               <div id="contact-shop">
-                <div id="contact-shop-icon-container">
+                <div
+                  id="contact-shop-icon-container"
+                  onClick={(e) => handleRedirectToChat(e)}
+                >
                   <BsChatLeftText id="contact-shop-icon" />
                 </div>
                 <div id="contact-shop-message">

@@ -4,7 +4,7 @@
 
 #orders-status-container {
   padding: 2rem;
-  width: 70%;
+  width: 80%;
 }
 
 #orders-title-container {
@@ -15,17 +15,6 @@
   margin: 0;
   font-size: 2rem;
   color: var(--accent-color);
-}
-
-#orders-status-options-container {
-  display: flex;
-  border-bottom: 1px grey solid;
-  margin-top: 1rem;
-}
-
-#orders-status-options-container div {
-  margin-right: 1rem;
-  font-size: 1.5rem;
 }
 
 .order-card {
@@ -95,7 +84,7 @@
 #orders-options-toggle-container-active {
   border-radius: 5px;
   padding: 0.5rem 1rem;
-  border: 2px #001f54 solid;
+  border: 2px var(--accent-color) solid;
   transition: 0.5s ease-in;
 }
 
@@ -111,38 +100,4 @@
 #orders-initial-div-active {
   border-bottom: 1px var(--accent-color) solid;
   margin-bottom: 1rem;
-}
-
-.sorting-status {
-  border-bottom: 2px #fff solid;
-}
-
-.active-sorting-status {
-  border-bottom: 2px var(--accent-color) solid;
-}
-
-.orders-empty-div {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  border: 2px var(--primary-color) solid;
-  margin-right: 1rem;
-}
-
-.order-sorting-options {
-  display: flex;
-  align-items: center;
-}
-
-.order-sorting-options p {
-  margin: 0.25rem 0;
-}
-
-.orders-empty-div-active {
-  width: 1rem;
-  height: 1rem;
-  border-radius: 50%;
-  border: 2px var(--primary-color) solid;
-  margin-right: 1rem;
-  background-color: var(--accent-color);
 }

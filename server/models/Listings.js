@@ -13,7 +13,8 @@ const listingsSchema = new mongoose.Schema({
   color: { type: String },
   gender: { type: String },
   totalViews: { type: Number },
+  ownerId: { type: String },
 });
 
-const Listings = mongoose.model("Listings", listingsSchema);
+const Listings = mongoose.model("Listing", listingsSchema);
 module.exports = Listings;
