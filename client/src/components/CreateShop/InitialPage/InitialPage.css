@@ -1,3 +1,7 @@
+#selected-shop-category {
+  width: 70%;
+}
+
 #create-shop-wrapper {
   justify-content: center;
   align-items: center;
@@ -39,15 +43,15 @@
 .create-shop-carousel-button {
   font-size: 1rem;
   padding: 1rem 2rem;
-  background-color: #001f54;
+  background-color: var(--primary-color);
   color: #fff;
   font-weight: 500;
   transition: 0.5s;
 }
 
 .create-shop-carousel-button:hover {
-  background-color: #fff;
-  color: #001f54;
+  background-color: var(--primary-color);
+  color: var(--accent-color);
 }
 
 #create-shop-carousel-counter {
@@ -61,7 +65,7 @@
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: grey;
+  background-color: var(--primary-color);
   color: #fff;
   display: flex;
   justify-content: center;
@@ -72,7 +76,7 @@
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
-  background-color: #001f54;
+  background-color: var(--accent-color);
   color: #fff;
   display: flex;
   justify-content: center;

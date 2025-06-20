@@ -1,7 +1,7 @@
 export const addListingToBag = async (productData, user) => {
   try {
     const response = await fetch(
-      `http://localhost:5000/product-details?name=${user}`,
+      `http://localhost:5001/product-details?name=${user}`,
       {
         method: "POST",
         headers: {
@@ -21,7 +21,7 @@ export const addListingToBag = async (productData, user) => {
 
 export const getUserCart = async (user) => {
   try {
-    const response = await fetch(`http://localhost:5000/cart?id=${user}`);
+    const response = await fetch(`http://localhost:5001/cart?id=${user}`);
 
     const data = await response.json();
 
@@ -34,7 +34,7 @@ export const getUserCart = async (user) => {
 
 export const orderCheckout = async (checkoutData) => {
   try {
-    const response = await fetch(`http://localhost:5000/checkout`, {
+    const response = await fetch(`http://localhost:5001/checkout`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -52,7 +52,7 @@ export const orderCheckout = async (checkoutData) => {
 
 export const removeProductFromCart = async (id, user) => {
   try {
-    const response = await fetch(`http://localhost:5000/cart`, {
+    const response = await fetch(`http://localhost:5001/cart`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +70,7 @@ export const removeProductFromCart = async (id, user) => {
 
 export const editProductQuantity = async (productId, quantity, user) => {
   try {
-    const response = await fetch(`http://localhost:5000/cart`, {
+    const response = await fetch(`http://localhost:5001/cart`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -88,7 +88,7 @@ export const editProductQuantity = async (productId, quantity, user) => {
 
 export const addListingToFavourites = async (product, name) => {
   try {
-    const response = await fetch(`http://localhost:5000/product-details`, {
+    const response = await fetch(`http://localhost:5001/product-details`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +106,7 @@ export const addListingToFavourites = async (product, name) => {
 
 export const removeListingFromFavourites = async (product, name) => {
   try {
-    const response = await fetch(`http://localhost:5000/product-details`, {
+    const response = await fetch(`http://localhost:5001/product-details`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

@@ -99,6 +99,7 @@ export default function CreateListing() {
       color,
       gender,
       totalViews: 0,
+      ownerId: user?._id,
     };
 
     const response = await createListing(data, user.username);
@@ -109,7 +110,7 @@ export default function CreateListing() {
   return (
     <div id="shop-profile-wrapper">
       <ShopProfileSidebar />
-      <div id="selected-shop-category">
+      <div id="dashboard-selected-shop-category">
         <div id="add-listing-wrapper">
           <div id="first-product-section">
             <div id="imageContainer">

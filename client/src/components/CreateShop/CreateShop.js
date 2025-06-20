@@ -39,9 +39,10 @@ export default function FinishCreateShop() {
       createdOn: new Date().toLocaleString(),
       totalViews: 0,
     };
-    const response = await createShop(data);
 
-    navigate("/add-listing");
+    const result = await createShop(data);
+
+    navigate("/dashboard");
   };
 
   return (

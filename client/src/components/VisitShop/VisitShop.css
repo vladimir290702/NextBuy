@@ -26,7 +26,7 @@
 
 #visit-shop-listings {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1;
   margin-bottom: 5rem;
   margin-top: 2rem;
@@ -35,6 +35,7 @@
 #visit-shop-information {
   border: 2px var(--primary-color) solid;
   margin-top: 0.5rem;
+  padding: 0 1rem;
 }
 
 .visit-shop-information-details {
@@ -43,10 +44,11 @@
 
 .visit-shop-information-details .option {
   display: flex;
+  width: 20rem;
 }
 
 .visit-shop-information-details .option > h4 {
-  padding: 0.5rem 0;
+  padding: 0.25rem;
   margin: 0;
 }
 

@@ -72,3 +72,11 @@
   font-weight: 500;
   margin-left: 0.5rem;
 }
+
+.shop-left-side-section {
+  max-width: 50%;
+}
+
+.shop-right-side-section {
+  width: 30%;
+}

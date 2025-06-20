@@ -6,6 +6,8 @@ const ImageLoader = ({ onImageUpload }) => {
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null);
 
+  console.log(images);
+
   useEffect(() => {
     onImageUpload(images);
   }, [images]);
@@ -55,14 +57,19 @@ const ImageLoader = ({ onImageUpload }) => {
         formData.append("image", file);
 
         try {
-          const res = await fetch("http://localhost:3000/upload", {
+          const res = await fetch("http://localhost:5001/upload", {
             method: "POST",
             body: formData,
           });
           const data = await res.json();
 
-          if (data.url && !images.includes(data.url)) {
-            setImages((prev) => [...prev, data.url]);
+          if (data.url) {
+            const fullUrl = data.url.startsWith("http")
+              ? data.url
+              : `http://localhost:5001${data.url}`;
+            if (!images.includes(fullUrl)) {
+              setImages((prev) => [...prev, fullUrl]);
+            }
           }
         } catch (err) {
           console.error("Upload failed:", err);
@@ -77,7 +84,6 @@ const ImageLoader = ({ onImageUpload }) => {
     <div>
       <input
         type="file"
-        accept="image/*"
         multiple
         ref={fileInputRef}
         style={{ display: "none" }}
@@ -100,14 +106,23 @@ const ImageLoader = ({ onImageUpload }) => {
       </div>
       <div className="image-uploader-images-container ">
         {images.map((file) => (
-          <div key={file} style={{ margin: "10px", position: "relative" }}>
-            <img className="image-uploader-image" src={file} alt="uploaded" />
-            <button
-              className="image-uploader-image-delete-button"
-              onClick={() => deleteImage(file)}
-            >
-              ✕
-            </button>
+          <div
+            key={file}
+            style={{
+              margin: "10px",
+              position: "relative",
+            }}
+          >
+            <div>
+              <img className="image-uploader-image" src={file} alt="uploaded" />
+
+              <button
+                className="image-uploader-image-delete-button"
+                onClick={() => deleteImage(file)}
+              >
+                ✕
+              </button>
+            </div>
           </div>
         ))}
       </div>

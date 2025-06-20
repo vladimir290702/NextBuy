@@ -1,6 +1,6 @@
 export const createShop = async (userData) => {
   try {
-    const response = await fetch("http://localhost:5000/create-shop", {
+    const response = await fetch("http://localhost:5001/create-shop", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -19,7 +19,7 @@ export const createShop = async (userData) => {
 export const getShopData = async (id, page) => {
   try {
     const response = await fetch(
-      `http://localhost:5000/dashboard?name=${id}&page=${page}`
+      `http://localhost:5001/dashboard?name=${id}&page=${page}`
     );
 
     const data = await response.json();
@@ -34,7 +34,7 @@ export const getShopData = async (id, page) => {
 export const createListing = async (listingData, user) => {
   try {
     const response = await fetch(
-      `http://localhost:5000/create-listing?name=${user}`,
+      `http://localhost:5001/create-listing?name=${user}`,
       {
         method: "PATCH",
         headers: {
@@ -54,7 +54,7 @@ export const createListing = async (listingData, user) => {
 
 export const getAllShopData = async () => {
   try {
-    const response = await fetch(`http://localhost:5000/other-shops`);
+    const response = await fetch(`http://localhost:5001/other-shops`);
 
     const data = await response.json();
 
@@ -68,10 +68,10 @@ export const getAllShopData = async () => {
 export const getListingsData = async (search = "", query) => {
   try {
     const url = search
-      ? `http://localhost:5000/apparel?${query}&search=${encodeURIComponent(
+      ? `http://localhost:5001/apparel?${query}&search=${encodeURIComponent(
           search
         )}`
-      : `http://localhost:5000/apparel?${query}`;
+      : `http://localhost:5001/apparel?${query}`;
 
     const response = await fetch(url);
     const data = await response.json();
@@ -85,7 +85,7 @@ export const getListingsData = async (search = "", query) => {
 export const getListing = async (id) => {
   try {
     const response = await fetch(
-      `http://localhost:5000/product-details?id=${id}`
+      `http://localhost:5001/product-details?id=${id}`
     );
     const data = await response.json();
 

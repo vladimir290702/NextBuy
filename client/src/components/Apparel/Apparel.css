@@ -29,8 +29,8 @@
   margin-bottom: 2rem;
 }
 
-#apparel-loader-container {
-  min-width: 75vw;
+.apparel-loader-container {
+  max-width: 75vw;
   height: 80vh;
   display: flex;
   flex-direction: column;
@@ -40,7 +40,7 @@
   padding: 3rem 2rem;
 }
 
-#apparel-loader-container h2 {
+.apparel-loader-container h2 {
   margin-top: 5rem;
 }
 

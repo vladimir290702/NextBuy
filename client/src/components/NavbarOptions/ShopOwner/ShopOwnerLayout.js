@@ -12,14 +12,14 @@ export default function ShopOwnerLayout() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await getShopData(user.username);
+      const response = await getShopData(user?.username);
       if (response) {
         setShopData(response);
       }
     };
 
     fetchData();
-  }, []);
+  }, [shopData]);
 
   const handeLogout = () => {
     logout(null);
@@ -28,7 +28,7 @@ export default function ShopOwnerLayout() {
   };
 
   const handleProfileRedirect = async () => {
-    if (shopData.shop.owner) {
+    if (shopData?.shop?.owner) {
       navigate("/dashboard");
     } else {
       navigate("/create-shop-initial");
@@ -41,7 +41,7 @@ export default function ShopOwnerLayout() {
         <Link className="nav-link" to="/dashboard">
           {shopData?.shop?.logo ? (
             <div id="shop-owner-navbar-logo">
-              <img src={shopData?.shop?.logo} alt={shopData.shop.name} />
+              <img src={shopData?.shop?.logo} alt={shopData?.shop?.name} />
             </div>
           ) : (
             <FaUserCircle />

@@ -13,7 +13,6 @@ import Checkout from "./components/Checkout/Checkout";
 import CreateListing from "./components/CreateListing/CreateListing";
 import Dashboard from "./components/Dashboard/Dashboard";
 import ShopOrders from "./components/ShopOrders/ShopOrders";
-import ShopSettings from "./components/ShopSettings/ShopSettings";
 import OtherShops from "./components/OtherShops/OtherShops";
 import InitialPage from "./components/CreateShop/InitialPage/InitialPage";
 import CreateShop from "./components/CreateShop/CreateShop";
@@ -40,7 +39,6 @@ function App() {
           <Route path="/create-listing" element={<CreateListing />} />
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/shop-orders" element={<ShopOrders />} />
-          <Route path="/shop-settings" element={<ShopSettings />} />
           <Route path="/other-shops" element={<OtherShops />} />
           <Route path="/product-details" element={<ProductDetails />} />
           <Route path="/cart" element={<UserCart />} />
