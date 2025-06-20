@@ -42,7 +42,7 @@ export default function Dashboard() {
   return (
     <div id="shop-profile-wrapper">
       <ShopProfileSidebar />
-      <div id="selected-shop-category">
+      <div id="dashboard-selected-shop-category">
         <div id="dashboard-shop-wrapper">
           <div id="dashboard-shop-data">
             <div id="dashboard-shop-data-main-info">

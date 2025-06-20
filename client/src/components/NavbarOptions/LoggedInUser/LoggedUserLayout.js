@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useUser } from "../../../contexts/UserContext";
 import { IoIosHeartEmpty } from "react-icons/io";
+import { IoChatbubbleEllipsesOutline } from "react-icons/io5";
 import { BsCart4 } from "react-icons/bs";
 import DropdownCart from "./DropdownCart/DropdownCart";
 
@@ -20,6 +21,11 @@ export default function LoggedUserLayout() {
   };
   return (
     <div id="logged-user-container">
+      <li className="nav-item">
+        <Link className="nav-link" to="/user-chat">
+          <IoChatbubbleEllipsesOutline />
+        </Link>
+      </li>
       <li
         className="nav-item"
         onMouseEnter={() => setIsHovered(true)}

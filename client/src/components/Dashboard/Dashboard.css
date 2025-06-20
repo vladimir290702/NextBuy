@@ -4,7 +4,7 @@
   width: 100%;
 }
 
-#selected-shop-category {
+#dashboard-selected-shop-category {
   width: 80%;
 }
 
@@ -50,7 +50,7 @@
 
 #dashboard-messages {
   font-size: 2rem;
-  color: #001f54;
+  color: var(--accent-color);
 }
 
 #dashboard-messages:hover {
