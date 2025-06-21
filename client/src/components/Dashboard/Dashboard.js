@@ -19,8 +19,6 @@ export default function Dashboard() {
   const [loading, setLoading] = useState(shopData ? false : true);
   const [page, setPage] = useState(1);
 
-  console.log(shopData);
-
   const visibleLoadButtonContainer =
     activitiesCount !== 0 &&
     activitiesCount > 3 &&

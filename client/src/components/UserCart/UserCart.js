@@ -9,44 +9,38 @@ import { RingLoader } from "react-spinners";
 export default function UserCart() {
   const navigate = useNavigate();
   const { user } = useUser();
-  const [cart, setCart] = useState(
-    JSON.parse(localStorage.getItem("Bag")) || null
-  );
+  const [cart, setCart] = useState([]);
   const [promocode, setPromocode] = useState("");
   const [discount, setDiscount] = useState(1);
   const [subtotal, setSubtotal] = useState(0);
   const deliveryPrice = 5.99;
   const discountedPrice = (subtotal * (1 - discount)).toFixed(2);
   const total = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
-  const [loading, setLoading] = useState(cart ? false : true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
-      if (loading) {
-        try {
-          setLoading(true);
+      try {
+        const response = await getUserCart(user.username);
 
-          const response = await getUserCart(user.username);
+        let allPrices = 0;
+        for (const product of response.user.bag) {
+          allPrices += Number(product.price) * Number(product.quantity);
 
-          let allPrices = 0;
-          if (cart) {
-            for (const product of response.user.bag) {
-              allPrices += Number(product.price) * Number(product.quantity);
+          setSubtotal(allPrices);
+        }
 
-              setSubtotal(allPrices);
-            }
-          }
-
-          localStorage.setItem("Bag", JSON.stringify(response.user.bag));
-
+        if (response.user.bag === 0) {
+          setLoading(false);
+        } else {
           setTimeout(() => {
             setCart(response.user.bag);
             setLoading(false);
           }, 1000);
-        } catch (err) {
-          console.error("Error fetching products:", err);
-          setLoading(false);
         }
+      } catch (err) {
+        console.error("Error fetching products:", err);
+        setLoading(false);
       }
     };
     fetchData();
@@ -102,7 +96,7 @@ export default function UserCart() {
         <div className="cart-section">
           <h3>Your Shopping Cart</h3>
         </div>
-        {!loading && cart.length !== 0 ? (
+        {!loading ? (
           cart.length === 0 ? (
             <div id="no-products-content">
               <h2>You have no products in cart...</h2>
@@ -121,7 +115,7 @@ export default function UserCart() {
           )
         ) : (
           <div id="apparel-loader-container">
-            <RingLoader id="apparel-loader" color="#001f54" size={150} />
+            <RingLoader id="apparel-loader" color="#001f54" size={200} />
             <h2>Wait a second, the products are ariving!</h2>
           </div>
         )}
