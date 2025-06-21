@@ -9,7 +9,7 @@ export default function Navbar() {
   const { user } = useUser();
 
   const NavbarLayout = () => {
-    if (user.role) {
+    if (user?.role) {
       if (user?.role === "creator") {
         return <ShopOwner />;
       } else {

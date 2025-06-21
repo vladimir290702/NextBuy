@@ -2,7 +2,7 @@ import "./ReviewOrder.css";
 import { useLocation } from "react-router-dom";
 import ShopProfileSidebar from "../ShopProfileSidebar/ShopProfileSidebar";
 
-export default function ReviewOrder({ item }) {
+export default function ReviewOrder() {
   const { state } = useLocation();
 
   return (
@@ -14,19 +14,27 @@ export default function ReviewOrder({ item }) {
             <h3>Item(s):</h3>
             <div
               className="review-order-image-container"
-              key={state.item.model}
+              key={state?.orderedProducts?.model}
             >
               <div>
-                <img src={state.item.images[0]} alt={state.item.productName} />
+                <img
+                  src={state?.orderedProducts[0]?.images[0]}
+                  alt={state?.orderedProducts?.productName}
+                />
               </div>
               <div className="review-order-product-description">
                 <h1 className="review-order-product-model">
-                  {state.item.productName} {state.item.model}
+                  {state?.orderedProducts[0]?.productName}{" "}
+                  {state?.orderedProducts[0]?.model}
                 </h1>
-                <p>Category: {state.item.category}</p>
-                <p>Price: ${state.item.price}</p>
-                <p>Qantity: {state.item.quantity}</p>
-                <p>Total: ${state.item.price * state.item.quantity}</p>
+                <p>Category: {state?.orderedProducts[0]?.category}</p>
+                <p>Price: ${state?.orderedProducts[0]?.price}</p>
+                <p>Qantity: {state?.orderedProducts[0]?.quantity}</p>
+                <p>
+                  Total: $
+                  {state?.orderedProducts[0]?.price *
+                    state?.orderedProducts[0]?.quantity}
+                </p>
                 <p>Arrives: Fri, 19/04 - Mon, 21/04</p>
               </div>
             </div>
@@ -36,9 +44,9 @@ export default function ReviewOrder({ item }) {
           <div id="review-order-contact-custommer">
             <h2>Contact custommer:</h2>
 
-            <p>Email: {state.email}</p>
+            <p>Email: {state?.user}</p>
             <p>
-              Name: {state.firstName} {state.lastName}
+              Name: {state?.firstName} {state?.lastName}
             </p>
           </div>
         </div>

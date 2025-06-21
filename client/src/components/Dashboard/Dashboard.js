@@ -25,11 +25,12 @@ export default function Dashboard() {
     activity.length !== activitiesCount;
 
   useEffect(() => {
-    if (!loading) {
+    if (loading) {
       const fetchedShopData = async () => {
         setLoading(true);
 
         const response = await getShopData(user?.username, page);
+
         if (response) {
           setLoading(false);
           setActivity(response.activities);
