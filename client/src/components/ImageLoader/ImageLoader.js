@@ -6,8 +6,6 @@ const ImageLoader = ({ onImageUpload }) => {
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null);
 
-  console.log(images);
-
   useEffect(() => {
     onImageUpload(images);
   }, [images]);

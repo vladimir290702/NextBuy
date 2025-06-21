@@ -180,7 +180,7 @@ export default function Checkout() {
             <h4 className="overview-h4">Subtotal</h4>
           </div>
           <div>
-            <h4 className="overview-h4-price">${subtotal}</h4>
+            <h4 className="overview-h4-price">${subtotal.toFixed(2)}</h4>
           </div>
         </div>
         <div className="overview-category">

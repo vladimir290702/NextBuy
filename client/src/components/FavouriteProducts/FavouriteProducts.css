@@ -12,3 +12,7 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 1rem;
 }
+
+#favourite-products-card-wrapper-empty {
+  height: 24vh;
+}

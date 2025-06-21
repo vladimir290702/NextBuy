@@ -11,7 +11,11 @@ export default function FavouriteProducts() {
         <h3 id="favourite-products-title">Your favourite products:</h3>
       </div>
 
-      <div id="favourite-products-card-wrapper">
+      <div
+        id={`favourite-products-card-wrapper-${
+          user.favouriteProducts.length === 0 ? "empty" : ""
+        }`}
+      >
         {user.favouriteProducts.length > 0 ? (
           user.favouriteProducts.map((product) => (
             <FavouriteProductCard product={product} key={product._id} />

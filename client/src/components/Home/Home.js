@@ -19,14 +19,14 @@ export default function Home() {
             id="collection-man-section"
           >
             <div className="apparel-picture-overlay"></div>
-            <button class="apparel-collection-button">Shop Men's</button>
+            <button className="apparel-collection-button">Shop Men's</button>
           </div>
           <div
             onClick={(e) => handleApparel(e, "woman")}
             id="collection-woman-section"
           >
             <div className="apparel-picture-overlay"></div>
-            <button class="apparel-collection-button">Shop Women's</button>
+            <button className="apparel-collection-button">Shop Women's</button>
           </div>
         </div>
       </div>
