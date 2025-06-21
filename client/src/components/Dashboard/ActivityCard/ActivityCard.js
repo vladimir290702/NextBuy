@@ -33,7 +33,7 @@ export default function ActivityCard({ activity }) {
   const handleReviewOrder = (e) => {
     e.preventDefault();
 
-    navigate("/review-order", { state: activity });
+    navigate("/review-order", { state: activity.order });
   };
 
   return (
