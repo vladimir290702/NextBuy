@@ -20,9 +20,11 @@ export default function UserCart() {
   const total = (subtotal + deliveryPrice - discountedPrice).toFixed(2);
   const [loading, setLoading] = useState(cart ? false : true);
 
+  console.log(cart);
+
   useEffect(() => {
     const fetchData = async () => {
-      if (loading) {
+      if (!loading) {
         try {
           setLoading(true);
 
